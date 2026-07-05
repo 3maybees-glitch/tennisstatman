@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070d18;
+  --foreground: #e8edf5;
+  --court-green: #2d6a4f;
+  --court-green-light: #40916c;
+  --gold: #d4af37;
+  --gold-light: #f0c75e;
+  --navy: #0b1221;
+  --navy-light: #141f35;
+  --muted: #8b9cb8;
+  --accent-blue: #3b82f6;
+  --danger: #ef4444;
+  --success: #22c55e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-court: var(--court-green);
+  --color-court-light: var(--court-green-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent-blue);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--court-green-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.court-pattern {
+  background-image:
+    linear-gradient(rgba(45, 106, 79, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 106, 79, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.glow-gold {
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+.glow-green {
+  box-shadow: 0 0 40px rgba(45, 106, 79, 0.2);
+}
