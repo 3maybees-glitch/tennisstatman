@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { RankingsTable } from "@/components/RankingsTable";
 import { MatchCard } from "@/components/MatchCard";
-import { featuredMatches, tourRankings } from "@/lib/data/mock-matches";
+import { featuredMatches } from "@/lib/data/mock-matches";
+import { fetchTourRankings } from "@/lib/rankings";
 
 export const metadata: Metadata = {
   title: "ATP Men's Tour",
@@ -10,8 +11,11 @@ export const metadata: Metadata = {
     "ATP men's tennis analytics, rankings, and innovative match stats from TennisStatMan.",
 };
 
-export default function AtpPage() {
+export const revalidate = 3600;
+
+export default async function AtpPage() {
   const atpMatches = featuredMatches.filter((m) => m.tour === "ATP");
+  const atpRankings = await fetchTourRankings("ATP");
 
   return (
     <div className="court-pattern">
@@ -30,8 +34,13 @@ export default function AtpPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="mb-8 text-2xl font-bold">Current Rankings</h2>
-        <RankingsTable tour="ATP" entries={tourRankings.atp} />
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <h2 className="text-2xl font-bold">Current Rankings</h2>
+          <Link href="/rankings" className="text-sm text-gold hover:text-gold-light">
+            Full rankings →
+          </Link>
+        </div>
+        <RankingsTable snapshot={atpRankings} limit={20} showSource />
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-20">

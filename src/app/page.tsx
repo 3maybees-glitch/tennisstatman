@@ -1,14 +1,16 @@
+import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { MatchCard } from "@/components/MatchCard";
 import { RankingsTable } from "@/components/RankingsTable";
 import { StatFeatureCard } from "@/components/StatFeatureCard";
-import {
-  featuredMatches,
-  tourRankings,
-  upcomingStats,
-} from "@/lib/data/mock-matches";
+import { featuredMatches, upcomingStats } from "@/lib/data/mock-matches";
+import { fetchAllRankings } from "@/lib/rankings";
 
-export default function HomePage() {
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  const { atp, wta } = await fetchAllRankings();
+
   return (
     <>
       <Hero />
@@ -32,12 +34,18 @@ export default function HomePage() {
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-bold">Rankings Snapshot</h2>
             <p className="mt-3 text-muted">
-              Current top 5 on both tours — full dashboards coming soon
+              Official top 5 on both tours, refreshed hourly
             </p>
+            <Link
+              href="/rankings"
+              className="mt-4 inline-block text-sm text-gold hover:text-gold-light"
+            >
+              View full rankings →
+            </Link>
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
-            <RankingsTable tour="ATP" entries={tourRankings.atp} />
-            <RankingsTable tour="WTA" entries={tourRankings.wta} />
+            <RankingsTable snapshot={atp} limit={5} fullPageLink />
+            <RankingsTable snapshot={wta} limit={5} fullPageLink />
           </div>
         </div>
       </section>

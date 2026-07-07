@@ -21,6 +21,11 @@ export function Footer() {
             </p>
             <ul className="mt-3 space-y-2 text-sm text-muted">
               <li>
+                <Link href="/rankings" className="hover:text-foreground">
+                  Official Rankings
+                </Link>
+              </li>
+              <li>
                 <Link href="/atp" className="hover:text-foreground">
                   ATP Men&apos;s Tour
                 </Link>

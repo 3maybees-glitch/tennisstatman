@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { RankingsTable } from "@/components/RankingsTable";
 import { MatchCard } from "@/components/MatchCard";
-import { featuredMatches, tourRankings } from "@/lib/data/mock-matches";
+import { featuredMatches } from "@/lib/data/mock-matches";
+import { fetchTourRankings } from "@/lib/rankings";
 
 export const metadata: Metadata = {
   title: "WTA Women's Tour",
@@ -10,8 +11,11 @@ export const metadata: Metadata = {
     "WTA women's tennis analytics, rankings, and innovative match stats from TennisStatMan.",
 };
 
-export default function WtaPage() {
+export const revalidate = 3600;
+
+export default async function WtaPage() {
   const wtaMatches = featuredMatches.filter((m) => m.tour === "WTA");
+  const wtaRankings = await fetchTourRankings("WTA");
 
   return (
     <div className="court-pattern">
@@ -30,8 +34,13 @@ export default function WtaPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="mb-8 text-2xl font-bold">Current Rankings</h2>
-        <RankingsTable tour="WTA" entries={tourRankings.wta} />
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <h2 className="text-2xl font-bold">Current Rankings</h2>
+          <Link href="/rankings" className="text-sm text-gold hover:text-gold-light">
+            Full rankings →
+          </Link>
+        </div>
+        <RankingsTable snapshot={wtaRankings} limit={20} showSource />
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-20">

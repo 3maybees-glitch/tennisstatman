@@ -8,10 +8,33 @@ TennisStatMan aims to surface the invisible forces in tennis — momentum swings
 
 ## Features (Current)
 
-- **Homepage** with hero, featured match analysis, and rankings snapshot
-- **ATP & WTA tour pages** with top-5 rankings and featured matches
+- **Homepage** with hero, featured match analysis, and live rankings snapshot
+- **Official Rankings page** (`/rankings`) with ATP + WTA singles tables
+- **API routes** at `/api/rankings/atp` and `/api/rankings/wta`
+- **ATP & WTA tour pages** with top-20 live rankings
 - **Stats Lab** showcasing current and upcoming innovative metrics
 - **Momentum Swing Index** — interactive preview tracking win-probability shifts game-by-game
+
+Rankings refresh hourly from official tour sources, with Tennis API (RapidAPI) as a fallback and primary ATP source when configured:
+- **WTA**: parsed from the official rankings page at `wtatennis.com`
+- **ATP**: Tennis API when `RAPIDAPI_KEY` is set, otherwise the official ATP rankings API
+- **Free tier note**: Tennis API responses are cached for 24 hours (50 requests/day limit). No live endpoints are used.
+
+### Tennis API setup (optional, free tier)
+
+1. Subscribe to [Tennis API on RapidAPI](https://rapidapi.com/jjrm365-kIFr3Nx_odV/api/tennis-api-atp-wta-itf)
+2. Copy `.env.example` to `.env.local` and add your key:
+
+```bash
+RAPIDAPI_KEY=your_key_here
+```
+
+3. Available adapter routes (non-live, free-tier friendly):
+   - `GET /api/tennis/rankings/atp` or `/wta`
+   - `GET /api/tennis/player/atp/{playerId}`
+   - `GET /api/tennis/h2h/atp/{player1Id}/{player2Id}`
+   - `GET /api/tennis/fixtures/atp?date=YYYY-MM-DD`
+   - `GET /api/tennis/fixtures/atp?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD`
 
 ## Upcoming Metrics
 
