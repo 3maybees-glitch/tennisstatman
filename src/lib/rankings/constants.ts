@@ -1,4 +1,6 @@
-export const RANKINGS_REVALIDATE_SECONDS = 60 * 60;
+export const RANKINGS_REVALIDATE_SECONDS = 60 * 60 * 24;
+
+export const RANKINGS_TOP_COUNT = 100;
 
 export const OFFICIAL_SOURCES = {
   ATP: {

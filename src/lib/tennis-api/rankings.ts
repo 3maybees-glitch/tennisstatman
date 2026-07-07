@@ -1,4 +1,5 @@
 import type { RankingEntry, RankingsSnapshot, Tour } from "@/lib/rankings/types";
+import { RANKINGS_TOP_COUNT } from "@/lib/rankings/constants";
 import { TENNIS_API_DOCS_URL, TENNIS_API_RAPIDAPI_URL } from "./constants";
 import { isTennisApiConfigured, tennisApiRequest, TennisApiError } from "./client";
 import type { TennisApiRankingRecord, TennisApiRankingsResponse, TennisApiTour } from "./types";
@@ -40,7 +41,7 @@ function normalizeRankingRecords(records: TennisApiRankingRecord[]): RankingEntr
 
 export async function fetchTennisApiRankings(
   tour: Tour,
-  pageSize = 100,
+  pageSize = RANKINGS_TOP_COUNT,
 ): Promise<RankingsSnapshot> {
   if (!isTennisApiConfigured()) {
     return getFallbackRankings(
@@ -57,7 +58,7 @@ export async function fetchTennisApiRankings(
     );
 
     const records = Array.isArray(payload) ? payload : (payload.data ?? []);
-    const entries = normalizeRankingRecords(records);
+    const entries = normalizeRankingRecords(records).slice(0, RANKINGS_TOP_COUNT);
 
     if (entries.length === 0) {
       return getFallbackRankings(

@@ -3,15 +3,16 @@ import { fetchWtaRankings } from "./wta";
 import type { RankingsSnapshot, Tour } from "./types";
 import { isTennisApiConfigured } from "@/lib/tennis-api/client";
 import { fetchTennisApiRankings } from "@/lib/tennis-api/rankings";
+import { RANKINGS_TOP_COUNT } from "./constants";
 
 function isLiveSnapshot(snapshot: RankingsSnapshot): boolean {
   return snapshot.source !== "fallback";
 }
 
 export async function fetchTourRankings(tour: Tour): Promise<RankingsSnapshot> {
-  // Prefer Tennis API for ATP when configured — official ATP feed is often bot-blocked.
-  if (tour === "ATP" && isTennisApiConfigured()) {
-    const tennisApiRankings = await fetchTennisApiRankings("ATP");
+  // Tennis API returns top 100 for both tours (official WTA HTML only exposes ~50).
+  if (isTennisApiConfigured()) {
+    const tennisApiRankings = await fetchTennisApiRankings(tour, RANKINGS_TOP_COUNT);
     if (isLiveSnapshot(tennisApiRankings)) {
       return tennisApiRankings;
     }
@@ -21,14 +22,15 @@ export async function fetchTourRankings(tour: Tour): Promise<RankingsSnapshot> {
     tour === "ATP" ? await fetchAtpRankings() : await fetchWtaRankings();
 
   if (isLiveSnapshot(official)) {
-    return official;
-  }
-
-  if (isTennisApiConfigured()) {
-    const tennisApiRankings = await fetchTennisApiRankings(tour);
-    if (isLiveSnapshot(tennisApiRankings)) {
-      return tennisApiRankings;
+    if (tour === "WTA" && official.entries.length < RANKINGS_TOP_COUNT) {
+      return {
+        ...official,
+        warning:
+          official.warning ??
+          `Official WTA page lists ${official.entries.length} players. Add RAPIDAPI_KEY for the full top ${RANKINGS_TOP_COUNT}.`,
+      };
     }
+    return official;
   }
 
   return official;

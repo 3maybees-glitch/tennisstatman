@@ -23,9 +23,9 @@ export default async function RankingsPage() {
             <h1 className="text-4xl font-bold">Official Tour Rankings</h1>
           </div>
           <p className="mt-4 max-w-3xl text-lg text-muted">
-            Singles rankings for the ATP and WTA tours, refreshed hourly. WTA
-            data comes from the official rankings page; ATP uses Tennis API
-            when configured, otherwise the official tour feed.
+            Top 100 singles rankings for the ATP and WTA tours, refreshed daily
+            via Tennis API when configured, with official tour sources as
+            fallback.
           </p>
         </div>
       </section>

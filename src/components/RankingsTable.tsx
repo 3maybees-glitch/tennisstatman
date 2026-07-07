@@ -18,7 +18,9 @@ export function RankingsTable({
   const title =
     limit && limit < snapshot.entries.length
       ? `${snapshot.tour === "ATP" ? "Men's" : "Women's"} Top ${limit}`
-      : `${snapshot.tour === "ATP" ? "Men's" : "Women's"} Singles Rankings`;
+      : snapshot.entries.length >= 100
+        ? `${snapshot.tour === "ATP" ? "Men's" : "Women's"} Top 100`
+        : `${snapshot.tour === "ATP" ? "Men's" : "Women's"} Singles Rankings`;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-navy-light">
