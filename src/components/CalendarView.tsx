@@ -1,26 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import Link from "next/link";
 import {
   SURFACE_COLORS,
   SURFACE_LABELS,
   TIER_COLORS,
+  TIER_GROUPS,
   tournaments,
   type Surface,
-  type Tier,
   type Tournament,
 } from "@/lib/data/tournaments";
+import { SeasonTimeline } from "@/components/SeasonTimeline";
 import { MapPin } from "lucide-react";
-
-const TIER_GROUPS: { label: string; tiers: Tier[] }[] = [
-  { label: "Grand Slams", tiers: ["Grand Slam"] },
-  { label: "1000s", tiers: ["Masters 1000", "WTA 1000"] },
-  { label: "500s", tiers: ["ATP 500", "WTA 500"] },
-  { label: "250s", tiers: ["ATP 250", "WTA 250"] },
-  { label: "Challengers", tiers: ["Challenger"] },
-  { label: "ITF", tiers: ["ITF"] },
-];
 
 const SURFACES: Surface[] = ["hard", "clay", "grass", "indoor"];
 
@@ -31,11 +24,23 @@ function formatRange(t: Tournament): string {
   return `${start} – ${end}`;
 }
 
+/** Per-month surface mix, used to paint the month header ribbons. */
+function surfaceMix(events: Tournament[]): { surface: Surface; share: number }[] {
+  const counts = new Map<Surface, number>();
+  for (const t of events) counts.set(t.surface, (counts.get(t.surface) ?? 0) + 1);
+  return SURFACES.filter((s) => counts.has(s)).map((s) => ({
+    surface: s,
+    share: (counts.get(s)! / events.length) * 100,
+  }));
+}
+
 export function CalendarView() {
   const [activeGroups, setActiveGroups] = useState<Set<string>>(
     () => new Set(TIER_GROUPS.map((g) => g.label)),
   );
   const [surface, setSurface] = useState<Surface | "all">("all");
+  const [flashId, setFlashId] = useState<string | null>(null);
+  const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const visible = useMemo(() => {
     const allowedTiers = new Set(
@@ -73,8 +78,31 @@ export function CalendarView() {
     });
   }
 
+  function jumpTo(t: Tournament) {
+    // Widen the filters synchronously so the target card exists in the DOM,
+    // then scroll to it.
+    flushSync(() => {
+      const group = TIER_GROUPS.find((g) => g.tiers.includes(t.tier));
+      if (group && !activeGroups.has(group.label)) {
+        setActiveGroups((prev) => new Set(prev).add(group.label));
+      }
+      if (surface !== "all" && surface !== t.surface) setSurface("all");
+      setFlashId(t.id);
+    });
+    document
+      .getElementById(`event-${t.id}`)
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (flashTimer.current) clearTimeout(flashTimer.current);
+    flashTimer.current = setTimeout(() => setFlashId(null), 1600);
+  }
+
   return (
     <section className="mx-auto max-w-7xl px-6 py-12">
+      {/* Season timeline */}
+      <div className="mb-10">
+        <SeasonTimeline surface={surface} onSelect={jumpTo} />
+      </div>
+
       {/* Filters */}
       <div className="mb-10 space-y-4">
         <div className="flex flex-wrap items-center gap-2">
@@ -134,51 +162,97 @@ export function CalendarView() {
       </div>
 
       {/* Month sections */}
-      {[...byMonth.entries()].map(([month, events]) => (
-        <div key={month} className="mb-10">
-          <h2 className="mb-4 text-xl font-bold text-gold-light">{month}</h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {events.map((t) => (
-              <article
-                key={t.id}
-                className="rounded-2xl border border-white/10 bg-navy-light p-5 transition-colors hover:border-white/20"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <span
-                    className="rounded px-2 py-0.5 text-[11px] font-bold"
+      {[...byMonth.entries()].map(([month, events]) => {
+        const mix = surfaceMix(events);
+        return (
+          <div key={month} className="mb-10">
+            <div className="mb-4 flex items-center gap-4">
+              <h2 className="text-xl font-bold text-gold-light">{month}</h2>
+              <div className="flex h-1.5 flex-1 overflow-hidden rounded-full bg-white/5">
+                {mix.map(({ surface: s, share }) => (
+                  <div
+                    key={s}
+                    title={`${SURFACE_LABELS[s]}: ${Math.round(share)}%`}
                     style={{
-                      backgroundColor: `${TIER_COLORS[t.tier]}22`,
-                      color: TIER_COLORS[t.tier],
+                      width: `${share}%`,
+                      backgroundColor: SURFACE_COLORS[s],
+                      opacity: 0.75,
+                    }}
+                  />
+                ))}
+              </div>
+              <span className="font-mono text-xs text-muted">
+                {events.length} {events.length === 1 ? "event" : "events"}
+              </span>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {events.map((t) => {
+                const color = SURFACE_COLORS[t.surface];
+                const isSlam = t.tier === "Grand Slam";
+                const flashing = flashId === t.id;
+                return (
+                  <article
+                    key={t.id}
+                    id={`event-${t.id}`}
+                    className="relative overflow-hidden rounded-2xl border bg-navy-light p-5 transition-all hover:-translate-y-0.5"
+                    style={{
+                      borderColor: flashing
+                        ? "#f0c75e"
+                        : isSlam
+                          ? "#f0c75e55"
+                          : `${color}33`,
+                      boxShadow: flashing
+                        ? "0 0 24px rgba(240, 199, 94, 0.45)"
+                        : isSlam
+                          ? "0 0 24px rgba(240, 199, 94, 0.12)"
+                          : undefined,
+                      background: `linear-gradient(160deg, ${color}14 0%, var(--navy-light) 45%)`,
                     }}
                   >
-                    {t.tier}
-                  </span>
-                  <span
-                    className="rounded px-2 py-0.5 text-[11px] font-medium"
-                    style={{
-                      backgroundColor: `${SURFACE_COLORS[t.surface]}22`,
-                      color: SURFACE_COLORS[t.surface],
-                    }}
-                  >
-                    {SURFACE_LABELS[t.surface]}
-                  </span>
-                </div>
-                <h3 className="mt-3 font-semibold leading-snug">{t.name}</h3>
-                <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
-                  <MapPin size={13} />
-                  {t.city}, {t.country}
-                </p>
-                <div className="mt-3 flex items-center justify-between text-xs text-muted">
-                  <span>{formatRange(t)}</span>
-                  <span className="font-mono">
-                    {t.tour} · {t.drawSize} draw · {t.prizeMoney}
-                  </span>
-                </div>
-              </article>
-            ))}
+                    <div
+                      className="absolute inset-x-0 top-0 h-1"
+                      style={{
+                        background: `linear-gradient(90deg, ${color}, ${color}00)`,
+                      }}
+                    />
+                    <div className="flex items-start justify-between gap-2">
+                      <span
+                        className="rounded px-2 py-0.5 text-[11px] font-bold"
+                        style={{
+                          backgroundColor: `${TIER_COLORS[t.tier]}22`,
+                          color: TIER_COLORS[t.tier],
+                        }}
+                      >
+                        {t.tier}
+                      </span>
+                      <span
+                        className="rounded px-2 py-0.5 text-[11px] font-medium"
+                        style={{
+                          backgroundColor: `${color}22`,
+                          color,
+                        }}
+                      >
+                        {SURFACE_LABELS[t.surface]}
+                      </span>
+                    </div>
+                    <h3 className="mt-3 font-semibold leading-snug">{t.name}</h3>
+                    <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
+                      <MapPin size={13} style={{ color }} />
+                      {t.city}, {t.country}
+                    </p>
+                    <div className="mt-3 flex items-center justify-between text-xs text-muted">
+                      <span>{formatRange(t)}</span>
+                      <span className="font-mono">
+                        {t.tour} · {t.drawSize} draw · {t.prizeMoney}
+                      </span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {visible.length === 0 && (
         <p className="py-20 text-center text-muted">
