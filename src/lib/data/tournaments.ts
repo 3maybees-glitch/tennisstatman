@@ -54,6 +54,29 @@ export const SURFACE_LABELS: Record<Surface, string> = {
   indoor: "Indoor Hard",
 };
 
+export const TIER_GROUPS: { label: string; tiers: Tier[] }[] = [
+  { label: "Grand Slams", tiers: ["Grand Slam"] },
+  { label: "1000s", tiers: ["Masters 1000", "WTA 1000"] },
+  { label: "500s", tiers: ["ATP 500", "WTA 500"] },
+  { label: "250s", tiers: ["ATP 250", "WTA 250"] },
+  { label: "Challengers", tiers: ["Challenger"] },
+  { label: "ITF", tiers: ["ITF"] },
+];
+
+/** The surface "swings" that shape a tennis season, in order. */
+export const SEASON_SWINGS: {
+  label: string;
+  surface: Surface;
+  from: string;
+  to: string;
+}[] = [
+  { label: "Sunshine hard", surface: "hard", from: "2026-01-01", to: "2026-03-31" },
+  { label: "Clay swing", surface: "clay", from: "2026-04-01", to: "2026-06-07" },
+  { label: "Grass swing", surface: "grass", from: "2026-06-08", to: "2026-07-12" },
+  { label: "US & Asian hard", surface: "hard", from: "2026-07-13", to: "2026-10-18" },
+  { label: "Indoor finish", surface: "indoor", from: "2026-10-19", to: "2026-11-30" },
+];
+
 export const tournaments: Tournament[] = [
   // ─── January ─────────────────────────────────────────
   {
