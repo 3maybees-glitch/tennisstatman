@@ -96,6 +96,14 @@ export const upcomingStats = [
     icon: "wave",
   },
   {
+    id: "skills",
+    title: "Skill Category Leaderboards",
+    description:
+      "Top 10 bar charts and tables for serve, forehand, backhand, net play, and movement — ATP and WTA. Courtside exclusive.",
+    status: "preview" as const,
+    icon: "bars",
+  },
+  {
     id: "clutch",
     title: "Clutch Factor Score",
     description:
