@@ -155,7 +155,7 @@ export default async function PlayerDetailPage({ params }: PageProps) {
           <div className="space-y-6">
             <div className="rounded-2xl border border-gold/25 bg-navy-light p-6">
               <div className="flex items-center gap-3">
-                <StatManMascot size={56} mood="thinking" />
+                <StatManMascot size={56} mood="thinking" pose="point" />
                 <h2 className="font-semibold text-gold-light">
                   Stat Man&apos;s Verdict
                 </h2>

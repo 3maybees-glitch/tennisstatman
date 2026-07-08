@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MascotExplainer } from "@/components/MascotExplainer";
 import { StatFeatureCard } from "@/components/StatFeatureCard";
 import { upcomingStats } from "@/lib/data/mock-matches";
 import { FlaskConical } from "lucide-react";
@@ -16,16 +17,23 @@ export default function StatsPage() {
   return (
     <div className="court-pattern">
       <section className="border-b border-white/5 bg-navy-light/40">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="flex items-center gap-3">
-            <FlaskConical className="text-gold" size={28} />
-            <h1 className="text-4xl font-bold">Stats Lab</h1>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8 px-6 py-16">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3">
+              <FlaskConical className="text-gold" size={28} />
+              <h1 className="text-4xl font-bold">Stats Lab</h1>
+            </div>
+            <p className="mt-4 max-w-2xl text-lg text-muted">
+              Traditional tennis stats tell you what happened. We&apos;re
+              building metrics that explain <em>why</em> it happened and{" "}
+              <em>what</em> happens next — momentum, mentality, and the forces
+              players can&apos;t control.
+            </p>
           </div>
-          <p className="mt-4 max-w-2xl text-lg text-muted">
-            Traditional tennis stats tell you what happened. We&apos;re building
-            metrics that explain <em>why</em> it happened and <em>what</em> happens
-            next — momentum, mentality, and the forces players can&apos;t control.
-          </p>
+          <MascotExplainer pose="flask">
+            Welcome to my laboratory! This is where I brew the experimental
+            metrics — some are live previews, some are still bubbling.
+          </MascotExplainer>
         </div>
       </section>
 

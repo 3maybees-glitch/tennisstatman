@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { MascotExplainer } from "@/components/MascotExplainer";
 import { MomentumChart } from "@/components/MomentumChart";
 import { featuredMatches } from "@/lib/data/mock-matches";
 import { Activity, Info, TrendingUp, Zap } from "lucide-react";
@@ -20,17 +21,24 @@ export default function MomentumPage() {
   return (
     <div className="court-pattern">
       <section className="border-b border-white/5 bg-navy-light/40">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="flex items-center gap-3">
-            <Activity className="text-gold" size={28} />
-            <h1 className="text-4xl font-bold">Momentum Swing Index</h1>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8 px-6 py-16">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3">
+              <Activity className="text-gold" size={28} />
+              <h1 className="text-4xl font-bold">Momentum Swing Index</h1>
+            </div>
+            <p className="mt-4 max-w-3xl text-lg text-muted">
+              Every match has turning points — moments where probability shifts
+              dramatically. Our Momentum Swing Index tracks win-probability
+              changes game-by-game, flagging breaks, comebacks, and the
+              psychological swings that decide outcomes.
+            </p>
           </div>
-          <p className="mt-4 max-w-3xl text-lg text-muted">
-            Every match has turning points — moments where probability shifts
-            dramatically. Our Momentum Swing Index tracks win-probability
-            changes game-by-game, flagging breaks, comebacks, and the
-            psychological swings that decide outcomes.
-          </p>
+          <MascotExplainer pose="chart" mood="thinking">
+            See that jagged line? That&apos;s a match changing its mind. I
+            chart win probability game by game so you can spot the exact
+            moment it flipped.
+          </MascotExplainer>
         </div>
       </section>
 

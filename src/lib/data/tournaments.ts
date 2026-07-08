@@ -11,6 +11,16 @@ export type Tier =
   | "Challenger"
   | "ITF";
 
+/** The championship match from the most recent completed edition. */
+export type LastFinal = {
+  tour: "ATP" | "WTA";
+  year: number;
+  champion: string;
+  runnerUp: string;
+  /** e.g. "7-6(4), 7-5" or "4-1, ret." */
+  score: string;
+};
+
 export type Tournament = {
   id: string;
   name: string;
@@ -26,6 +36,8 @@ export type Tournament = {
   end: string;
   drawSize: number;
   prizeMoney: string;
+  /** Static snapshot of the last completed final(s) at this event. */
+  lastFinals: LastFinal[];
 };
 
 export const TIER_COLORS: Record<Tier, string> = {
@@ -93,6 +105,22 @@ export const tournaments: Tournament[] = [
     end: "2026-01-11",
     drawSize: 32,
     prizeMoney: "$2.2M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Lehečka",
+        runnerUp: "R. Opelka",
+        score: "4-1, ret.",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "A. Sabalenka",
+        runnerUp: "P. Kudermetova",
+        score: "4-6, 6-3, 6-2",
+      },
+    ],
   },
   {
     id: "auckland-open",
@@ -108,6 +136,15 @@ export const tournaments: Tournament[] = [
     end: "2026-01-11",
     drawSize: 32,
     prizeMoney: "$280K",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "C. Tauson",
+        runnerUp: "N. Osaka",
+        score: "4-6, ret.",
+      },
+    ],
   },
   {
     id: "canberra-challenger",
@@ -123,6 +160,15 @@ export const tournaments: Tournament[] = [
     end: "2026-01-11",
     drawSize: 48,
     prizeMoney: "$80K",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Fonseca",
+        runnerUp: "E. Quinn",
+        score: "6-4, 6-4",
+      },
+    ],
   },
   {
     id: "australian-open",
@@ -138,6 +184,22 @@ export const tournaments: Tournament[] = [
     end: "2026-02-01",
     drawSize: 128,
     prizeMoney: "$60M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Sinner",
+        runnerUp: "A. Zverev",
+        score: "6-3, 7-6(4), 6-3",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "M. Keys",
+        runnerUp: "A. Sabalenka",
+        score: "6-3, 2-6, 7-5",
+      },
+    ],
   },
   {
     id: "itf-monastir-w15",
@@ -153,6 +215,15 @@ export const tournaments: Tournament[] = [
     end: "2026-01-18",
     drawSize: 32,
     prizeMoney: "$15K",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "H. Abe",
+        runnerUp: "M. Matoula",
+        score: "6-0, 6-0",
+      },
+    ],
   },
   // ─── February ────────────────────────────────────────
   {
@@ -169,6 +240,15 @@ export const tournaments: Tournament[] = [
     end: "2026-02-08",
     drawSize: 32,
     prizeMoney: "$2.3M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "A. de Minaur",
+        score: "6-4, 3-6, 6-2",
+      },
+    ],
   },
   {
     id: "doha-open-wta",
@@ -184,6 +264,15 @@ export const tournaments: Tournament[] = [
     end: "2026-02-15",
     drawSize: 64,
     prizeMoney: "$3.9M",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "A. Anisimova",
+        runnerUp: "J. Ostapenko",
+        score: "6-4, 6-3",
+      },
+    ],
   },
   {
     id: "rio-open",
@@ -199,6 +288,15 @@ export const tournaments: Tournament[] = [
     end: "2026-02-22",
     drawSize: 32,
     prizeMoney: "$2.1M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "S. Báez",
+        runnerUp: "A. Müller",
+        score: "6-2, 6-3",
+      },
+    ],
   },
   {
     id: "dubai-championships",
@@ -214,6 +312,22 @@ export const tournaments: Tournament[] = [
     end: "2026-02-28",
     drawSize: 64,
     prizeMoney: "$3.9M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "S. Tsitsipas",
+        runnerUp: "F. Auger-Aliassime",
+        score: "6-3, 6-3",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "M. Andreeva",
+        runnerUp: "C. Tauson",
+        score: "7-6(1), 6-1",
+      },
+    ],
   },
   {
     id: "cherbourg-challenger",
@@ -229,6 +343,15 @@ export const tournaments: Tournament[] = [
     end: "2026-02-22",
     drawSize: 48,
     prizeMoney: "€74K",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "P.-H. Herbert",
+        runnerUp: "J. Sels",
+        score: "6-3, 6-4",
+      },
+    ],
   },
   // ─── March ───────────────────────────────────────────
   {
@@ -245,6 +368,22 @@ export const tournaments: Tournament[] = [
     end: "2026-03-15",
     drawSize: 96,
     prizeMoney: "$19.5M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Draper",
+        runnerUp: "H. Rune",
+        score: "6-2, 6-2",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "M. Andreeva",
+        runnerUp: "A. Sabalenka",
+        score: "2-6, 6-4, 6-3",
+      },
+    ],
   },
   {
     id: "miami-open",
@@ -260,6 +399,22 @@ export const tournaments: Tournament[] = [
     end: "2026-03-29",
     drawSize: 96,
     prizeMoney: "$17.8M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Menšík",
+        runnerUp: "N. Djokovic",
+        score: "7-6(4), 7-6(4)",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "A. Sabalenka",
+        runnerUp: "J. Pegula",
+        score: "7-5, 6-2",
+      },
+    ],
   },
   {
     id: "itf-antalya-m25",
@@ -275,6 +430,15 @@ export const tournaments: Tournament[] = [
     end: "2026-03-15",
     drawSize: 32,
     prizeMoney: "$25K",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "O. Krutykh",
+        runnerUp: "S. Fomin",
+        score: "7-6(4), 3-6, 7-5",
+      },
+    ],
   },
   // ─── April (clay swing) ──────────────────────────────
   {
@@ -291,6 +455,15 @@ export const tournaments: Tournament[] = [
     end: "2026-04-19",
     drawSize: 56,
     prizeMoney: "€6.2M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "L. Musetti",
+        score: "3-6, 6-1, 6-0",
+      },
+    ],
   },
   {
     id: "stuttgart-open",
@@ -306,6 +479,15 @@ export const tournaments: Tournament[] = [
     end: "2026-04-19",
     drawSize: 28,
     prizeMoney: "$1M",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "J. Ostapenko",
+        runnerUp: "A. Sabalenka",
+        score: "6-4, 6-1",
+      },
+    ],
   },
   {
     id: "barcelona-open",
@@ -321,6 +503,15 @@ export const tournaments: Tournament[] = [
     end: "2026-04-19",
     drawSize: 48,
     prizeMoney: "€2.9M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "H. Rune",
+        runnerUp: "C. Alcaraz",
+        score: "7-6(6), 6-2",
+      },
+    ],
   },
   {
     id: "madrid-open",
@@ -336,6 +527,22 @@ export const tournaments: Tournament[] = [
     end: "2026-05-03",
     drawSize: 96,
     prizeMoney: "€15.9M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Ruud",
+        runnerUp: "J. Draper",
+        score: "7-5, 3-6, 6-4",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "A. Sabalenka",
+        runnerUp: "C. Gauff",
+        score: "6-3, 7-6(3)",
+      },
+    ],
   },
   {
     id: "oeiras-challenger",
@@ -351,6 +558,15 @@ export const tournaments: Tournament[] = [
     end: "2026-04-26",
     drawSize: 48,
     prizeMoney: "€145K",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "E. Møller",
+        runnerUp: "F. Comesaña",
+        score: "6-0, 6-4",
+      },
+    ],
   },
   // ─── May ─────────────────────────────────────────────
   {
@@ -367,6 +583,22 @@ export const tournaments: Tournament[] = [
     end: "2026-05-17",
     drawSize: 96,
     prizeMoney: "€14.8M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "J. Sinner",
+        score: "7-6(5), 6-1",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "J. Paolini",
+        runnerUp: "C. Gauff",
+        score: "6-4, 6-2",
+      },
+    ],
   },
   {
     id: "french-open",
@@ -382,6 +614,22 @@ export const tournaments: Tournament[] = [
     end: "2026-06-07",
     drawSize: 128,
     prizeMoney: "€58M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "J. Sinner",
+        score: "4-6, 6-7(4), 6-4, 7-6(3), 7-6(10-2)",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "C. Gauff",
+        runnerUp: "A. Sabalenka",
+        score: "6-7(5), 6-2, 6-4",
+      },
+    ],
   },
   {
     id: "itf-changwon-w35",
@@ -397,6 +645,15 @@ export const tournaments: Tournament[] = [
     end: "2026-05-17",
     drawSize: 32,
     prizeMoney: "$35K",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "E. Reyngold",
+        runnerUp: "W. Zheng",
+        score: "4-6, 7-5, 7-6(2)",
+      },
+    ],
   },
   // ─── June (grass swing) ──────────────────────────────
   {
@@ -413,6 +670,15 @@ export const tournaments: Tournament[] = [
     end: "2026-06-14",
     drawSize: 28,
     prizeMoney: "€2.1M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "T. Fritz",
+        runnerUp: "A. Zverev",
+        score: "6-3, 7-6(0)",
+      },
+    ],
   },
   {
     id: "queens-club",
@@ -428,6 +694,22 @@ export const tournaments: Tournament[] = [
     end: "2026-06-21",
     drawSize: 32,
     prizeMoney: "£2.5M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "J. Lehečka",
+        score: "7-5, 6-7(5), 6-2",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "T. Maria",
+        runnerUp: "A. Anisimova",
+        score: "6-3, 6-4",
+      },
+    ],
   },
   {
     id: "halle-open",
@@ -443,6 +725,15 @@ export const tournaments: Tournament[] = [
     end: "2026-06-21",
     drawSize: 32,
     prizeMoney: "€2.5M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "A. Bublik",
+        runnerUp: "D. Medvedev",
+        score: "6-3, 7-6(4)",
+      },
+    ],
   },
   {
     id: "wimbledon",
@@ -458,6 +749,22 @@ export const tournaments: Tournament[] = [
     end: "2026-07-12",
     drawSize: 128,
     prizeMoney: "£53.5M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Sinner",
+        runnerUp: "C. Alcaraz",
+        score: "4-6, 6-4, 6-4, 6-4",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "I. Świątek",
+        runnerUp: "A. Anisimova",
+        score: "6-0, 6-0",
+      },
+    ],
   },
   {
     id: "ilkley-challenger",
@@ -473,6 +780,22 @@ export const tournaments: Tournament[] = [
     end: "2026-06-21",
     drawSize: 48,
     prizeMoney: "£145K",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "T. Schoolkate",
+        runnerUp: "J. Pinnington Jones",
+        score: "6-7(8), 6-4, 6-3",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "I. Jovic",
+        runnerUp: "R. Marino",
+        score: "6-1, 6-3",
+      },
+    ],
   },
   // ─── July ────────────────────────────────────────────
   {
@@ -489,6 +812,15 @@ export const tournaments: Tournament[] = [
     end: "2026-07-19",
     drawSize: 32,
     prizeMoney: "€2.2M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "F. Cobolli",
+        runnerUp: "A. Rublev",
+        score: "6-2, 6-4",
+      },
+    ],
   },
   {
     id: "prague-open",
@@ -504,6 +836,15 @@ export const tournaments: Tournament[] = [
     end: "2026-07-26",
     drawSize: 32,
     prizeMoney: "$280K",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "M. Bouzková",
+        runnerUp: "L. Nosková",
+        score: "2-6, 6-1, 6-3",
+      },
+    ],
   },
   {
     id: "itf-porto-w75",
@@ -519,6 +860,15 @@ export const tournaments: Tournament[] = [
     end: "2026-07-12",
     drawSize: 32,
     prizeMoney: "$75K",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "T. Valentová",
+        runnerUp: "N. Schunk",
+        score: "6-3, 6-4",
+      },
+    ],
   },
   // ─── August (US summer) ──────────────────────────────
   {
@@ -535,6 +885,22 @@ export const tournaments: Tournament[] = [
     end: "2026-08-09",
     drawSize: 96,
     prizeMoney: "$12.4M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "B. Shelton",
+        runnerUp: "K. Khachanov",
+        score: "6-7(5), 6-4, 7-6(3)",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "V. Mboko",
+        runnerUp: "N. Osaka",
+        score: "2-6, 6-4, 6-1",
+      },
+    ],
   },
   {
     id: "cincinnati-open",
@@ -550,6 +916,22 @@ export const tournaments: Tournament[] = [
     end: "2026-08-19",
     drawSize: 96,
     prizeMoney: "$14.2M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "J. Sinner",
+        score: "5-0, ret.",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "I. Świątek",
+        runnerUp: "J. Paolini",
+        score: "7-5, 6-4",
+      },
+    ],
   },
   {
     id: "us-open",
@@ -565,6 +947,22 @@ export const tournaments: Tournament[] = [
     end: "2026-09-13",
     drawSize: 128,
     prizeMoney: "$75M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "J. Sinner",
+        score: "6-2, 3-6, 6-1, 6-4",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "A. Sabalenka",
+        runnerUp: "A. Anisimova",
+        score: "6-3, 7-6(3)",
+      },
+    ],
   },
   {
     id: "cary-challenger",
@@ -580,6 +978,15 @@ export const tournaments: Tournament[] = [
     end: "2026-08-23",
     drawSize: 48,
     prizeMoney: "$100K",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "R. Sakamoto",
+        runnerUp: "L. Draxl",
+        score: "6-1, 6-4",
+      },
+    ],
   },
   // ─── September / October (Asian swing) ───────────────
   {
@@ -596,6 +1003,22 @@ export const tournaments: Tournament[] = [
     end: "2026-10-04",
     drawSize: 96,
     prizeMoney: "$8.9M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Sinner",
+        runnerUp: "L. Tien",
+        score: "6-2, 6-2",
+      },
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "A. Anisimova",
+        runnerUp: "L. Nosková",
+        score: "6-0, 2-6, 6-2",
+      },
+    ],
   },
   {
     id: "tokyo-open",
@@ -611,6 +1034,15 @@ export const tournaments: Tournament[] = [
     end: "2026-10-04",
     drawSize: 32,
     prizeMoney: "$2.2M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "C. Alcaraz",
+        runnerUp: "T. Fritz",
+        score: "6-4, 6-4",
+      },
+    ],
   },
   {
     id: "shanghai-masters",
@@ -626,6 +1058,15 @@ export const tournaments: Tournament[] = [
     end: "2026-10-14",
     drawSize: 96,
     prizeMoney: "$11.2M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "V. Vacherot",
+        runnerUp: "A. Rinderknech",
+        score: "4-6, 6-3, 6-3",
+      },
+    ],
   },
   {
     id: "wuhan-open",
@@ -641,6 +1082,15 @@ export const tournaments: Tournament[] = [
     end: "2026-10-11",
     drawSize: 64,
     prizeMoney: "$3.7M",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "C. Gauff",
+        runnerUp: "J. Pegula",
+        score: "6-4, 7-5",
+      },
+    ],
   },
   {
     id: "itf-hua-hin-w50",
@@ -656,6 +1106,15 @@ export const tournaments: Tournament[] = [
     end: "2026-10-18",
     drawSize: 32,
     prizeMoney: "$50K",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2024,
+        champion: "R. Šramková",
+        runnerUp: "L. Siegemund",
+        score: "6-4, 6-4",
+      },
+    ],
   },
   // ─── November (finals) ───────────────────────────────
   {
@@ -672,6 +1131,15 @@ export const tournaments: Tournament[] = [
     end: "2026-11-01",
     drawSize: 56,
     prizeMoney: "€6.1M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Sinner",
+        runnerUp: "F. Auger-Aliassime",
+        score: "6-4, 7-6(4)",
+      },
+    ],
   },
   {
     id: "wta-finals",
@@ -687,6 +1155,15 @@ export const tournaments: Tournament[] = [
     end: "2026-11-08",
     drawSize: 8,
     prizeMoney: "$15.3M",
+    lastFinals: [
+      {
+        tour: "WTA",
+        year: 2025,
+        champion: "E. Rybakina",
+        runnerUp: "A. Sabalenka",
+        score: "6-3, 7-6(0)",
+      },
+    ],
   },
   {
     id: "atp-finals",
@@ -702,6 +1179,15 @@ export const tournaments: Tournament[] = [
     end: "2026-11-22",
     drawSize: 8,
     prizeMoney: "$15.5M",
+    lastFinals: [
+      {
+        tour: "ATP",
+        year: 2025,
+        champion: "J. Sinner",
+        runnerUp: "C. Alcaraz",
+        score: "7-6(4), 7-5",
+      },
+    ],
   },
 ];
 

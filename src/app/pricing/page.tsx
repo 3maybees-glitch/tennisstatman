@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { StatManMascot } from "@/components/StatManMascot";
+import { MascotExplainer } from "@/components/MascotExplainer";
 import { Check, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -39,9 +39,12 @@ export default function PricingPage() {
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto max-w-7xl px-6 py-16 text-center">
           <div className="flex justify-center">
-            <StatManMascot size={110} />
+            <MascotExplainer pose="thumbsup">
+              Good news: the stats stay free, forever. Courtside is just for
+              the superfans who want to read the footnotes with me.
+            </MascotExplainer>
           </div>
-          <h1 className="mt-4 text-4xl font-bold">
+          <h1 className="mt-6 text-4xl font-bold">
             Free for every fan.{" "}
             <span className="gradient-text">Courtside for the obsessed.</span>
           </h1>

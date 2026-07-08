@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MascotExplainer } from "@/components/MascotExplainer";
 import { PulseSpark } from "@/components/PulseSpark";
-import { StatManMascot } from "@/components/StatManMascot";
 import { UpgradeCTA } from "@/components/UpgradeCTA";
 import { currentPulse, players, pulseTrend } from "@/lib/data/players";
 import { Activity, Flame, Snowflake } from "lucide-react";
@@ -43,7 +43,11 @@ export default function PulsePage() {
                 is about to have a very good fortnight.
               </p>
             </div>
-            <StatManMascot size={130} className="ml-auto hidden lg:block" />
+            <MascotExplainer pose="heart" className="ml-auto">
+              PULSE is the site&apos;s heartbeat — one number for how alive a
+              player&apos;s game is right now. When it spikes past 90, keep
+              your eyes on them.
+            </MascotExplainer>
           </div>
         </div>
       </section>
