@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Fetches Wikipedia headshot URLs for top-50 ATP and WTA players.
- * Run: node scripts/fetch-wikipedia-portraits.mjs
+ * Fetches Wikipedia headshot URLs for ranked players + curated roster names.
+ * Run: npm run generate-portraits
  */
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -9,6 +9,8 @@ import { fileURLToPath } from "node:url";
 import {
   TOP_50_ATP,
   TOP_50_WTA,
+  TOP_51_100_ATP,
+  TOP_51_100_WTA,
   slugify,
 } from "./top-50-players.mjs";
 
@@ -19,8 +21,29 @@ const OUT_PATH = path.join(ROOT, "src", "lib", "images", "wikipedia-portraits.ts
 const USER_AGENT =
   "TennisStatMan/1.0 (https://tennisstatman.vercel.app; wikipedia-portrait-fetch)";
 
+const BROWSER_HEADERS = {
+  "User-Agent": USER_AGENT,
+  Accept: "application/json, text/html, */*",
+  "Accept-Language": "en-US,en;q=0.9",
+};
+
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
+}
+
+function uniqueNames(lists) {
+  const seen = new Set();
+  const names = [];
+  for (const list of lists) {
+    for (const name of list) {
+      const key = slugify(name);
+      if (!seen.has(key)) {
+        seen.add(key);
+        names.push(name);
+      }
+    }
+  }
+  return names;
 }
 
 function wikiTitleCandidates(name) {
@@ -32,14 +55,65 @@ function wikiTitleCandidates(name) {
   return [...new Set([base, ascii])];
 }
 
-async function fetchJson(url) {
-  const response = await fetch(url, {
-    headers: { "User-Agent": USER_AGENT },
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
+async function fetchJson(url, headers = BROWSER_HEADERS) {
+  const response = await fetch(url, { headers });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
+}
+
+async function fetchText(url, headers = BROWSER_HEADERS) {
+  const response = await fetch(url, { headers });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.text();
+}
+
+function parseWtaRankingsHtml(html) {
+  const rows = html.split('class="player-row js-player-item-favourite').slice(1);
+  return rows
+    .map((row) => row.match(/data-player-name="([^"]+)"/)?.[1])
+    .filter(Boolean);
+}
+
+function parseAtpRankingsJson(payload) {
+  const records = payload.rankings ?? payload.data?.rankings ?? [];
+  return records
+    .map((record) => {
+      const first = record.player?.firstName ?? "";
+      const last = record.player?.lastName ?? "";
+      return `${first} ${last}`.trim();
+    })
+    .filter(Boolean);
+}
+
+async function fetchLiveRankingNames() {
+  const names = [];
+
+  try {
+    const html = await fetchText("https://www.wtatennis.com/rankings/singles", {
+      ...BROWSER_HEADERS,
+      Referer: "https://www.wtatennis.com/rankings/singles",
+    });
+    names.push(...parseWtaRankingsHtml(html));
+  } catch (error) {
+    console.warn("WTA live rankings skipped:", error.message);
+  }
+
+  try {
+    const payload = await fetchJson(
+      "https://www.atptour.com/-/api/rankings/singles?rankRange=0-499",
+      {
+        ...BROWSER_HEADERS,
+        Accept: "application/json, text/plain, */*",
+        Referer: "https://www.atptour.com/en/rankings/singles",
+        Origin: "https://www.atptour.com",
+      },
+    );
+    names.push(...parseAtpRankingsJson(payload));
+  } catch (error) {
+    console.warn("ATP live rankings skipped:", error.message);
+  }
+
+  return names;
 }
 
 async function fetchThumbByTitles(titles) {
@@ -97,33 +171,40 @@ async function fetchThumbBySearch(name) {
 async function fetchWikipediaPortrait(name) {
   const direct = await fetchThumbByTitles(wikiTitleCandidates(name));
   if (direct) return direct;
-
   return fetchThumbBySearch(name);
 }
 
 async function main() {
-  const entries = [];
-  const all = [
-    ...TOP_50_ATP.map((name) => ({ tour: "ATP", name })),
-    ...TOP_50_WTA.map((name) => ({ tour: "WTA", name })),
-  ];
+  console.log("Collecting player names…");
+  const liveNames = await fetchLiveRankingNames();
+  const allNames = uniqueNames([
+    TOP_50_ATP,
+    TOP_51_100_ATP,
+    TOP_50_WTA,
+    TOP_51_100_WTA,
+    liveNames,
+  ]);
 
+  console.log(`Fetching Wikipedia portraits for ${allNames.length} players…\n`);
+
+  const entries = [];
   let found = 0;
-  for (const { tour, name } of all) {
+
+  for (const name of allNames) {
     const slug = slugify(name);
     try {
       const result = await fetchWikipediaPortrait(name);
       if (result?.url) {
-        entries.push({ slug, name, tour, ...result });
+        entries.push({ slug, name, ...result });
         found++;
-        console.log(`  ✓ ${slug} ← ${result.title}`);
+        console.log(`  ✓ ${slug}`);
       } else {
         console.log(`  ✗ ${slug} (no image)`);
       }
     } catch (error) {
       console.log(`  ✗ ${slug} (${error.message})`);
     }
-    await sleep(150);
+    await sleep(120);
   }
 
   const lines = entries
@@ -146,7 +227,7 @@ ${lines}
 `;
 
   await writeFile(OUT_PATH, content);
-  console.log(`\nWrote ${found}/${all.length} portraits → ${OUT_PATH}`);
+  console.log(`\nWrote ${found}/${allNames.length} portraits → ${OUT_PATH}`);
 }
 
 main().catch((error) => {

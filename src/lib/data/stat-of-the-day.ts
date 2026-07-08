@@ -52,7 +52,7 @@ const dailyStats: DailyStat[] = [
     detail:
       "Novak Djokovic has broken serve in 96% of his matches since 2010. Nobody else in the dataset is above 90%. The return remains undefeated by time.",
     category: "Legend corner",
-    relatedHref: "/players/novak-djokovic-atp",
+    relatedHref: "/players/novak-djokovic",
     relatedLabel: "Djokovic's player card",
   },
   {
