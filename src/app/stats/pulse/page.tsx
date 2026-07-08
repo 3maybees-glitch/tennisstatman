@@ -1,16 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PulseSpark } from "@/components/PulseSpark";
+import { FaqSection } from "@/components/FaqSection";
+import { JsonLd } from "@/components/JsonLd";
 import { StatManMascot } from "@/components/StatManMascot";
 import { UpgradeCTA } from "@/components/UpgradeCTA";
 import { currentPulse, players, pulseTrend } from "@/lib/data/players";
+import { PULSE_FAQS } from "@/lib/seo/faqs";
+import { definedTermJsonLd, faqPageJsonLd } from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+import { absoluteUrl } from "@/lib/seo/site";
 import { Activity, Flame, Snowflake } from "lucide-react";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "PULSE — the form score",
   description:
     "PULSE: Performance Under Load & Streak Evaluation. A 0-100 form score for every ATP and WTA player, updated after every match.",
-};
+  path: "/stats/pulse",
+  keywords: [
+    "PULSE tennis",
+    "tennis form score",
+    "ATP player form",
+    "WTA player form",
+    "tennis analytics",
+  ],
+});
 
 export default function PulsePage() {
   const sorted = [...players].sort((a, b) => currentPulse(b) - currentPulse(a));
@@ -20,6 +34,17 @@ export default function PulsePage() {
 
   return (
     <div className="court-pattern">
+      <JsonLd
+        data={[
+          definedTermJsonLd({
+            name: "PULSE",
+            description:
+              "Performance Under Load & Streak Evaluation — a 0-100 tennis form score blending recent results, opponent strength, pressure points, and momentum.",
+            url: absoluteUrl("/stats/pulse"),
+          }),
+          faqPageJsonLd(PULSE_FAQS),
+        ]}
+      />
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto max-w-7xl px-6 py-16">
           <div className="flex flex-wrap items-center gap-8">
@@ -176,6 +201,8 @@ export default function PulsePage() {
           />
         </div>
       </section>
+
+      <FaqSection faqs={PULSE_FAQS} />
     </div>
   );
 }

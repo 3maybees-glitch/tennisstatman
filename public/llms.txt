@@ -1,0 +1,65 @@
+# TennisStatMan
+
+> Fan-inspired professional tennis analytics for ATP and WTA tours.
+
+TennisStatMan is a free tennis stats site with player cards, proprietary metrics, live rankings, a world map, and a full-season tournament calendar.
+
+## Canonical URL
+
+https://tennisstatman.vercel.app
+
+## Key pages
+
+- Home: /
+- Player cards: /players
+- Live rankings: /rankings
+- ATP hub: /atp
+- WTA hub: /wta
+- PULSE form score: /stats/pulse
+- Momentum Swing Index: /stats/momentum
+- Skill leaderboards (Courtside): /stats/skills
+- Legend comparisons: /legends
+- Tournament calendar: /calendar
+- World map: /map
+- Race to the Finals: /race
+- Weekly picks: /picks
+- Pricing: /pricing
+
+## Proprietary metrics
+
+### PULSE (Performance Under Load & Streak Evaluation)
+
+A 0-100 form score for every ATP and WTA player. Ingredients:
+- 40% recent results (last 10 matches, weighted by recency and tournament tier)
+- 25% opponent strength
+- 20% pressure points (break points, tiebreaks, deciding sets)
+- 15% momentum swings
+
+Scores above 80 indicate strong form; above 90 signals a player is peaking.
+
+### Momentum Swing Index
+
+Tracks win-probability shifts game-by-game during a match. Flags breaks, comebacks, and turning points when the likely winner changes.
+
+### Player skill grades
+
+Each player receives 0-100 grades in five categories: serve, forehand, backhand, net play, and movement.
+
+### Legend Similarity Score
+
+Compares a current player's skill profile against all-time greats and returns a percentage match.
+
+## Data sources
+
+- ATP and WTA official rankings, refreshed hourly
+- Curated scouting cards for top players; auto-scouted cards for the broader top 100
+- 2026 tournament calendar from Grand Slams through ITF
+
+## Pricing
+
+- Fan tier: free forever
+- Courtside: $6/month or $48/year (billing preview — not live yet)
+
+## Contact
+
+Not affiliated with ATP, WTA, or ITF.

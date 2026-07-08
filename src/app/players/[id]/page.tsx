@@ -17,6 +17,9 @@ import { getLegend } from "@/lib/data/legends";
 import { currentPulse, players, pulseTrend } from "@/lib/data/players";
 import { findRosterPlayer } from "@/lib/data/roster";
 import { ArrowLeft, MapPin, Sparkles, Swords } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbJsonLd, personJsonLd } from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
@@ -30,10 +33,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params;
   const player = await findRosterPlayer(id);
   if (!player) return { title: "Player not found" };
-  return {
+  const pulse = currentPulse(player);
+  return buildPageMetadata({
     title: `${player.name} — Player Card`,
-    description: `Scouting grades, PULSE score, and Stat Man's verdict on ${player.name}.`,
-  };
+    description: `${player.tour} #${player.rank} ${player.name}: PULSE ${pulse}, skill grades for serve/forehand/backhand/net play/movement, and Stat Man's scouting verdict.`,
+    path: `/players/${player.id}`,
+    keywords: [
+      player.name,
+      `${player.tour} player stats`,
+      "tennis player card",
+      "PULSE tennis",
+      player.countryName,
+    ],
+  });
 }
 
 export default async function PlayerDetailPage({ params }: PageProps) {
@@ -49,6 +61,16 @@ export default async function PlayerDetailPage({ params }: PageProps) {
 
   return (
     <div className="court-pattern">
+      <JsonLd
+        data={[
+          personJsonLd(player),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Players", path: "/players" },
+            { name: player.name, path: `/players/${player.id}` },
+          ]),
+        ]}
+      />
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto max-w-7xl px-6 py-12">
           <Link
