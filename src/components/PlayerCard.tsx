@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SkillRadar } from "./SkillRadar";
 import { PulseSpark } from "./PulseSpark";
 import { GradeChip, StarRating } from "./GradeChip";
+import { PlayerAvatar } from "./PlayerAvatar";
 import {
   SKILL_LABELS,
   SKILL_ORDER,
@@ -50,22 +51,30 @@ export function PlayerCard({
       </div>
 
       <div className="px-5 pb-5">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-lg font-bold leading-tight group-hover:text-gold-light">
-              {player.name}
-            </h3>
-            <p className="mt-0.5 text-xs text-muted">
-              {player.country} · {player.playstyle}
-            </p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-navy px-3 py-2 text-center">
-            <p className="text-[10px] uppercase tracking-wider text-muted">
-              Overall
-            </p>
-            <p className="font-mono text-xl font-bold text-gold-light">
-              {overall}
-            </p>
+        <div className="flex items-start gap-4">
+          <PlayerAvatar
+            playerId={player.id}
+            name={player.name}
+            tour={player.tour}
+            size={72}
+          />
+          <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
+            <div className="min-w-0">
+              <h3 className="text-lg font-bold leading-tight group-hover:text-gold-light">
+                {player.name}
+              </h3>
+              <p className="mt-0.5 text-xs text-muted">
+                {player.country} · {player.playstyle}
+              </p>
+            </div>
+            <div className="shrink-0 rounded-xl border border-white/10 bg-navy px-3 py-2 text-center">
+              <p className="text-[10px] uppercase tracking-wider text-muted">
+                Overall
+              </p>
+              <p className="font-mono text-xl font-bold text-gold-light">
+                {overall}
+              </p>
+            </div>
           </div>
         </div>
 
