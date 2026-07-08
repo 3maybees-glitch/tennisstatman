@@ -3,8 +3,14 @@ export const TENNIS_API_BASE_URL =
 
 export const TENNIS_API_HOST = "tennis-api-atp-wta-itf.p.rapidapi.com";
 
-/** Free tier is 50 req/day — cache aggressively (rankings update weekly). */
-export const TENNIS_API_REVALIDATE_SECONDS = 60 * 60 * 24;
+/** Default: refresh once per week (free tier is very limited). Override via env. */
+export const TENNIS_API_REVALIDATE_SECONDS = (() => {
+  const fromEnv = Number(process.env.TENNIS_API_REVALIDATE_SECONDS);
+  if (fromEnv > 0) return fromEnv;
+  return 60 * 60 * 24 * 7;
+})();
+
+export const TENNIS_API_CACHE_CONTROL = `public, s-maxage=${TENNIS_API_REVALIDATE_SECONDS}, stale-while-revalidate=${TENNIS_API_REVALIDATE_SECONDS}`;
 
 export const TENNIS_API_DOCS_URL = "https://docs.tennis-api.com/";
 

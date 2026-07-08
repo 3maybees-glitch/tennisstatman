@@ -4,6 +4,7 @@ import {
   fetchTennisApiFixturesByRange,
   isTennisApiConfigured,
   TennisApiError,
+  TENNIS_API_CACHE_CONTROL,
 } from "@/lib/tennis-api";
 import type { Tour } from "@/lib/rankings/types";
 
@@ -53,7 +54,7 @@ export async function GET(request: Request, context: RouteContext) {
       const fixtures = await fetchTennisApiFixturesByDate(tour, date);
       return NextResponse.json({ tour, date, fixtures }, {
         headers: {
-          "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
+          "Cache-Control": TENNIS_API_CACHE_CONTROL,
         },
       });
     }
@@ -73,7 +74,7 @@ export async function GET(request: Request, context: RouteContext) {
       );
       return NextResponse.json({ tour, startDate, endDate, fixtures }, {
         headers: {
-          "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
+          "Cache-Control": TENNIS_API_CACHE_CONTROL,
         },
       });
     }

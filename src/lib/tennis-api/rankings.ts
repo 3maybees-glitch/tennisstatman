@@ -87,7 +87,7 @@ export async function fetchTennisApiRankings(
     if (error instanceof TennisApiError && error.status === 429) {
       return getFallbackRankings(
         tour,
-        "Tennis API daily quota exceeded (free tier: 50 requests/day). Rankings will refresh after reset.",
+        "Tennis API quota exceeded. Rankings refresh at most once per week on the free tier.",
       );
     }
 
