@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MascotExplainer } from "@/components/MascotExplainer";
 import { RankingsTable } from "@/components/RankingsTable";
 import { MatchCard } from "@/components/MatchCard";
 import { featuredMatches } from "@/lib/data/mock-matches";
@@ -20,16 +21,22 @@ export default async function AtpPage() {
   return (
     <div className="court-pattern">
       <section className="border-b border-white/5 bg-navy-light/40">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-blue-300">
-            ATP Tour
-          </span>
-          <h1 className="mt-4 text-4xl font-bold">Men&apos;s Tennis</h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted">
-            Deep analytics for the ATP Tour — from Grand Slams to Masters 1000.
-            Track momentum, clutch performance, and the invisible battle for
-            control on every surface.
-          </p>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8 px-6 py-16">
+          <div className="max-w-2xl">
+            <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-blue-300">
+              ATP Tour
+            </span>
+            <h1 className="mt-4 text-4xl font-bold">Men&apos;s Tennis</h1>
+            <p className="mt-4 max-w-2xl text-lg text-muted">
+              Deep analytics for the ATP Tour — from Grand Slams to Masters
+              1000. Track momentum, clutch performance, and the invisible
+              battle for control on every surface.
+            </p>
+          </div>
+          <MascotExplainer pose="racquet">
+            The men&apos;s tour, served up with the good stuff — live top 100,
+            featured matchups, and the momentum swings behind every scoreline.
+          </MascotExplainer>
         </div>
       </section>
 

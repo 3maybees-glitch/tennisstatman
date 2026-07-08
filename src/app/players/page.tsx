@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { MascotExplainer } from "@/components/MascotExplainer";
 import { PlayersGrid } from "@/components/PlayersGrid";
-import { StatManMascot } from "@/components/StatManMascot";
 import { getFullRoster } from "@/lib/data/roster";
 
 export const revalidate = 3600;
@@ -17,9 +17,8 @@ export default async function PlayersPage() {
   return (
     <div className="court-pattern">
       <section className="border-b border-white/5 bg-navy-light/40">
-        <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-16">
-          <StatManMascot size={110} className="hidden shrink-0 md:block" />
-          <div>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8 px-6 py-16">
+          <div className="max-w-3xl">
             <h1 className="text-4xl font-bold">Player Cards</h1>
             <p className="mt-4 max-w-3xl text-lg text-muted">
               The top 100 of both tours, every player graded on the five skills
@@ -31,6 +30,10 @@ export default async function PlayersPage() {
               whole tour.
             </p>
           </div>
+          <MascotExplainer pose="clipboard">
+            My scouting binder, open for everyone. Two hundred players, five
+            grades each — I did the homework so you can just flip the cards.
+          </MascotExplainer>
         </div>
       </section>
       <PlayersGrid players={roster} />

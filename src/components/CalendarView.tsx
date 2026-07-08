@@ -14,7 +14,7 @@ import {
 } from "@/lib/data/tournaments";
 import { SeasonTimeline } from "@/components/SeasonTimeline";
 import { TournamentImage } from "@/components/TournamentImage";
-import { MapPin } from "lucide-react";
+import { MapPin, Trophy } from "lucide-react";
 
 const SURFACES: Surface[] = ["hard", "clay", "grass", "indoor"];
 
@@ -264,6 +264,36 @@ export function CalendarView() {
                         {t.tour} · {t.drawSize} draw · {t.prizeMoney}
                       </span>
                     </div>
+                    {t.lastFinals.length > 0 && (
+                      <div className="mt-4 space-y-2 border-t border-white/10 pt-3">
+                        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold-light">
+                          <Trophy size={13} className="text-gold" />
+                          Reigning champion
+                          {t.lastFinals.length > 1 ? "s" : ""} ·{" "}
+                          {t.lastFinals[0].year}
+                        </p>
+                        {t.lastFinals.map((f) => (
+                          <p
+                            key={f.tour}
+                            className="text-sm leading-snug text-white"
+                          >
+                            {t.lastFinals.length > 1 && (
+                              <span className="mr-1.5 font-mono text-xs text-white/80">
+                                {f.tour}
+                              </span>
+                            )}
+                            <span className="font-semibold text-gold-light">
+                              {f.champion}
+                            </span>{" "}
+                            <span className="text-white/80">def.</span>{" "}
+                            {f.runnerUp}{" "}
+                            <span className="font-mono text-white/90">
+                              {f.score}
+                            </span>
+                          </p>
+                        ))}
+                      </div>
+                    )}
                     </div>
                   </article>
                 );
