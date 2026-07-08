@@ -17,7 +17,7 @@ export default function CalendarPage() {
             <CalendarDays className="text-gold" size={28} />
             <h1 className="text-4xl font-bold">The Master Calendar</h1>
           </div>
-          <p className="mt-4 max-w-3xl text-lg text-muted">
+          <p className="mt-4 max-w-3xl text-xl text-foreground/90">
             Every level of professional tennis in one place — from the Grand
             Slams down to the Challengers and ITF events where next year&apos;s
             stars are grinding right now. Filter by level and surface.

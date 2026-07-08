@@ -81,11 +81,11 @@ export function SeasonTimeline({
   return (
     <div className="rounded-2xl border border-white/10 bg-navy-light/60 p-5">
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="text-lg font-bold">
+        <h2 className="text-xl font-bold text-white">
           Season at a glance{" "}
           <span className="gradient-text">— follow the surfaces</span>
         </h2>
-        <span className="text-xs text-muted">
+        <span className="text-sm text-foreground/80">
           Hover a bar for details · click to jump to it
         </span>
       </div>
@@ -93,7 +93,7 @@ export function SeasonTimeline({
       <div className="overflow-x-auto pb-1">
         <div className="min-w-[760px]">
           {/* Month ruler */}
-          <div className="relative ml-24 mb-1 flex text-[10px] font-mono uppercase tracking-wider text-muted">
+          <div className="relative ml-28 mb-1 flex text-xs font-mono font-semibold uppercase tracking-wider text-foreground">
             {MONTHS.map((m) => (
               <span
                 key={m}
@@ -106,7 +106,7 @@ export function SeasonTimeline({
           </div>
 
           {/* Surface swing ribbon */}
-          <div className="relative ml-24 mb-3 flex h-6 overflow-hidden rounded-md">
+          <div className="relative ml-28 mb-3 flex h-7 overflow-hidden rounded-md">
             {SEASON_SWINGS.map((swing) => {
               const left = pct(swing.from);
               const width = pct(swing.to) - left;
@@ -114,7 +114,7 @@ export function SeasonTimeline({
               return (
                 <div
                   key={swing.label}
-                  className="flex h-full items-center justify-center overflow-hidden whitespace-nowrap text-[10px] font-semibold"
+                  className="flex h-full items-center justify-center overflow-hidden whitespace-nowrap text-xs font-bold"
                   style={{
                     width: `${width}%`,
                     background: `linear-gradient(180deg, ${color}55, ${color}22)`,
@@ -135,7 +135,7 @@ export function SeasonTimeline({
               return (
                 <div key={row.label} className="flex items-center">
                   <span
-                    className="w-24 shrink-0 pr-3 text-right text-[11px] font-semibold"
+                    className="w-28 shrink-0 pr-3 text-right text-sm font-semibold"
                     style={{ color: rowColor }}
                   >
                     {row.label}
@@ -191,11 +191,11 @@ export function SeasonTimeline({
       </div>
 
       {/* Hover detail strip */}
-      <div className="mt-4 flex min-h-11 items-center rounded-xl bg-white/[0.03] px-4 py-2 text-sm">
+      <div className="mt-4 flex min-h-12 items-center rounded-xl bg-white/[0.03] px-4 py-2 text-base">
         {hovered ? (
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <span
-              className="rounded px-2 py-0.5 text-[11px] font-bold"
+              className="rounded px-2 py-0.5 text-xs font-bold"
               style={{
                 backgroundColor: `${TIER_COLORS[hovered.tier]}22`,
                 color: TIER_COLORS[hovered.tier],
@@ -203,25 +203,25 @@ export function SeasonTimeline({
             >
               {hovered.tier}
             </span>
-            <span className="font-semibold">{hovered.name}</span>
-            <span className="text-muted">
+            <span className="font-semibold text-white">{hovered.name}</span>
+            <span className="text-white/90">
               {hovered.city}, {hovered.country}
             </span>
-            <span className="font-mono text-xs text-muted">
+            <span className="font-mono text-sm text-white">
               {formatRange(hovered)}
             </span>
             <span
-              className="text-xs font-medium"
+              className="text-sm font-medium"
               style={{ color: SURFACE_COLORS[hovered.surface] }}
             >
               {SURFACE_LABELS[hovered.surface]}
             </span>
-            <span className="font-mono text-xs text-gold-light">
+            <span className="font-mono text-sm text-gold-light">
               {hovered.prizeMoney}
             </span>
           </div>
         ) : (
-          <span className="text-xs text-muted">
+          <span className="text-sm text-foreground/80">
             The tour never stops — hard courts in the sun, a spring of clay, two
             months of grass, then back to hard until the indoor finish.
           </span>

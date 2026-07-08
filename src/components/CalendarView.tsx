@@ -106,7 +106,7 @@ export function CalendarView() {
       {/* Filters */}
       <div className="mb-10 space-y-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-2 text-sm text-muted">Level:</span>
+          <span className="mr-2 text-base font-medium text-white">Level:</span>
           {TIER_GROUPS.map((group) => {
             const active = activeGroups.has(group.label);
             const color = TIER_COLORS[group.tiers[0]];
@@ -115,7 +115,7 @@ export function CalendarView() {
                 key={group.label}
                 type="button"
                 onClick={() => toggleGroup(group.label)}
-                className={`rounded-lg border px-3 py-1.5 text-sm transition-all ${
+                className={`rounded-lg border px-3 py-1.5 text-base transition-all ${
                   active ? "" : "opacity-40"
                 }`}
                 style={{
@@ -130,14 +130,14 @@ export function CalendarView() {
           })}
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-2 text-sm text-muted">Surface:</span>
+          <span className="mr-2 text-base font-medium text-white">Surface:</span>
           <button
             type="button"
             onClick={() => setSurface("all")}
-            className={`rounded-lg px-3 py-1.5 text-sm ${
+            className={`rounded-lg px-3 py-1.5 text-base ${
               surface === "all"
-                ? "bg-white/10 text-foreground"
-                : "text-muted hover:text-foreground"
+                ? "bg-white/10 text-white"
+                : "text-foreground/70 hover:text-white"
             }`}
           >
             All
@@ -147,8 +147,8 @@ export function CalendarView() {
               key={s}
               type="button"
               onClick={() => setSurface(s)}
-              className={`rounded-lg px-3 py-1.5 text-sm transition-all ${
-                surface === s ? "" : "opacity-50 hover:opacity-80"
+              className={`rounded-lg px-3 py-1.5 text-base transition-all ${
+                surface === s ? "" : "opacity-60 hover:opacity-90"
               }`}
               style={{
                 backgroundColor: surface === s ? `${SURFACE_COLORS[s]}33` : "transparent",
@@ -167,7 +167,7 @@ export function CalendarView() {
         return (
           <div key={month} className="mb-10">
             <div className="mb-4 flex items-center gap-4">
-              <h2 className="text-xl font-bold text-gold-light">{month}</h2>
+              <h2 className="text-2xl font-bold text-gold-light">{month}</h2>
               <div className="flex h-1.5 flex-1 overflow-hidden rounded-full bg-white/5">
                 {mix.map(({ surface: s, share }) => (
                   <div
@@ -181,7 +181,7 @@ export function CalendarView() {
                   />
                 ))}
               </div>
-              <span className="font-mono text-xs text-muted">
+              <span className="font-mono text-sm text-white">
                 {events.length} {events.length === 1 ? "event" : "events"}
               </span>
             </div>
@@ -217,7 +217,7 @@ export function CalendarView() {
                     />
                     <div className="flex items-start justify-between gap-2">
                       <span
-                        className="rounded px-2 py-0.5 text-[11px] font-bold"
+                        className="rounded px-2 py-0.5 text-xs font-bold"
                         style={{
                           backgroundColor: `${TIER_COLORS[t.tier]}22`,
                           color: TIER_COLORS[t.tier],
@@ -226,7 +226,7 @@ export function CalendarView() {
                         {t.tier}
                       </span>
                       <span
-                        className="rounded px-2 py-0.5 text-[11px] font-medium"
+                        className="rounded px-2 py-0.5 text-xs font-semibold"
                         style={{
                           backgroundColor: `${color}22`,
                           color,
@@ -235,14 +235,18 @@ export function CalendarView() {
                         {SURFACE_LABELS[t.surface]}
                       </span>
                     </div>
-                    <h3 className="mt-3 font-semibold leading-snug">{t.name}</h3>
-                    <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
-                      <MapPin size={13} style={{ color }} />
+                    <h3 className="mt-3 text-lg font-semibold leading-snug text-white">
+                      {t.name}
+                    </h3>
+                    <p className="mt-1 flex items-center gap-1.5 text-base text-white/90">
+                      <MapPin size={15} style={{ color }} />
                       {t.city}, {t.country}
                     </p>
-                    <div className="mt-3 flex items-center justify-between text-xs text-muted">
-                      <span>{formatRange(t)}</span>
-                      <span className="font-mono">
+                    <div className="mt-3 flex items-center justify-between text-sm">
+                      <span className="font-medium text-white">
+                        {formatRange(t)}
+                      </span>
+                      <span className="font-mono text-white/90">
                         {t.tour} · {t.drawSize} draw · {t.prizeMoney}
                       </span>
                     </div>
@@ -261,7 +265,7 @@ export function CalendarView() {
       )}
 
       <div className="mt-4 rounded-2xl border border-white/10 bg-navy-light/50 p-6 text-center">
-        <p className="text-sm text-muted">
+        <p className="text-base text-foreground/80">
           Want to see all of these on a globe instead?{" "}
           <Link href="/map" className="text-gold hover:text-gold-light">
             Open the World Map →
