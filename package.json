@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate-portraits": "node scripts/generate-portraits.mjs"
+    "generate-portraits": "node scripts/fetch-wikipedia-portraits.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "image.pollinations.ai",
+        hostname: "upload.wikimedia.org",
         pathname: "/**",
       },
     ],
