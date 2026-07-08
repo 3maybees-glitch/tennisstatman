@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { FaqSection } from "@/components/FaqSection";
+import { JsonLd } from "@/components/JsonLd";
 import { LegendCompare } from "@/components/LegendCompare";
 import { StatManMascot } from "@/components/StatManMascot";
+import { LEGENDS_FAQS } from "@/lib/seo/faqs";
+import { faqPageJsonLd } from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Legend Comparisons",
   description:
     "Compare today's ATP and WTA stars to the legends of the game — skill overlays, similarity scores, and career trajectory tracking.",
-};
+  path: "/legends",
+});
 
 export default function LegendsPage() {
   return (
     <div className="court-pattern">
+      <JsonLd data={faqPageJsonLd(LEGENDS_FAQS)} />
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-16">
           <div className="max-w-3xl">
@@ -29,6 +36,7 @@ export default function LegendsPage() {
       <Suspense>
         <LegendCompare />
       </Suspense>
+      <FaqSection faqs={LEGENDS_FAQS} />
     </div>
   );
 }
