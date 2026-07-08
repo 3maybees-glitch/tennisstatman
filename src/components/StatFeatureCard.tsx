@@ -1,4 +1,5 @@
 import {
+  Activity,
   Brain,
   Cloud,
   Link2,
@@ -16,6 +17,12 @@ const iconMap: Record<string, LucideIcon> = {
   cloud: Cloud,
   link: Link2,
   users: Users,
+  pulse: Activity,
+};
+
+const previewLinks: Record<string, string> = {
+  momentum: "/stats/momentum",
+  pulse: "/stats/pulse",
 };
 
 type StatFeature = {
@@ -62,7 +69,7 @@ export function StatFeatureCard({ stat }: { stat: StatFeature }) {
       <p className="mt-2 text-sm leading-relaxed text-muted">{stat.description}</p>
       {isPreview && (
         <Link
-          href={stat.id === "momentum" ? "/stats/momentum" : "/stats"}
+          href={previewLinks[stat.id] ?? "/stats"}
           className="mt-4 inline-block text-sm font-medium text-gold hover:text-gold-light"
         >
           View preview →

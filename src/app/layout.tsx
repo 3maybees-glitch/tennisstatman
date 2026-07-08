@@ -20,13 +20,16 @@ export const metadata: Metadata = {
     template: "%s | TennisStatMan",
   },
   description:
-    "Fan-inspired professional tennis analytics for ATP and WTA. Momentum swings, clutch stats, mental resilience, and innovative metrics beyond the box score.",
+    "Tennis stats with a face. Player cards with skill grades, the PULSE form score, legend comparisons, a world map of tennis, and the master calendar from Grand Slams to ITF.",
   keywords: [
     "tennis stats",
     "ATP analytics",
     "WTA analytics",
+    "tennis player cards",
+    "PULSE tennis form score",
+    "tennis legend comparison",
+    "tennis tournament calendar",
     "momentum tennis",
-    "tennis analytics",
   ],
 };
 

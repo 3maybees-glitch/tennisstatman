@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-white/5 bg-navy">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-4">
           <div>
             <p className="text-lg font-semibold">
               Tennis<span className="text-gold">StatMan</span>
@@ -14,6 +14,43 @@ export function Footer() {
               box score to reveal momentum, mentality, and the invisible forces
               that decide matches.
             </p>
+          </div>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-gold">
+              Explore
+            </p>
+            <ul className="mt-3 space-y-2 text-sm text-muted">
+              <li>
+                <Link href="/players" className="hover:text-foreground">
+                  Player Cards
+                </Link>
+              </li>
+              <li>
+                <Link href="/legends" className="hover:text-foreground">
+                  Legend Comparisons
+                </Link>
+              </li>
+              <li>
+                <Link href="/map" className="hover:text-foreground">
+                  World Map
+                </Link>
+              </li>
+              <li>
+                <Link href="/calendar" className="hover:text-foreground">
+                  Master Calendar
+                </Link>
+              </li>
+              <li>
+                <Link href="/race" className="hover:text-foreground">
+                  Race to the Finals
+                </Link>
+              </li>
+              <li>
+                <Link href="/picks" className="hover:text-foreground">
+                  Beat Stat Man
+                </Link>
+              </li>
+            </ul>
           </div>
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-gold">
@@ -43,6 +80,11 @@ export function Footer() {
             </p>
             <ul className="mt-3 space-y-2 text-sm text-muted">
               <li>
+                <Link href="/stats/pulse" className="hover:text-foreground">
+                  PULSE Form Score
+                </Link>
+              </li>
+              <li>
                 <Link href="/stats/momentum" className="hover:text-foreground">
                   Momentum Swing Index
                 </Link>
@@ -50,6 +92,11 @@ export function Footer() {
               <li>
                 <Link href="/stats" className="hover:text-foreground">
                   All Innovations
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="hover:text-foreground">
+                  Courtside Membership
                 </Link>
               </li>
             </ul>

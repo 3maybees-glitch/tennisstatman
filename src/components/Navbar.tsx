@@ -1,18 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { StatManMascot } from "./StatManMascot";
 
 const links = [
-  { href: "/", label: "Home" },
+  { href: "/players", label: "Players" },
+  { href: "/stats/pulse", label: "PULSE" },
+  { href: "/legends", label: "Legends" },
+  { href: "/race", label: "Race" },
+  { href: "/map", label: "Map" },
+  { href: "/calendar", label: "Calendar" },
   { href: "/rankings", label: "Rankings" },
-  { href: "/atp", label: "ATP" },
-  { href: "/wta", label: "WTA" },
-  { href: "/stats", label: "Stats Lab" },
-  { href: "/stats/momentum", label: "Momentum" },
+  { href: "/picks", label: "Picks" },
+  { href: "/pricing", label: "Courtside" },
 ];
 
 export function Navbar() {
@@ -22,20 +25,14 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-navy/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/images/logo-icon.png"
-            alt="TennisStatMan"
-            width={36}
-            height={36}
-            className="rounded-lg"
-          />
+        <Link href="/" className="flex items-center gap-2.5">
+          <StatManMascot size={38} />
           <span className="text-lg font-semibold tracking-tight">
             Tennis<span className="text-gold">StatMan</span>
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-0.5 md:flex">
           {links.map((link) => {
             const active =
               link.href === "/"
@@ -45,10 +42,14 @@ export function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                    active
-                      ? "bg-court/20 text-gold-light"
-                      : "text-muted hover:bg-white/5 hover:text-foreground"
+                  className={`rounded-lg px-2.5 py-2 text-sm font-medium transition-colors lg:px-3 ${
+                    link.href === "/pricing"
+                      ? active
+                        ? "bg-gold/25 text-gold-light"
+                        : "text-gold hover:bg-gold/10 hover:text-gold-light"
+                      : active
+                        ? "bg-court/20 text-gold-light"
+                        : "text-muted hover:bg-white/5 hover:text-foreground"
                   }`}
                 >
                   {link.label}

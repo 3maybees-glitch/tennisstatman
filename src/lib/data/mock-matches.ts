@@ -80,6 +80,14 @@ export const featuredMatches: MatchPreview[] = [
 
 export const upcomingStats = [
   {
+    id: "pulse",
+    title: "PULSE Form Score",
+    description:
+      "Our signature 0-100 form score — recent results, opponent strength, pressure points, and momentum in one heartbeat.",
+    status: "preview" as const,
+    icon: "pulse",
+  },
+  {
     id: "momentum",
     title: "Momentum Swing Index",
     description:
