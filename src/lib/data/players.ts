@@ -87,7 +87,7 @@ export const players: Player[] = [
       "Averages 11.2 aces per match — but his second-serve points won drops 14 points in deciding sets.",
   },
   {
-    id: "novak-djokovic-atp",
+    id: "novak-djokovic",
     name: "Novak Djokovic",
     tour: "ATP",
     country: "SRB",

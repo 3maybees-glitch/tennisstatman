@@ -44,7 +44,7 @@ export const atpRace: RaceEntry[] = [
     points: [130, 1430, 2030, 2330, 3130, 3730, 4130, 4630, 5030, 5530, 6030],
   },
   {
-    playerId: "novak-djokovic-atp",
+    playerId: "novak-djokovic",
     name: "Novak Djokovic",
     country: "SRB",
     color: "#8b5cf6",
