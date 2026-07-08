@@ -13,8 +13,11 @@ import {
   starRating,
 } from "@/lib/data/grades";
 import { getLegend } from "@/lib/data/legends";
-import { currentPulse, getPlayer, players, pulseTrend } from "@/lib/data/players";
+import { currentPulse, players, pulseTrend } from "@/lib/data/players";
+import { findRosterPlayer } from "@/lib/data/roster";
 import { ArrowLeft, MapPin, Sparkles, Swords } from "lucide-react";
+
+export const revalidate = 3600;
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -24,7 +27,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const player = getPlayer(id);
+  const player = await findRosterPlayer(id);
   if (!player) return { title: "Player not found" };
   return {
     title: `${player.name} — Player Card`,
@@ -34,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PlayerDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const player = getPlayer(id);
+  const player = await findRosterPlayer(id);
   if (!player) notFound();
 
   const pulse = currentPulse(player);
@@ -63,6 +66,11 @@ export default async function PlayerDetailPage({ params }: PageProps) {
                   {player.tour} #{player.rank}
                 </span>
                 <StarRating stars={starRating(player.skills)} />
+                {player.generated && (
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-muted">
+                    Auto-scouted
+                  </span>
+                )}
               </div>
               <h1 className="mt-3 text-4xl font-bold md:text-5xl">
                 {player.name}

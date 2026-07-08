@@ -20,6 +20,8 @@ export type Player = {
   /** Stat Man's AI-written scouting verdict */
   verdict: string;
   funStat: string;
+  /** True for auto-scouted cards generated from live rankings */
+  generated?: boolean;
 };
 
 export const players: Player[] = [

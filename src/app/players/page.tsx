@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import { PlayersGrid } from "@/components/PlayersGrid";
 import { StatManMascot } from "@/components/StatManMascot";
+import { getFullRoster } from "@/lib/data/roster";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Player Cards",
   description:
-    "Trading-card style scouting profiles for ATP and WTA players — Serve, Forehand, Backhand, Net Play, and Movement grades plus live PULSE scores.",
+    "Trading-card style scouting profiles for the ATP and WTA top 100 — Serve, Forehand, Backhand, Net Play, and Movement grades plus live PULSE scores.",
 };
 
-export default function PlayersPage() {
+export default async function PlayersPage() {
+  const roster = await getFullRoster();
+
   return (
     <div className="court-pattern">
       <section className="border-b border-white/5 bg-navy-light/40">
@@ -17,7 +22,8 @@ export default function PlayersPage() {
           <div>
             <h1 className="text-4xl font-bold">Player Cards</h1>
             <p className="mt-4 max-w-3xl text-lg text-muted">
-              Every player graded on the five skills that matter —{" "}
+              The top 100 of both tours, every player graded on the five skills
+              that matter —{" "}
               <span className="text-gold-light">
                 Serve, Forehand, Backhand, Net Play, and Movement
               </span>{" "}
@@ -27,7 +33,7 @@ export default function PlayersPage() {
           </div>
         </div>
       </section>
-      <PlayersGrid />
+      <PlayersGrid players={roster} />
     </div>
   );
 }
