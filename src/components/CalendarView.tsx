@@ -121,7 +121,7 @@ export function CalendarView() {
                 style={{
                   borderColor: `${color}66`,
                   backgroundColor: active ? `${color}22` : "transparent",
-                  color: active ? color : "#8b9cb8",
+                  color: active ? color : "#ffffff",
                 }}
               >
                 {group.label}

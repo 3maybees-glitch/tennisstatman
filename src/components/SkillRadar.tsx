@@ -40,7 +40,7 @@ export function SkillRadar({ series, height = 280, showLegend = false }: Props) 
         <PolarGrid stroke="rgba(255,255,255,0.12)" />
         <PolarAngleAxis
           dataKey="skill"
-          tick={{ fill: "#8b9cb8", fontSize: 12 }}
+          tick={{ fill: "#ffffff", fontSize: 12 }}
         />
         <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
         {series.map((s) => (
@@ -56,7 +56,7 @@ export function SkillRadar({ series, height = 280, showLegend = false }: Props) 
         ))}
         {showLegend && (
           <Legend
-            wrapperStyle={{ fontSize: 12, color: "#8b9cb8" }}
+            wrapperStyle={{ fontSize: 12, color: "#ffffff" }}
             iconType="circle"
           />
         )}

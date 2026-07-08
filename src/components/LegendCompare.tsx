@@ -192,19 +192,19 @@ export function LegendCompare() {
                   dataKey="age"
                   type="number"
                   domain={["dataMin", "dataMax"]}
-                  tick={{ fill: "#8b9cb8", fontSize: 11 }}
+                  tick={{ fill: "#ffffff", fontSize: 11 }}
                   tickLine={false}
                   axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
                   label={{
                     value: "Age",
                     position: "insideBottomRight",
-                    fill: "#8b9cb8",
+                    fill: "#ffffff",
                     fontSize: 11,
                   }}
                 />
                 <YAxis
                   domain={[50, 100]}
-                  tick={{ fill: "#8b9cb8", fontSize: 11 }}
+                  tick={{ fill: "#ffffff", fontSize: 11 }}
                   tickLine={false}
                   axisLine={false}
                 />

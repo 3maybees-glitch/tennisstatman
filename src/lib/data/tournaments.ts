@@ -37,7 +37,7 @@ export const TIER_COLORS: Record<Tier, string> = {
   "ATP 250": "#3b82f6",
   "WTA 250": "#3b82f6",
   Challenger: "#8b5cf6",
-  ITF: "#8b9cb8",
+  ITF: "#ffffff",
 };
 
 export const SURFACE_COLORS: Record<Surface, string> = {

@@ -34,13 +34,13 @@ export function PulseHistoryChart({
         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
         <XAxis
           dataKey="month"
-          tick={{ fill: "#8b9cb8", fontSize: 11 }}
+          tick={{ fill: "#ffffff", fontSize: 11 }}
           axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
           tickLine={false}
         />
         <YAxis
           domain={[40, 100]}
-          tick={{ fill: "#8b9cb8", fontSize: 11 }}
+          tick={{ fill: "#ffffff", fontSize: 11 }}
           axisLine={false}
           tickLine={false}
         />

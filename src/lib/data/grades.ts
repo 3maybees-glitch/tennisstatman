@@ -53,5 +53,5 @@ export function gradeColor(score: number): string {
   if (score >= 90) return "#f0c75e"; // gold-light
   if (score >= 80) return "#40916c"; // court-light
   if (score >= 70) return "#3b82f6"; // accent blue
-  return "#8b9cb8"; // muted
+  return "#ffffff"; // white
 }

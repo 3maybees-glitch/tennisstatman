@@ -55,13 +55,13 @@ export function MomentumChart({
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
           <XAxis
             dataKey="label"
-            tick={{ fill: "#8b9cb8", fontSize: 12 }}
+            tick={{ fill: "#ffffff", fontSize: 12 }}
             axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
             tickLine={false}
           />
           <YAxis
             domain={[20, 80]}
-            tick={{ fill: "#8b9cb8", fontSize: 12 }}
+            tick={{ fill: "#ffffff", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
             tickFormatter={(v) => `${v}%`}

@@ -42,7 +42,7 @@ export function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`rounded-lg px-2.5 py-2 text-sm font-medium transition-colors lg:px-3 ${
+                  className={`rounded-lg px-2.5 py-2 text-sm font-medium transition-colors lg:px-3 lg:text-base ${
                     link.href === "/pricing"
                       ? active
                         ? "bg-gold/25 text-gold-light"
@@ -77,7 +77,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm font-medium text-muted hover:bg-white/5 hover:text-foreground"
+                  className="block rounded-lg px-4 py-3 text-base font-medium text-muted hover:bg-white/5 hover:text-foreground"
                 >
                   {link.label}
                 </Link>
