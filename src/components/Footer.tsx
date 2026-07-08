@@ -104,7 +104,8 @@ export function Footer() {
         </div>
         <p className="mt-10 border-t border-white/5 pt-6 text-center text-xs text-muted">
           © {new Date().getFullYear()} TennisStatMan. Not affiliated with ATP,
-          WTA, or ITF. Demo data for preview purposes.
+          WTA, or ITF. Rankings refresh hourly from official tour feeds; player
+          scouting grades and proprietary metrics are editorial analytics.
         </p>
       </div>
     </footer>

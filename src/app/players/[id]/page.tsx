@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GradeChip, StarRating } from "@/components/GradeChip";
+import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { PulseHistoryChart } from "@/components/PulseHistoryChart";
 import { SkillRadar } from "@/components/SkillRadar";
 import { StatManMascot } from "@/components/StatManMascot";
@@ -16,6 +17,9 @@ import { getLegend } from "@/lib/data/legends";
 import { currentPulse, players, pulseTrend } from "@/lib/data/players";
 import { findRosterPlayer } from "@/lib/data/roster";
 import { ArrowLeft, MapPin, Sparkles, Swords } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbJsonLd, personJsonLd } from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
@@ -29,10 +33,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params;
   const player = await findRosterPlayer(id);
   if (!player) return { title: "Player not found" };
-  return {
+  const pulse = currentPulse(player);
+  return buildPageMetadata({
     title: `${player.name} — Player Card`,
-    description: `Scouting grades, PULSE score, and Stat Man's verdict on ${player.name}.`,
-  };
+    description: `${player.tour} #${player.rank} ${player.name}: PULSE ${pulse}, skill grades for serve/forehand/backhand/net play/movement, and Stat Man's scouting verdict.`,
+    path: `/players/${player.id}`,
+    keywords: [
+      player.name,
+      `${player.tour} player stats`,
+      "tennis player card",
+      "PULSE tennis",
+      player.countryName,
+    ],
+  });
 }
 
 export default async function PlayerDetailPage({ params }: PageProps) {
@@ -48,6 +61,16 @@ export default async function PlayerDetailPage({ params }: PageProps) {
 
   return (
     <div className="court-pattern">
+      <JsonLd
+        data={[
+          personJsonLd(player),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Players", path: "/players" },
+            { name: player.name, path: `/players/${player.id}` },
+          ]),
+        ]}
+      />
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto max-w-7xl px-6 py-12">
           <Link
@@ -57,30 +80,40 @@ export default async function PlayerDetailPage({ params }: PageProps) {
             <ArrowLeft size={15} /> All player cards
           </Link>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-3">
-                <span
-                  className="rounded px-2 py-0.5 text-xs font-bold tracking-wider text-white"
-                  style={{ backgroundColor: tourColor }}
-                >
-                  {player.tour} #{player.rank}
-                </span>
-                <StarRating stars={starRating(player.skills)} />
-                {player.generated && (
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-muted">
-                    Auto-scouted
+            <div className="flex flex-wrap items-end gap-6">
+              <PlayerAvatar
+                playerId={player.id}
+                name={player.name}
+                tour={player.tour}
+                rank={player.rank}
+                size={120}
+                priority
+              />
+              <div>
+                <div className="flex items-center gap-3">
+                  <span
+                    className="rounded px-2 py-0.5 text-xs font-bold tracking-wider text-white"
+                    style={{ backgroundColor: tourColor }}
+                  >
+                    {player.tour} #{player.rank}
                   </span>
-                )}
+                  <StarRating stars={starRating(player.skills)} />
+                  {player.generated && (
+                    <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-muted">
+                      Auto-scouted
+                    </span>
+                  )}
+                </div>
+                <h1 className="mt-3 text-4xl font-bold md:text-5xl">
+                  {player.name}
+                </h1>
+                <p className="mt-2 flex items-center gap-2 text-muted">
+                  <MapPin size={15} />
+                  {player.origin.city} · Age {player.age} ·{" "}
+                  {player.hand === "R" ? "Right" : "Left"}-handed ·{" "}
+                  <span className="text-gold-light">{player.playstyle}</span>
+                </p>
               </div>
-              <h1 className="mt-3 text-4xl font-bold md:text-5xl">
-                {player.name}
-              </h1>
-              <p className="mt-2 flex items-center gap-2 text-muted">
-                <MapPin size={15} />
-                {player.origin.city} · Age {player.age} ·{" "}
-                {player.hand === "R" ? "Right" : "Left"}-handed ·{" "}
-                <span className="text-gold-light">{player.playstyle}</span>
-              </p>
             </div>
             <div className="flex gap-4">
               <div className="rounded-2xl border border-white/10 bg-navy px-6 py-4 text-center">

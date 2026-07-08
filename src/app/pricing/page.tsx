@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MascotExplainer } from "@/components/MascotExplainer";
 import { Check, Sparkles } from "lucide-react";
+import { FaqSection } from "@/components/FaqSection";
+import { JsonLd } from "@/components/JsonLd";
+import { PRICING_FAQS } from "@/lib/seo/faqs";
+import { faqPageJsonLd, productJsonLd } from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Pricing — Free & Courtside",
   description:
     "TennisStatMan is free for every fan. Courtside membership unlocks unlimited comparisons, PULSE archives, alerts, and ITF-level scouting.",
-};
+  path: "/pricing",
+});
 
 const freeFeatures = [
   "Live ATP & WTA rankings, refreshed hourly",
@@ -30,12 +36,14 @@ const courtsideFeatures = [
   "Matchup projections: any player vs any player",
   "Custom stat sliders and downloadable data",
   "Graded picks history and season leaderboard",
+  "Skill category leaderboards — top 10 bar charts & tables per stroke",
   "Ad-free, and early access to new Stat Lab metrics",
 ];
 
 export default function PricingPage() {
   return (
     <div className="court-pattern">
+      <JsonLd data={[productJsonLd(), faqPageJsonLd(PRICING_FAQS)]} />
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto max-w-7xl px-6 py-16 text-center">
           <div className="flex justify-center">
@@ -122,6 +130,8 @@ export default function PricingPage() {
           membership will include at launch.
         </p>
       </section>
+
+      <FaqSection faqs={PRICING_FAQS} />
     </div>
   );
 }

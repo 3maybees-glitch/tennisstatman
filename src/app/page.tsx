@@ -1,5 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { FaqSection } from "@/components/FaqSection";
+import { JsonLd } from "@/components/JsonLd";
 import { MatchCard } from "@/components/MatchCard";
 import { PlayerCard } from "@/components/PlayerCard";
 import { RankingsTable } from "@/components/RankingsTable";
@@ -17,6 +20,16 @@ import {
   Trophy,
   WalletCards,
 } from "lucide-react";
+import { HOME_FAQS } from "@/lib/seo/faqs";
+import { faqPageJsonLd } from "@/lib/seo/json-ld";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Next-Gen Tennis Analytics",
+  description:
+    "ATP and WTA player cards with skill grades, PULSE form scores, legend comparisons, live rankings, a world map, and the full 2026 tournament calendar.",
+  path: "/",
+});
 
 export const revalidate = 3600;
 
@@ -68,6 +81,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd data={faqPageJsonLd(HOME_FAQS)} />
       <Hero />
 
       {/* Stat of the Day */}
@@ -189,6 +203,8 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      <FaqSection faqs={HOME_FAQS} />
     </>
   );
 }

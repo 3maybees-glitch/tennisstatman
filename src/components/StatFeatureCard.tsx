@@ -1,5 +1,6 @@
 import {
   Activity,
+  BarChart3,
   Brain,
   Cloud,
   Link2,
@@ -18,11 +19,13 @@ const iconMap: Record<string, LucideIcon> = {
   link: Link2,
   users: Users,
   pulse: Activity,
+  bars: BarChart3,
 };
 
 const previewLinks: Record<string, string> = {
   momentum: "/stats/momentum",
   pulse: "/stats/pulse",
+  skills: "/stats/skills",
 };
 
 type StatFeature = {

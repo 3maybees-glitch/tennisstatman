@@ -9,6 +9,8 @@ import {
   type Tournament,
 } from "@/lib/data/tournaments";
 import { currentPulse, players, type Player } from "@/lib/data/players";
+import { PlayerAvatar } from "./PlayerAvatar";
+import { TournamentImage } from "./TournamentImage";
 
 /**
  * Equirectangular projection onto a 1000x500 canvas.
@@ -298,29 +300,38 @@ export function WorldMap() {
 
       {/* Detail cards */}
       {selectedTournament && (
-        <div className="mt-6 rounded-2xl border border-white/10 bg-navy-light p-6">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <span
-                className="rounded px-2 py-0.5 text-[11px] font-bold"
-                style={{
-                  backgroundColor: `${TIER_COLORS[selectedTournament.tier]}22`,
-                  color: TIER_COLORS[selectedTournament.tier],
-                }}
-              >
-                {selectedTournament.tier}
-              </span>
-              <h3 className="mt-2 text-xl font-bold">{selectedTournament.name}</h3>
-              <p className="mt-1 text-sm text-muted">
-                {selectedTournament.city}, {selectedTournament.country} ·{" "}
-                {SURFACE_LABELS[selectedTournament.surface]} ·{" "}
-                {selectedTournament.tour} · {selectedTournament.drawSize} draw ·{" "}
-                {selectedTournament.prizeMoney}
-              </p>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-navy-light">
+          <TournamentImage
+            tournamentId={selectedTournament.id}
+            city={selectedTournament.city}
+            country={selectedTournament.country}
+            surface={selectedTournament.surface}
+            aspectClass="aspect-[21/9]"
+          />
+          <div className="p-6">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <span
+                  className="rounded px-2 py-0.5 text-[11px] font-bold"
+                  style={{
+                    backgroundColor: `${TIER_COLORS[selectedTournament.tier]}22`,
+                    color: TIER_COLORS[selectedTournament.tier],
+                  }}
+                >
+                  {selectedTournament.tier}
+                </span>
+                <h3 className="mt-2 text-xl font-bold">{selectedTournament.name}</h3>
+                <p className="mt-1 text-sm text-muted">
+                  {selectedTournament.city}, {selectedTournament.country} ·{" "}
+                  {SURFACE_LABELS[selectedTournament.surface]} ·{" "}
+                  {selectedTournament.tour} · {selectedTournament.drawSize} draw ·{" "}
+                  {selectedTournament.prizeMoney}
+                </p>
+              </div>
+              <Link href="/calendar" className="text-sm text-gold hover:text-gold-light">
+                View in calendar →
+              </Link>
             </div>
-            <Link href="/calendar" className="text-sm text-gold hover:text-gold-light">
-              View in calendar →
-            </Link>
           </div>
         </div>
       )}
@@ -328,15 +339,24 @@ export function WorldMap() {
       {selectedPlayer && (
         <div className="mt-6 rounded-2xl border border-white/10 bg-navy-light p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <span className="text-xs text-muted">
-                {selectedPlayer.tour} #{selectedPlayer.rank} · PULSE{" "}
-                {currentPulse(selectedPlayer)}
-              </span>
-              <h3 className="mt-1 text-xl font-bold">{selectedPlayer.name}</h3>
-              <p className="mt-1 text-sm text-muted">
-                From {selectedPlayer.origin.city} · {selectedPlayer.playstyle}
-              </p>
+            <div className="flex items-start gap-4">
+              <PlayerAvatar
+                playerId={selectedPlayer.id}
+                name={selectedPlayer.name}
+                tour={selectedPlayer.tour}
+                rank={selectedPlayer.rank}
+                size={64}
+              />
+              <div>
+                <span className="text-xs text-muted">
+                  {selectedPlayer.tour} #{selectedPlayer.rank} · PULSE{" "}
+                  {currentPulse(selectedPlayer)}
+                </span>
+                <h3 className="mt-1 text-xl font-bold">{selectedPlayer.name}</h3>
+                <p className="mt-1 text-sm text-muted">
+                  From {selectedPlayer.origin.city} · {selectedPlayer.playstyle}
+                </p>
+              </div>
             </div>
             <Link
               href={`/players/${selectedPlayer.id}`}

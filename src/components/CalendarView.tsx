@@ -13,6 +13,7 @@ import {
   type Tournament,
 } from "@/lib/data/tournaments";
 import { SeasonTimeline } from "@/components/SeasonTimeline";
+import { TournamentImage } from "@/components/TournamentImage";
 import { MapPin, Trophy } from "lucide-react";
 
 const SURFACES: Surface[] = ["hard", "clay", "grass", "indoor"];
@@ -194,7 +195,7 @@ export function CalendarView() {
                   <article
                     key={t.id}
                     id={`event-${t.id}`}
-                    className="relative overflow-hidden rounded-2xl border bg-navy-light p-5 transition-all hover:-translate-y-0.5"
+                    className="relative overflow-hidden rounded-2xl border bg-navy-light transition-all hover:-translate-y-0.5"
                     style={{
                       borderColor: flashing
                         ? "#f0c75e"
@@ -206,15 +207,28 @@ export function CalendarView() {
                         : isSlam
                           ? "0 0 24px rgba(240, 199, 94, 0.12)"
                           : undefined,
-                      background: `linear-gradient(160deg, ${color}14 0%, var(--navy-light) 45%)`,
                     }}
                   >
+                    <TournamentImage
+                      tournamentId={t.id}
+                      city={t.city}
+                      country={t.country}
+                      surface={t.surface}
+                      className="w-full"
+                      priority={isSlam}
+                    />
                     <div
-                      className="absolute inset-x-0 top-0 h-1"
+                      className="absolute inset-x-0 top-0 h-1 z-10"
                       style={{
                         background: `linear-gradient(90deg, ${color}, ${color}00)`,
                       }}
                     />
+                    <div
+                      className="p-5"
+                      style={{
+                        background: `linear-gradient(160deg, ${color}14 0%, var(--navy-light) 45%)`,
+                      }}
+                    >
                     <div className="flex items-start justify-between gap-2">
                       <span
                         className="rounded px-2 py-0.5 text-xs font-bold"
@@ -280,6 +294,7 @@ export function CalendarView() {
                         ))}
                       </div>
                     )}
+                    </div>
                   </article>
                 );
               })}
