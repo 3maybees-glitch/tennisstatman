@@ -30,6 +30,7 @@ const courtsideFeatures = [
   "Matchup projections: any player vs any player",
   "Custom stat sliders and downloadable data",
   "Graded picks history and season leaderboard",
+  "Skill category leaderboards — top 10 bar charts & tables per stroke",
   "Ad-free, and early access to new Stat Lab metrics",
 ];
 
