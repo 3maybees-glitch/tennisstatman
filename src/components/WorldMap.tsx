@@ -344,6 +344,7 @@ export function WorldMap() {
                 playerId={selectedPlayer.id}
                 name={selectedPlayer.name}
                 tour={selectedPlayer.tour}
+                rank={selectedPlayer.rank}
                 size={64}
               />
               <div>

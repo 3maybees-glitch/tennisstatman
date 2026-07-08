@@ -56,6 +56,7 @@ export function PlayerCard({
             playerId={player.id}
             name={player.name}
             tour={player.tour}
+            rank={player.rank}
             size={72}
           />
           <div className="flex min-w-0 flex-1 items-start justify-between gap-3">

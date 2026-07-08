@@ -11,6 +11,7 @@ type Props = {
   playerId: string;
   name: string;
   tour: "ATP" | "WTA";
+  rank?: number;
   size?: number;
   className?: string;
   priority?: boolean;
@@ -20,6 +21,7 @@ export function PlayerAvatar({
   playerId,
   name,
   tour,
+  rank,
   size = 64,
   className = "",
   priority = false,
@@ -51,7 +53,7 @@ export function PlayerAvatar({
       style={{ width: size, height: size }}
     >
       <Image
-        src={getPlayerPortraitUrl(playerId, size * 2)}
+        src={getPlayerPortraitUrl(playerId, size * 2, { tour, rank, name })}
         alt={`${name} portrait`}
         fill
         sizes={`${size}px`}
