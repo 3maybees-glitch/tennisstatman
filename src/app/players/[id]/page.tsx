@@ -85,6 +85,7 @@ export default async function PlayerDetailPage({ params }: PageProps) {
                 playerId={player.id}
                 name={player.name}
                 tour={player.tour}
+                rank={player.rank}
                 size={120}
                 priority
               />
