@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchTourRankings } from "@/lib/rankings";
 import type { Tour } from "@/lib/rankings/types";
+import { TENNIS_API_CACHE_CONTROL } from "@/lib/tennis-api";
 
 type RouteContext = {
   params: Promise<{ tour: string }>;
@@ -25,7 +26,7 @@ export async function GET(_request: Request, context: RouteContext) {
 
   return NextResponse.json(rankings, {
     headers: {
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+      "Cache-Control": TENNIS_API_CACHE_CONTROL,
     },
   });
 }

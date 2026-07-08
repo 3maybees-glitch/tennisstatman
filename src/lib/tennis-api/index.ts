@@ -4,6 +4,7 @@ export {
   TennisApiError,
 } from "./client";
 export {
+  TENNIS_API_CACHE_CONTROL,
   TENNIS_API_DOCS_URL,
   TENNIS_API_RAPIDAPI_URL,
   TENNIS_API_REVALIDATE_SECONDS,

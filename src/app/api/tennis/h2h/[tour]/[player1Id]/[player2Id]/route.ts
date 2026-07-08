@@ -3,6 +3,7 @@ import {
   fetchTennisApiH2H,
   isTennisApiConfigured,
   TennisApiError,
+  TENNIS_API_CACHE_CONTROL,
 } from "@/lib/tennis-api";
 import type { Tour } from "@/lib/rankings/types";
 
@@ -49,7 +50,7 @@ export async function GET(_request: Request, context: RouteContext) {
       { tour, player1Id, player2Id, matches },
       {
         headers: {
-          "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
+          "Cache-Control": TENNIS_API_CACHE_CONTROL,
         },
       },
     );

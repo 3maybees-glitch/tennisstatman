@@ -3,6 +3,7 @@ import {
   fetchTennisApiPlayerProfile,
   isTennisApiConfigured,
   TennisApiError,
+  TENNIS_API_CACHE_CONTROL,
 } from "@/lib/tennis-api";
 import type { Tour } from "@/lib/rankings/types";
 
@@ -40,7 +41,7 @@ export async function GET(_request: Request, context: RouteContext) {
     const profile = await fetchTennisApiPlayerProfile(tour, playerId);
     return NextResponse.json(profile, {
       headers: {
-        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
+        "Cache-Control": TENNIS_API_CACHE_CONTROL,
       },
     });
   } catch (error) {

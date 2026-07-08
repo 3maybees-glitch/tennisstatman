@@ -53,7 +53,7 @@ export function PlayerAvatar({
       style={{ width: size, height: size }}
     >
       <Image
-        src={getPlayerPortraitUrl(playerId, size * 2, { tour, rank, name })}
+        src={getPlayerPortraitUrl(playerId, size * 2)}
         alt={`${name} portrait`}
         fill
         sizes={`${size}px`}
