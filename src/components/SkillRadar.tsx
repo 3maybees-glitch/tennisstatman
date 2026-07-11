@@ -9,7 +9,12 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { SKILL_LABELS, SKILL_ORDER, type SkillGrades } from "@/lib/data/grades";
+import {
+  SKILL_LABELS,
+  CORE_SKILL_ORDER,
+  type SkillGrades,
+  type SkillKey,
+} from "@/lib/data/grades";
 
 type Series = {
   name: string;
@@ -21,10 +26,17 @@ type Props = {
   series: Series[];
   height?: number;
   showLegend?: boolean;
+  /** Which skill axes to plot — defaults to the public core five. */
+  skillKeys?: SkillKey[];
 };
 
-export function SkillRadar({ series, height = 280, showLegend = false }: Props) {
-  const data = SKILL_ORDER.map((key) => {
+export function SkillRadar({
+  series,
+  height = 280,
+  showLegend = false,
+  skillKeys = CORE_SKILL_ORDER,
+}: Props) {
+  const data = skillKeys.map((key) => {
     const point: Record<string, string | number> = {
       skill: SKILL_LABELS[key],
     };
@@ -40,7 +52,7 @@ export function SkillRadar({ series, height = 280, showLegend = false }: Props) 
         <PolarGrid stroke="rgba(255,255,255,0.12)" />
         <PolarAngleAxis
           dataKey="skill"
-          tick={{ fill: "#ffffff", fontSize: 12 }}
+          tick={{ fill: "#ffffff", fontSize: skillKeys.length > 5 ? 10 : 12 }}
         />
         <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
         {series.map((s) => (

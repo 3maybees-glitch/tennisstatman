@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Lock, Sparkles } from "lucide-react";
+import { useMembership } from "@/lib/membership";
 
 export function UpgradeCTA({
   title = "Courtside members only",
@@ -8,6 +11,11 @@ export function UpgradeCTA({
   title?: string;
   description: string;
 }) {
+  const { isMember } = useMembership();
+
+  // Members have already unlocked everything — no reason to nag them.
+  if (isMember) return null;
+
   return (
     <div className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 via-navy-light to-navy-light p-6">
       <div className="flex items-start gap-4">

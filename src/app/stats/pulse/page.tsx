@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MascotExplainer } from "@/components/MascotExplainer";
+import { MemberGate } from "@/components/MemberGate";
+import { PulseCourtside } from "@/components/PulseCourtside";
 import { PulseSpark } from "@/components/PulseSpark";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -204,6 +206,10 @@ export default function PulsePage() {
             description="Courtside members get PULSE spike alerts, full historical archives back to a player's first pro match, and PULSE tracking for every Challenger and ITF player on the planet."
           />
         </div>
+
+        <MemberGate>
+          <PulseCourtside />
+        </MemberGate>
       </section>
 
       <FaqSection faqs={PULSE_FAQS} />

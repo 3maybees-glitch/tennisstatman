@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 import { useState } from "react";
+import { useMembership } from "@/lib/membership";
 import { StatManMascot } from "./StatManMascot";
 
 const links = [
@@ -21,6 +22,13 @@ const links = [
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { isMember } = useMembership();
+
+  const navLinks = links.map((link) =>
+    link.href === "/pricing" && isMember
+      ? { href: "/courtside", label: "Courtside" }
+      : link,
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-navy/80 backdrop-blur-xl">
@@ -36,17 +44,19 @@ export function Navbar() {
         </Link>
 
         <ul className="hidden items-center gap-0.5 md:flex">
-          {links.map((link) => {
+          {navLinks.map((link) => {
             const active =
               link.href === "/"
                 ? pathname === "/"
                 : pathname.startsWith(link.href);
+            const isCourtside =
+              link.href === "/pricing" || link.href === "/courtside";
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`rounded-lg px-2.5 py-2 text-sm font-medium transition-colors lg:px-3 lg:text-base ${
-                    link.href === "/pricing"
+                  className={`flex items-center gap-1 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors lg:px-3 lg:text-base ${
+                    isCourtside
                       ? active
                         ? "bg-gold/25 text-gold-light"
                         : "text-gold hover:bg-gold/10 hover:text-gold-light"
@@ -55,6 +65,7 @@ export function Navbar() {
                         : "text-muted hover:bg-white/5 hover:text-foreground"
                   }`}
                 >
+                  {isCourtside && isMember && <Sparkles size={13} />}
                   {link.label}
                 </Link>
               </li>
@@ -75,7 +86,7 @@ export function Navbar() {
       {open && (
         <div className="border-t border-white/5 px-6 py-4 md:hidden">
           <ul className="flex flex-col gap-1">
-            {links.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}

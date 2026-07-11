@@ -1,4 +1,13 @@
-import type { SkillGrades } from "./grades";
+import { ensureSkillGrades, type CoreSkillGrades, type SkillGrades } from "./grades";
+
+function skillSeed(id: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
 
 export type Legend = {
   id: string;
@@ -17,7 +26,9 @@ export type Legend = {
   careerCurve: { age: number; level: number }[];
 };
 
-export const legends: Legend[] = [
+type LegendDraft = Omit<Legend, "skills"> & { skills: CoreSkillGrades };
+
+const legendDrafts: LegendDraft[] = [
   {
     id: "roger-federer",
     name: "Roger Federer",
@@ -283,6 +294,11 @@ export const legends: Legend[] = [
     ],
   },
 ];
+
+export const legends: Legend[] = legendDrafts.map((legend) => ({
+  ...legend,
+  skills: ensureSkillGrades(legend.skills, skillSeed(legend.id)),
+}));
 
 export function getLegend(id: string): Legend | undefined {
   return legends.find((l) => l.id === id);

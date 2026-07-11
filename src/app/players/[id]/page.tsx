@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ExtendedSkillsPanel } from "@/components/ExtendedSkillsPanel";
 import { GradeChip, StarRating } from "@/components/GradeChip";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
+import { MemberGate } from "@/components/MemberGate";
+import { PulseArchivePanel } from "@/components/PulseArchivePanel";
 import { PulseHistoryChart } from "@/components/PulseHistoryChart";
 import { SkillRadar } from "@/components/SkillRadar";
 import { StatManMascot } from "@/components/StatManMascot";
 import { UpgradeCTA } from "@/components/UpgradeCTA";
+import { WatchButton } from "@/components/WatchButton";
 import {
+  CORE_SKILL_ORDER,
   SKILL_LABELS,
-  SKILL_ORDER,
   overallScore,
   starRating,
 } from "@/lib/data/grades";
@@ -103,6 +107,7 @@ export default async function PlayerDetailPage({ params }: PageProps) {
                       Auto-scouted
                     </span>
                   )}
+                  <WatchButton playerId={player.id} />
                 </div>
                 <h1 className="mt-3 text-4xl font-bold md:text-5xl">
                   {player.name}
@@ -154,7 +159,7 @@ export default async function PlayerDetailPage({ params }: PageProps) {
               height={240}
             />
             <div className="mt-2 grid gap-2">
-              {SKILL_ORDER.map((key) => (
+              {CORE_SKILL_ORDER.map((key) => (
                 <GradeChip
                   key={key}
                   label={SKILL_LABELS[key]}
@@ -162,6 +167,20 @@ export default async function PlayerDetailPage({ params }: PageProps) {
                 />
               ))}
             </div>
+            <MemberGate
+              fallback={
+                <div className="mt-4">
+                  <UpgradeCTA
+                    title="Extended skill deep dive"
+                    description="Courtside members unlock five additional grades — Return, Clutch, Consistency, Defense, and Power — plus the skill leaderboards on your Courtside hub."
+                  />
+                </div>
+              }
+            >
+              <div className="mt-4">
+                <ExtendedSkillsPanel player={player} tourColor={tourColor} />
+              </div>
+            </MemberGate>
           </div>
 
           {/* PULSE + fun stat */}
@@ -176,6 +195,9 @@ export default async function PlayerDetailPage({ params }: PageProps) {
                 <PulseHistoryChart history={player.pulseHistory} />
               </div>
             </div>
+            <MemberGate>
+              <PulseArchivePanel player={player} />
+            </MemberGate>
             <div className="rounded-2xl border border-court/25 bg-court/5 p-6">
               <h3 className="flex items-center gap-2 font-semibold text-court-light">
                 <Sparkles size={16} /> Fun stat

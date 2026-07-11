@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { Sparkles } from "lucide-react";
 import {
   CartesianGrid,
   Line,
@@ -14,6 +15,7 @@ import {
 } from "recharts";
 import { SkillRadar } from "./SkillRadar";
 import { UpgradeCTA } from "./UpgradeCTA";
+import { useMembership } from "@/lib/membership";
 import {
   SKILL_LABELS,
   SKILL_ORDER,
@@ -42,8 +44,9 @@ export function LegendCompare() {
       legends.find((l) => l.id === initialPlayer.legendMatch.legendId) ??
       legends[0],
   );
+  const { isMember } = useMembership();
   const [comparisons, setComparisons] = useState(0);
-  const locked = comparisons >= FREE_COMPARISONS;
+  const locked = !isMember && comparisons >= FREE_COMPARISONS;
 
   const sim = useMemo(
     () => similarity(player.skills, legend.skills),
@@ -114,7 +117,13 @@ export function LegendCompare() {
         </div>
       </div>
 
-      {!locked && (
+      {isMember && (
+        <p className="mt-4 flex items-center gap-1.5 text-xs text-gold-light">
+          <Sparkles size={13} /> Courtside: unlimited comparisons unlocked.
+        </p>
+      )}
+
+      {!isMember && !locked && (
         <p className="mt-4 text-xs text-muted">
           Free plan: {Math.max(0, FREE_COMPARISONS - comparisons)} comparison
           changes left today. Courtside members compare without limits.

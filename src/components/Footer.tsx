@@ -95,6 +95,21 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/matchups" className="hover:text-foreground">
+                  Matchup Projections
+                </Link>
+              </li>
+              <li>
+                <Link href="/stats/lab" className="hover:text-foreground">
+                  Stat Lab
+                </Link>
+              </li>
+              <li>
+                <Link href="/scouting" className="hover:text-foreground">
+                  Deep Scouting
+                </Link>
+              </li>
+              <li>
                 <Link href="/pricing" className="hover:text-foreground">
                   Courtside Membership
                 </Link>

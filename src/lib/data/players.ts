@@ -1,4 +1,13 @@
-import type { SkillGrades } from "./grades";
+import { ensureSkillGrades, type CoreSkillGrades, type SkillGrades } from "./grades";
+
+function skillSeed(id: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
 
 export type Player = {
   id: string;
@@ -24,7 +33,9 @@ export type Player = {
   generated?: boolean;
 };
 
-export const players: Player[] = [
+type PlayerDraft = Omit<Player, "skills"> & { skills: CoreSkillGrades };
+
+const playerDrafts: PlayerDraft[] = [
   // ─── ATP ───────────────────────────────────────────────
   {
     id: "jannik-sinner",
@@ -428,6 +439,11 @@ export const players: Player[] = [
       "Has returned to the top 15 after three separate injury absences of 3+ months.",
   },
 ];
+
+export const players: Player[] = playerDrafts.map((player) => ({
+  ...player,
+  skills: ensureSkillGrades(player.skills, skillSeed(player.id)),
+}));
 
 export function getPlayer(id: string): Player | undefined {
   return players.find((p) => p.id === id);

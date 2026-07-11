@@ -2,6 +2,8 @@
 
 import { useMemo, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { MemberGate } from "./MemberGate";
+import { PicksCourtside } from "./PicksCourtside";
 import { StatManMascot } from "./StatManMascot";
 import { weeklyPicks, type PickMatch } from "@/lib/data/picks";
 import { CheckCircle2 } from "lucide-react";
@@ -75,15 +77,21 @@ export function PicksGame() {
         ))}
       </div>
 
-      <div className="mt-10 rounded-2xl border border-gold/25 bg-gold/5 p-6 text-center">
-        <p className="text-sm text-muted">
-          Courtside members get graded pick history, PULSE-powered win
-          probabilities on every pick, and a season-long leaderboard.{" "}
-          <Link href="/pricing" className="text-gold hover:text-gold-light">
-            Go Courtside →
-          </Link>
-        </p>
-      </div>
+      <MemberGate
+        fallback={
+          <div className="mt-10 rounded-2xl border border-gold/25 bg-gold/5 p-6 text-center">
+            <p className="text-sm text-muted">
+              Courtside members get graded pick history, PULSE-powered win
+              probabilities on every pick, and a season-long leaderboard.{" "}
+              <Link href="/pricing" className="text-gold hover:text-gold-light">
+                Go Courtside →
+              </Link>
+            </p>
+          </div>
+        }
+      >
+        <PicksCourtside />
+      </MemberGate>
     </section>
   );
 }

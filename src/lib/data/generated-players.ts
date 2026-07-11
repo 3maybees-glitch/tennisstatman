@@ -1,5 +1,11 @@
 import type { RankingEntry, Tour } from "@/lib/rankings/types";
-import { SKILL_ORDER, type SkillGrades, type SkillKey } from "./grades";
+import {
+  CORE_SKILL_ORDER,
+  completeSkillGrades,
+  type CoreSkillGrades,
+  type SkillGrades,
+  type SkillKey,
+} from "./grades";
 import { legends } from "./legends";
 import type { Player } from "./players";
 
@@ -91,6 +97,26 @@ const SKILL_PHRASES: Record<SkillKey, { weapon: string; weakness: string }> = {
     weapon: "footwork that turns defense into offense",
     weakness: "court coverage that big hitters expose",
   },
+  return: {
+    weapon: "a return game that breaks serve for fun",
+    weakness: "returns that sit up and invite the first strike",
+  },
+  clutch: {
+    weapon: "ice in the veins when the match gets tight",
+    weakness: "big-point nerves that show up in the box score",
+  },
+  consistency: {
+    weapon: "rally tolerance that wears opponents down",
+    weakness: "unforced errors that leak sets",
+  },
+  defense: {
+    weapon: "scrambling that turns defense into offense",
+    weakness: "court coverage that gets stretched wide",
+  },
+  power: {
+    weapon: "pace that shortens points and rattles timing",
+    weakness: "ball speed that doesn't bother top-tier opponents",
+  },
 };
 
 function verdictTemplate(
@@ -139,13 +165,33 @@ function funStatTemplate(rng: () => number, weapon: SkillKey): string {
       `Wins ${n(38, 48)}% of points after being pulled off the court — elite scrambling numbers.`,
       `Covers an estimated ${n(3, 5)} km per best-of-three match.`,
     ],
+    return: [
+      `Wins ${n(36, 44)}% of return games — above tour average at this ranking band.`,
+      `Breaks serve in ${n(28, 38)}% of matches this season.`,
+    ],
+    clutch: [
+      `Wins ${n(54, 64)}% of deciding sets over the last 12 months.`,
+      `Converts ${n(58, 68)}% of break points in the third set.`,
+    ],
+    consistency: [
+      `Unforced error rate sits in the top ${n(15, 35)}% of the tour at this level.`,
+      `Wins ${n(62, 72)}% of rallies lasting eight shots or longer.`,
+    ],
+    defense: [
+      `Wins ${n(40, 50)}% of points after being pulled off the court.`,
+      `Saves ${n(32, 42)}% of break points with pure scrambling.`,
+    ],
+    power: [
+      `Averages ${n(72, 82)} mph on groundstroke winners.`,
+      `Hits ${n(55, 70)}% of winners with pace above tour median.`,
+    ],
   };
   const list = options[weapon];
   return list[Math.floor(rng() * list.length)];
 }
 
 function similarity(a: SkillGrades, b: SkillGrades): number {
-  const diffs = SKILL_ORDER.map((k) => Math.abs(a[k] - b[k]));
+  const diffs = CORE_SKILL_ORDER.map((k) => Math.abs(a[k] - b[k]));
   const avg = diffs.reduce((s, d) => s + d, 0) / diffs.length;
   return Math.max(0, Math.round(100 - avg * 1.8));
 }
@@ -153,24 +199,27 @@ function similarity(a: SkillGrades, b: SkillGrades): number {
 export function buildPlayerFromRanking(entry: RankingEntry, tour: Tour): Player {
   const slug = slugify(entry.name);
   const rng = mulberry32(hashString(`${tour}:${slug}`));
+  const seed = hashString(`${tour}:${slug}`);
 
   // Overall anchored to ranking: No. 1 ≈ 90, No. 100 ≈ 74
   const base = 93 - 9 * Math.log10(entry.rank + 1) + (rng() * 4 - 2);
 
-  const keys = [...SKILL_ORDER];
+  const keys = [...CORE_SKILL_ORDER];
   const weapon = keys[Math.floor(rng() * keys.length)];
   let weakness = keys[Math.floor(rng() * keys.length)];
   if (weakness === weapon) {
     weakness = keys[(keys.indexOf(weapon) + 2) % keys.length];
   }
 
-  const skills = {} as SkillGrades;
-  for (const key of SKILL_ORDER) {
+  const core = {} as CoreSkillGrades;
+  for (const key of CORE_SKILL_ORDER) {
     let value = base + (rng() * 10 - 5);
     if (key === weapon) value += 6;
     if (key === weakness) value -= 6;
-    skills[key] = Math.round(Math.min(97, Math.max(55, value)));
+    core[key] = Math.round(Math.min(97, Math.max(55, value)));
   }
+
+  const skills = completeSkillGrades(core, seed);
 
   // PULSE: random walk, drift tied to ranking movement
   const drift = entry.change > 0 ? 0.9 : entry.change < 0 ? -0.9 : 0;

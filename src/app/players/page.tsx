@@ -8,7 +8,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Player Cards",
   description:
-    "Trading-card style scouting profiles for the ATP and WTA top 100 — Serve, Forehand, Backhand, Net Play, and Movement grades plus live PULSE scores.",
+    "Trading-card style scouting profiles for the ATP and WTA top 100 — five core skill grades plus live PULSE scores.",
 };
 
 export default async function PlayersPage() {
