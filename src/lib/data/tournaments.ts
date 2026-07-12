@@ -752,17 +752,17 @@ export const tournaments: Tournament[] = [
     lastFinals: [
       {
         tour: "ATP",
-        year: 2025,
+        year: 2026,
         champion: "J. Sinner",
         runnerUp: "C. Alcaraz",
         score: "4-6, 6-4, 6-4, 6-4",
       },
       {
         tour: "WTA",
-        year: 2025,
-        champion: "I. Świątek",
+        year: 2026,
+        champion: "L. Nosková",
         runnerUp: "A. Anisimova",
-        score: "6-0, 6-0",
+        score: "6-4, 7-5",
       },
     ],
   },
