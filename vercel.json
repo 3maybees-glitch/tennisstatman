@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "tennisstatman.vercel.app" }],
+      "destination": "https://tennisstatman.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.tennisstatman.com" }],
+      "destination": "https://tennisstatman.com/:path*",
+      "permanent": true
+    }
+  ]
+}

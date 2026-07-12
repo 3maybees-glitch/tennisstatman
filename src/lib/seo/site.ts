@@ -1,7 +1,7 @@
 export const SITE_NAME = "TennisStatMan";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tennisstatman.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tennisstatman.com";
 
 export const SITE_DESCRIPTION =
   "Tennis stats with a face. Player cards with skill grades, the PULSE form score, legend comparisons, a world map of tennis, and the master calendar from Grand Slams to ITF.";

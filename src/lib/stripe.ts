@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { SITE_URL } from "./seo/site";
 
 export type CourtsidePlan =
   | "monthly"
@@ -46,6 +47,10 @@ export function getSiteUrl(): string {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (configured) {
     return configured.replace(/\/$/, "");
+  }
+
+  if (process.env.VERCEL_ENV === "production") {
+    return SITE_URL.replace(/\/$/, "");
   }
 
   const vercelUrl = process.env.VERCEL_URL?.trim();
