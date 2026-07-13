@@ -37,6 +37,8 @@ export function PlayerAvatar({
         style={{
           width: size,
           height: size,
+          minWidth: size,
+          minHeight: size,
           backgroundColor: tourColor,
           fontSize: size * 0.32,
         }}
@@ -49,15 +51,16 @@ export function PlayerAvatar({
 
   return (
     <div
-      className={`relative shrink-0 overflow-hidden rounded-full ring-2 ring-white/10 ${className}`}
-      style={{ width: size, height: size }}
+      className={`relative isolate shrink-0 overflow-hidden rounded-full ring-2 ring-white/10 ${className}`}
+      style={{ width: size, height: size, minWidth: size, minHeight: size }}
     >
       <Image
         src={getPlayerPortraitUrl(playerId, size * 2, name)}
         alt={`${name} portrait`}
-        fill
+        width={size}
+        height={size}
         sizes={`${size}px`}
-        className="object-cover"
+        className="h-full w-full object-cover"
         priority={priority}
         onError={() => setFailed(true)}
       />

@@ -70,17 +70,9 @@ function ChampionCard({
           playerId={playerId}
           name={name}
           tour={tour}
-          size={88}
+          size={96}
           priority
-          className="relative ring-4 ring-gold/30 sm:hidden"
-        />
-        <PlayerAvatar
-          playerId={playerId}
-          name={name}
-          tour={tour}
-          size={112}
-          priority
-          className="relative hidden ring-4 ring-gold/30 sm:block"
+          className="relative ring-4 ring-gold/30"
         />
         <div className="absolute -bottom-1.5 -right-1.5 rounded-full bg-gold p-1 shadow-lg sm:-bottom-2 sm:-right-2 sm:p-1.5">
           <Trophy size={14} className="text-navy sm:hidden" strokeWidth={2.5} />
@@ -110,6 +102,32 @@ function ChampionCard({
   );
 }
 
+function VenueBackdrop({
+  city,
+  country,
+  className = "",
+}: {
+  city: string;
+  country: string;
+  className?: string;
+}) {
+  return (
+    <div className={`relative overflow-hidden ${className}`} aria-hidden>
+      <TournamentImage
+        tournamentId="wimbledon"
+        city={city}
+        country={country}
+        surface="grass"
+        aspectClass="absolute inset-0"
+        className="h-full w-full"
+        objectPosition="center 35%"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/70 to-navy" />
+    </div>
+  );
+}
+
 export function WimbledonChampionsBanner() {
   const wimbledon = tournaments.find((t) => t.id === "wimbledon");
   if (!wimbledon) return null;
@@ -121,21 +139,27 @@ export function WimbledonChampionsBanner() {
   return (
     <section
       aria-label="2026 Wimbledon Champions"
-      className="relative overflow-hidden border-b border-court-green-light/20"
+      className="relative overflow-hidden border-b border-court-green-light/20 bg-navy"
     >
-      {/* Wimbledon venue backdrop */}
-      <div className="absolute inset-0">
-        <TournamentImage
-          tournamentId="wimbledon"
-          city={wimbledon.city}
-          country={wimbledon.country}
-          surface="grass"
-          aspectClass="aspect-auto h-full min-h-full"
-          className="h-full w-full"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/94 to-navy md:bg-gradient-to-r md:from-navy md:via-navy/92 md:to-navy/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
+      {/* Mobile: short skyline strip — never stretch a photo across the full section */}
+      <VenueBackdrop
+        city={wimbledon.city}
+        country={wimbledon.country}
+        className="h-36 sm:h-44 md:hidden"
+      />
+
+      {/* Desktop: bounded hero band behind the header area */}
+      <VenueBackdrop
+        city={wimbledon.city}
+        country={wimbledon.country}
+        className="pointer-events-none absolute inset-x-0 top-0 hidden h-80 md:block lg:h-96"
+      />
+
+      <div
+        className="pointer-events-none absolute inset-0 hidden md:block"
+        aria-hidden
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy/90 to-navy" />
         <div
           className="absolute inset-0 opacity-[0.07]"
           style={{
@@ -145,7 +169,7 @@ export function WimbledonChampionsBanner() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-20">
+      <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:py-20">
         <div className="flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-center lg:gap-14">
           {/* Copy + mascot */}
           <div className="flex shrink-0 flex-col items-center text-center lg:w-72 lg:items-start lg:text-left">
