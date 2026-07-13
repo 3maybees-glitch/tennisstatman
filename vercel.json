@@ -3,13 +3,13 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "tennisstatman.vercel.app" }],
-      "destination": "https://tennisstatman.com/:path*",
+      "destination": "https://www.tennisstatman.com/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.tennisstatman.com" }],
-      "destination": "https://tennisstatman.com/:path*",
+      "has": [{ "type": "host", "value": "tennisstatman.com" }],
+      "destination": "https://www.tennisstatman.com/:path*",
       "permanent": true
     }
   ]

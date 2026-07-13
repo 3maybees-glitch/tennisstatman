@@ -19,7 +19,7 @@ const ROOT = path.resolve(__dirname, "..");
 const OUT_PATH = path.join(ROOT, "src", "lib", "images", "wikipedia-portraits.ts");
 
 const USER_AGENT =
-  "TennisStatMan/1.0 (https://tennisstatman.com; wikipedia-portrait-fetch)";
+  "TennisStatMan/1.0 (https://www.tennisstatman.com; wikipedia-portrait-fetch)";
 
 const BROWSER_HEADERS = {
   "User-Agent": USER_AGENT,

@@ -206,31 +206,24 @@ export function WimbledonChampionsBanner() {
           {/* Infographic */}
           <div className="min-w-0 flex-1">
             <div className="overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-br from-gold/10 via-navy-light/80 to-court-green/10 p-4 shadow-2xl backdrop-blur-md sm:rounded-3xl sm:p-6 md:p-8">
-              {/* Mobile: single trophy above venue label */}
-              <div className="mb-5 flex flex-col items-center gap-3 border-b border-white/10 pb-5 sm:mb-6 sm:gap-4 sm:pb-6 md:hidden">
-                <TrophyIcon compact />
+              <div className="mb-5 flex flex-col items-center gap-3 border-b border-white/10 pb-5 sm:mb-6 sm:gap-4 sm:pb-6 md:mb-6 md:flex-row md:justify-center md:gap-4">
+                <div className="md:hidden">
+                  <TrophyIcon compact />
+                </div>
+                <div className="hidden md:block">
+                  <TrophyIcon />
+                </div>
                 <div className="text-center">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold sm:text-xs sm:tracking-[0.25em]">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold sm:text-xs md:tracking-[0.25em]">
                     All England Club
                   </p>
-                  <p className="mt-1 text-base font-bold text-white sm:text-lg">
+                  <p className="mt-1 text-base font-bold text-white sm:text-lg md:text-lg">
                     London · Grass · Grand Slam
                   </p>
                 </div>
-              </div>
-
-              {/* Tablet+: dual trophy header */}
-              <div className="mb-6 hidden items-center justify-center gap-4 border-b border-white/10 pb-6 md:flex">
-                <TrophyIcon />
-                <div className="text-center">
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-                    All England Club
-                  </p>
-                  <p className="mt-1 text-lg font-bold text-white">
-                    London · Grass · Grand Slam
-                  </p>
+                <div className="hidden md:block">
+                  <TrophyIcon />
                 </div>
-                <TrophyIcon />
               </div>
 
               <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
