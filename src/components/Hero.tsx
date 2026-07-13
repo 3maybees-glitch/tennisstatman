@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, WalletCards } from "lucide-react";
-import { StatManMascot } from "./StatManMascot";
+import { HeroMascotPanel } from "./HeroMascotPanel";
 
 export function Hero() {
   return (
@@ -11,9 +11,9 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-background/90 to-background" />
       </div>
 
-      <div className="court-pattern relative mx-auto max-w-7xl px-6 py-24 md:py-32">
-        <div className="flex flex-wrap items-center gap-12">
-          <div className="max-w-3xl flex-1 basis-96">
+      <div className="court-pattern relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-32">
+        <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center">
+          <div className="w-full max-w-3xl flex-1">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-sm text-gold-light">
               <Sparkles size={14} />
               Tennis stats with a face
@@ -45,27 +45,10 @@ export function Hero() {
               </Link>
             </div>
           </div>
-          <div className="hidden shrink-0 lg:block">
-            <div className="flex flex-col items-center gap-3">
-              <StatManMascot size={230} pose="wave" />
-              <div className="relative max-w-xs rounded-2xl rounded-tl-sm border border-gold/30 bg-navy-light/90 px-4 py-3 shadow-[0_0_24px_rgba(212,175,55,0.1)]">
-                <span
-                  aria-hidden
-                  className="absolute -top-[7px] left-8 h-3.5 w-3.5 rotate-45 border-l border-t border-gold/30 bg-navy-light"
-                />
-                <p className="text-[11px] font-bold uppercase tracking-widest text-gold">
-                  Stat Man says
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-white">
-                  Hi, I&apos;m Stat Man! I turn every serve, swing, and
-                  scoreline into stats you can actually feel. Come on in.
-                </p>
-              </div>
-            </div>
-          </div>
+          <HeroMascotPanel />
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-16 md:grid-cols-4">
           {[
             { label: "Tours covered", value: "ATP + WTA + ITF" },
             { label: "Signature stat", value: "PULSE" },

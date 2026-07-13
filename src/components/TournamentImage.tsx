@@ -18,6 +18,8 @@ type Props = {
   className?: string;
   aspectClass?: string;
   priority?: boolean;
+  /** Bias the crop when the image is taller than its container. */
+  objectPosition?: string;
 };
 
 export function TournamentImage({
@@ -28,6 +30,7 @@ export function TournamentImage({
   className = "",
   aspectClass = "aspect-[16/9]",
   priority = false,
+  objectPosition = "center",
 }: Props) {
   const [failed, setFailed] = useState(false);
   const url = getTournamentLandmarkUrl(tournamentId, city);
@@ -50,8 +53,9 @@ export function TournamentImage({
         src={url}
         alt={getLandmarkAlt(city, country)}
         fill
-        sizes="(max-width: 768px) 100vw, 33vw"
+        sizes="(max-width: 768px) 100vw, 50vw"
         className="object-cover"
+        style={{ objectPosition }}
         priority={priority}
         onError={() => setFailed(true)}
       />
