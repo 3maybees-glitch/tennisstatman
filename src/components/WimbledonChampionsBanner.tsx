@@ -22,12 +22,15 @@ const CHAMPIONS = {
   },
 };
 
-function TrophyIcon() {
+function TrophyIcon({ compact = false }: { compact?: boolean }) {
+  const glowSize = compact ? "h-12 w-12" : "h-20 w-20";
+  const iconSize = compact ? 36 : 56;
+
   return (
     <div className="relative flex shrink-0 items-center justify-center">
-      <div className="absolute h-20 w-20 rounded-full bg-gold/20 blur-xl" />
+      <div className={`absolute ${glowSize} rounded-full bg-gold/20 blur-xl`} />
       <Trophy
-        size={56}
+        size={iconSize}
         className="relative text-gold-light drop-shadow-[0_0_12px_rgba(240,199,94,0.5)]"
         strokeWidth={1.5}
         fill="currentColor"
@@ -59,7 +62,7 @@ function ChampionCard({
   return (
     <Link
       href={href}
-      className="group flex flex-1 flex-col items-center rounded-2xl border border-white/10 bg-navy/40 p-6 backdrop-blur-sm transition-all hover:border-gold/40 hover:bg-navy/60"
+      className="group flex flex-1 flex-col items-center rounded-2xl border border-white/10 bg-navy/40 p-4 backdrop-blur-sm transition-all hover:border-gold/40 hover:bg-navy/60 sm:p-6"
     >
       <div className="relative">
         <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-gold/40 to-court-green-light/40 opacity-60 blur-sm" />
@@ -67,25 +70,40 @@ function ChampionCard({
           playerId={playerId}
           name={name}
           tour={tour}
+          size={88}
+          priority
+          className="relative ring-4 ring-gold/30 sm:hidden"
+        />
+        <PlayerAvatar
+          playerId={playerId}
+          name={name}
+          tour={tour}
           size={112}
           priority
-          className="relative ring-4 ring-gold/30"
+          className="relative hidden ring-4 ring-gold/30 sm:block"
         />
-        <div className="absolute -bottom-2 -right-2 rounded-full bg-gold p-1.5 shadow-lg">
-          <Trophy size={18} className="text-navy" strokeWidth={2.5} />
+        <div className="absolute -bottom-1.5 -right-1.5 rounded-full bg-gold p-1 shadow-lg sm:-bottom-2 sm:-right-2 sm:p-1.5">
+          <Trophy size={14} className="text-navy sm:hidden" strokeWidth={2.5} />
+          <Trophy
+            size={18}
+            className="hidden text-navy sm:block"
+            strokeWidth={2.5}
+          />
         </div>
       </div>
-      <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-court-green-light">
+      <p className="mt-4 text-[10px] font-semibold uppercase tracking-widest text-court-green-light sm:mt-5 sm:text-xs">
         {tourLabel}
       </p>
-      <h3 className="mt-1 text-2xl font-bold text-white group-hover:text-gold-light">
+      <h3 className="mt-1 text-center text-xl font-bold text-white group-hover:text-gold-light sm:text-2xl">
         {name}
       </h3>
-      <p className="mt-2 font-mono text-lg font-semibold text-gold-light">
+      <p className="mt-2 font-mono text-base font-semibold text-gold-light sm:text-lg">
         {score}
       </p>
-      <p className="mt-1 text-sm text-muted">def. {runnerUp}</p>
-      <p className="mt-3 rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
+      <p className="mt-1 text-center text-xs text-muted sm:text-sm">
+        def. {runnerUp}
+      </p>
+      <p className="mt-3 rounded-full bg-gold/10 px-3 py-1 text-center text-[11px] font-medium text-gold sm:text-xs">
         {stat}
       </p>
     </Link>
@@ -112,11 +130,11 @@ export function WimbledonChampionsBanner() {
           city={wimbledon.city}
           country={wimbledon.country}
           surface="grass"
-          aspectClass="aspect-auto h-full min-h-[480px]"
+          aspectClass="aspect-auto h-full min-h-full"
           className="h-full w-full"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/92 to-navy/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/94 to-navy md:bg-gradient-to-r md:from-navy md:via-navy/92 md:to-navy/85" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/60" />
         <div
           className="absolute inset-0 opacity-[0.07]"
@@ -127,39 +145,58 @@ export function WimbledonChampionsBanner() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
+      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:py-20">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-center lg:gap-14">
           {/* Copy + mascot */}
           <div className="flex shrink-0 flex-col items-center text-center lg:w-72 lg:items-start lg:text-left">
-            <StatManMascot size={100} pose="trophy" className="mb-4" />
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5">
+            <StatManMascot size={80} pose="trophy" className="mb-3 sm:mb-4 md:hidden" />
+            <StatManMascot
+              size={100}
+              pose="trophy"
+              className="mb-4 hidden md:block"
+            />
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 sm:px-4 sm:py-1.5">
               <Trophy size={14} className="text-gold" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-gold">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-gold sm:text-xs">
                 The Championships · 2026
               </span>
             </div>
-            <h2 className="mt-4 text-4xl font-bold leading-tight md:text-5xl">
+            <h2 className="mt-3 text-3xl font-bold leading-tight sm:mt-4 sm:text-4xl md:text-5xl">
               <span className="gradient-text">Wimbledon</span>
               <br />
               <span className="text-white">Champions</span>
             </h2>
-            <p className="mt-4 max-w-sm leading-relaxed text-foreground/85">
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-foreground/85 sm:mt-4 sm:text-base">
               Jannik Sinner and Linda Nosková lifted the Venus Rosewater Dish
               and Gentlemen&apos;s Singles Trophy on Centre Court. Two grass-court
               masterclasses, one unforgettable fortnight.
             </p>
             <Link
               href="/calendar"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-gold-light"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-gold-light sm:mt-6"
             >
               Full 2026 calendar →
             </Link>
           </div>
 
           {/* Infographic */}
-          <div className="flex-1">
-            <div className="overflow-hidden rounded-3xl border border-gold/25 bg-gradient-to-br from-gold/10 via-navy-light/80 to-court-green/10 p-6 shadow-2xl backdrop-blur-md md:p-8">
-              <div className="mb-6 flex items-center justify-center gap-4 border-b border-white/10 pb-6">
+          <div className="min-w-0 flex-1">
+            <div className="overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-br from-gold/10 via-navy-light/80 to-court-green/10 p-4 shadow-2xl backdrop-blur-md sm:rounded-3xl sm:p-6 md:p-8">
+              {/* Mobile: single trophy above venue label */}
+              <div className="mb-5 flex flex-col items-center gap-3 border-b border-white/10 pb-5 sm:mb-6 sm:gap-4 sm:pb-6 md:hidden">
+                <TrophyIcon compact />
+                <div className="text-center">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold sm:text-xs sm:tracking-[0.25em]">
+                    All England Club
+                  </p>
+                  <p className="mt-1 text-base font-bold text-white sm:text-lg">
+                    London · Grass · Grand Slam
+                  </p>
+                </div>
+              </div>
+
+              {/* Tablet+: dual trophy header */}
+              <div className="mb-6 hidden items-center justify-center gap-4 border-b border-white/10 pb-6 md:flex">
                 <TrophyIcon />
                 <div className="text-center">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
@@ -172,7 +209,7 @@ export function WimbledonChampionsBanner() {
                 <TrophyIcon />
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
                 <ChampionCard
                   name={CHAMPIONS.atp.name}
                   playerId={CHAMPIONS.atp.id}
@@ -193,18 +230,28 @@ export function WimbledonChampionsBanner() {
                 />
               </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-4 border-t border-white/10 pt-6 text-center">
+              <div className="mt-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-5 text-center sm:mt-6 sm:gap-4 sm:pt-6">
                 <div>
-                  <p className="text-2xl font-bold text-gold-light">128</p>
-                  <p className="mt-1 text-xs text-muted">Draw size</p>
+                  <p className="text-lg font-bold text-gold-light sm:text-2xl">128</p>
+                  <p className="mt-0.5 text-[10px] text-muted sm:mt-1 sm:text-xs">
+                    Draw size
+                  </p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gold-light">£53.5M</p>
-                  <p className="mt-1 text-xs text-muted">Prize fund</p>
+                  <p className="text-lg font-bold text-gold-light sm:text-2xl">
+                    £53.5M
+                  </p>
+                  <p className="mt-0.5 text-[10px] text-muted sm:mt-1 sm:text-xs">
+                    Prize fund
+                  </p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gold-light">Grass</p>
-                  <p className="mt-1 text-xs text-muted">Surface</p>
+                  <p className="text-lg font-bold text-gold-light sm:text-2xl">
+                    Grass
+                  </p>
+                  <p className="mt-0.5 text-[10px] text-muted sm:mt-1 sm:text-xs">
+                    Surface
+                  </p>
                 </div>
               </div>
             </div>
