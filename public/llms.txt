@@ -6,7 +6,7 @@ TennisStatMan is a free tennis stats site with player cards, proprietary metrics
 
 ## Canonical URL
 
-https://tennisstatman.com
+https://www.tennisstatman.com
 
 ## Key pages
 
