@@ -96,10 +96,6 @@ export function HardcourtPreviewBanner() {
               <br />
               <span className="text-white">Flushing</span>
             </h2>
-            <p className="mt-4 max-w-sm leading-relaxed text-foreground/85">
-              Grass is packed. The North American hard courts decide who arrives
-              in New York with PULSE — and who arrives with questions.
-            </p>
             <Link
               href="/calendar"
               className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-gold-light"
@@ -111,7 +107,7 @@ export function HardcourtPreviewBanner() {
 
           <div className="flex-1 space-y-6">
             <div className="overflow-hidden rounded-3xl border border-court-green-light/25 bg-gradient-to-br from-court/15 via-navy-light/85 to-gold/10 p-6 shadow-2xl backdrop-blur-md md:p-8">
-              <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
                 <div className="flex items-center gap-2">
                   <CalendarDays size={16} className="text-gold" />
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
@@ -123,7 +119,43 @@ export function HardcourtPreviewBanner() {
                 </p>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="space-y-4 text-base leading-relaxed text-foreground/90 md:text-[17px]">
+                <p>
+                  Grass is packed — and the North American hard courts will sort
+                  the field before New York. Jannik Sinner enters the swing with
+                  a tour-high{" "}
+                  <span className="font-semibold text-gold-light">95 PULSE</span>
+                  , while Carlos Alcaraz returns as the defending champion of
+                  both Cincinnati and the US Open. Aryna Sabalenka still owns the
+                  Flushing Meadows trophy and is hitting{" "}
+                  <span className="font-semibold text-gold-light">
+                    9% more winners
+                  </span>{" "}
+                  than anyone else in the WTA top 20. The road runs Canada (Aug
+                  1–9) → Cincinnati (Aug 10–19) → Arthur Ashe (Aug 31), with a{" "}
+                  {usOpen.prizeMoney} prize fund waiting at the finish.
+                </p>
+                <p>
+                  Home hard courts should amplify the Americans: Taylor Fritz has
+                  held serve{" "}
+                  <span className="font-semibold text-gold-light">91%</span> of
+                  the time on hard for three straight seasons, Ben Shelton brings
+                  the tour&apos;s loudest lefty serve as the defending National
+                  Bank Open champion, and Coco Gauff converts{" "}
+                  <span className="font-semibold text-gold-light">
+                    62% of deciding sets
+                  </span>
+                  . Keep an eye on the climbers too — Jack Draper&apos;s{" "}
+                  <span className="font-semibold text-gold-light">
+                    23-point PULSE rise
+                  </span>{" "}
+                  over the past year and Mirra Andreeva&apos;s teenage{" "}
+                  <span className="font-semibold text-gold-light">94 PULSE</span>{" "}
+                  mean the undercard stays loud all the way to Queens.
+                </p>
+              </div>
+
+              <div className="mt-6 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-3">
                 {ROAD.map((stop, i) => (
                   <Link
                     key={stop.id}
@@ -170,12 +202,6 @@ export function HardcourtPreviewBanner() {
                   </div>
                 ))}
               </div>
-              <p className="mt-5 border-t border-white/10 pt-4 text-sm leading-relaxed text-foreground/80">
-                Watch the Americans on home hard courts — Fritz&apos;s hold rate,
-                Shelton&apos;s serve speed, Gauff&apos;s 62% deciding-set clip —
-                while Andreeva&apos;s teenage PULSE (94) and Draper&apos;s 23-point
-                climb keep the undercard loud all the way to Arthur Ashe.
-              </p>
             </div>
           </div>
         </div>
