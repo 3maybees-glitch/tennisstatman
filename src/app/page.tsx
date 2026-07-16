@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
 import { WimbledonChampionsBanner } from "@/components/WimbledonChampionsBanner";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -12,6 +13,7 @@ import { StatManMascot } from "@/components/StatManMascot";
 import { featuredMatches, upcomingStats } from "@/lib/data/mock-matches";
 import { players } from "@/lib/data/players";
 import { getStatOfTheDay } from "@/lib/data/stat-of-the-day";
+import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import { isWimbledonChampionsBannerActive } from "@/lib/promotions/wimbledon-champions";
 import { fetchAllRankings } from "@/lib/rankings";
 import {
@@ -87,6 +89,7 @@ export default async function HomePage() {
       <Hero />
 
       {isWimbledonChampionsBannerActive() && <WimbledonChampionsBanner />}
+      {isHardcourtPreviewActive() && <HardcourtPreviewBanner />}
 
       {/* Stat of the Day */}
       <section className="mx-auto max-w-7xl px-6 py-14">
