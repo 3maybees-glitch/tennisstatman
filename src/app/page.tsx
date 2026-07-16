@@ -88,8 +88,8 @@ export default async function HomePage() {
       <JsonLd data={faqPageJsonLd(HOME_FAQS)} />
       <Hero />
 
-      {isWimbledonChampionsBannerActive() && <WimbledonChampionsBanner />}
       {isHardcourtPreviewActive() && <HardcourtPreviewBanner />}
+      {isWimbledonChampionsBannerActive() && <WimbledonChampionsBanner />}
 
       {/* Stat of the Day */}
       <section className="mx-auto max-w-7xl px-6 py-14">
