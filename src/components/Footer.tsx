@@ -36,6 +36,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/prints" className="hover:text-foreground">
+                  Prints
+                </Link>
+              </li>
+              <li>
                 <Link href="/calendar" className="hover:text-foreground">
                   Master Calendar
                 </Link>

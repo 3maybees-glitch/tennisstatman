@@ -195,12 +195,20 @@ export function WimbledonChampionsBanner() {
               and Gentlemen&apos;s Singles Trophy on Centre Court. Two grass-court
               masterclasses, one unforgettable fortnight.
             </p>
-            <Link
-              href="/calendar"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-gold-light sm:mt-6"
-            >
-              Full 2026 calendar →
-            </Link>
+            <div className="mt-5 flex flex-col items-center gap-2 sm:mt-6 lg:items-start">
+              <Link
+                href="/prints"
+                className="inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-gold-light"
+              >
+                Championship Legend Maps →
+              </Link>
+              <Link
+                href="/calendar"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-gold-light"
+              >
+                Full 2026 calendar →
+              </Link>
+            </div>
           </div>
 
           {/* Infographic */}
