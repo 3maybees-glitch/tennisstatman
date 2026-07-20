@@ -1,5 +1,5 @@
 /* TennisStatMan lightweight service worker — app shell + short rankings cache. */
-const SHELL_CACHE = "tsm-shell-v1";
+const SHELL_CACHE = "tsm-shell-v2";
 const RANKINGS_CACHE = "tsm-rankings-v1";
 const RANKINGS_MAX_AGE_MS = 60 * 60 * 1000; // 1 hour
 
