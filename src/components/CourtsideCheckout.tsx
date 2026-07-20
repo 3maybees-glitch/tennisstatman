@@ -14,7 +14,7 @@ import type { CourtsidePlan } from "@/lib/stripe";
 
 export function CourtsideCheckout() {
   const searchParams = useSearchParams();
-  const { isMember, loading, plan, refresh, openPortal } = useMembership();
+  const { isMember, loading, isPreview, plan, refresh, openPortal } = useMembership();
   const plans = getActivePlans();
   const [selectedPlan, setSelectedPlan] = useState<CourtsidePlan>(
     plans.find((item) => item.highlight)?.id ?? plans[0].id,
@@ -94,7 +94,7 @@ export function CourtsideCheckout() {
         >
           Open your Courtside
         </Link>
-        {!isLifetime ? (
+        {!isLifetime && !isPreview ? (
           <button
             type="button"
             onClick={handleManageBilling}
@@ -111,6 +111,10 @@ export function CourtsideCheckout() {
               </>
             )}
           </button>
+        ) : isPreview ? (
+          <p className="text-center text-xs text-muted">
+            Local preview mode — no billing on this machine.
+          </p>
         ) : (
           <p className="text-center text-xs text-muted">
             Lifetime access is active on this browser. No renewal needed.

@@ -72,7 +72,7 @@ function formatRenewalDate(timestamp: number | null) {
 
 export function CourtsideHub({ roster }: { roster: Player[] }) {
   const searchParams = useSearchParams();
-  const { isMember, loading, plan, currentPeriodEnd, refresh, openPortal } =
+  const { isMember, loading, isPreview, plan, currentPeriodEnd, refresh, openPortal } =
     useMembership();
   const { ids } = useWatchlist();
   const spikeCount = pulseSpikes(players).length;
@@ -135,7 +135,11 @@ export function CourtsideHub({ roster }: { roster: Player[] }) {
 
   return (
     <div>
-      {subscribed ? (
+      {isPreview ? (
+        <div className="mb-6 rounded-2xl border border-gold/30 bg-gold/10 px-5 py-4 text-sm text-gold-light">
+          Local preview mode is on. Courtside is unlocked without billing.
+        </div>
+      ) : subscribed ? (
         <div className="mb-6 rounded-2xl border border-court/40 bg-court/10 px-5 py-4 text-sm text-court-light">
           Courtside is live. Your subscription is active on this browser.
         </div>
@@ -179,7 +183,9 @@ export function CourtsideHub({ roster }: { roster: Player[] }) {
             {isLifetime ? "Courtside lifetime access" : "Courtside subscription"}
           </p>
           <p className="text-sm text-muted">
-            {isLifetime
+            {isPreview
+              ? "Preview mode — billing is disabled in local development."
+              : isLifetime
               ? "You have lifetime Courtside access on this browser."
               : renewalDate
                 ? `Renews on ${renewalDate}.`
@@ -187,7 +193,7 @@ export function CourtsideHub({ roster }: { roster: Player[] }) {
           </p>
           {error ? <p className="mt-2 text-sm text-red-300">{error}</p> : null}
         </div>
-        {!isLifetime ? (
+        {!isLifetime && !isPreview ? (
           <button
             type="button"
             onClick={handleManageBilling}

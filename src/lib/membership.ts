@@ -6,6 +6,7 @@ import type { CourtsidePlan } from "@/lib/stripe";
 type MembershipState = {
   isMember: boolean;
   loading: boolean;
+  isPreview: boolean;
   plan: CourtsidePlan | null;
   status: string | null;
   currentPeriodEnd: number | null;
@@ -14,6 +15,7 @@ type MembershipState = {
 const initialState: MembershipState = {
   isMember: false,
   loading: true,
+  isPreview: false,
   plan: null,
   status: null,
   currentPeriodEnd: null,
@@ -31,6 +33,7 @@ export function useMembership() {
       });
       const data = (await response.json()) as {
         active?: boolean;
+        preview?: boolean;
         plan?: CourtsidePlan | null;
         status?: string | null;
         currentPeriodEnd?: number | null;
@@ -39,6 +42,7 @@ export function useMembership() {
       setState({
         isMember: Boolean(data.active),
         loading: false,
+        isPreview: Boolean(data.preview),
         plan: data.plan ?? null,
         status: data.status ?? null,
         currentPeriodEnd: data.currentPeriodEnd ?? null,

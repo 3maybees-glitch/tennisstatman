@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { JsonLd } from "@/components/JsonLd";
+import { PwaInstallPrompt } from "@/components/PwaInstallPrompt";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo/json-ld";
 import {
   SITE_DESCRIPTION,
@@ -55,6 +57,19 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "TennisStatMan",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#d4af37",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -73,6 +88,8 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <Analytics />
+        <ServiceWorkerRegister />
+        <PwaInstallPrompt />
       </body>
     </html>
   );
