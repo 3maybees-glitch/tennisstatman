@@ -5,16 +5,15 @@ import type { PrintProduct } from "@/lib/prints";
 export function PrintProductCard({ product }: { product: PrintProduct }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-navy-light transition-all hover:border-gold/30">
-      <div className="relative aspect-[4/5] overflow-hidden bg-navy">
+      <div className="relative aspect-[4/3] overflow-hidden bg-navy">
         <Image
           src={product.imageSrc}
           alt={product.imageAlt}
           fill
-          unoptimized
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy via-navy/60 to-transparent p-4 pt-16">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent p-4 pt-12">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-gold">
             {product.tourLabel}
           </p>

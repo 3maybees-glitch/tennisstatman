@@ -21,9 +21,9 @@ export const PRINT_PRODUCTS: PrintProduct[] = [
       "Every gentleman who lifted the singles trophy, mapped into one championship story. A wall print for fans who live the fortnight all year.",
     tour: "ATP",
     tourLabel: "Gentlemen's Singles",
-    imageSrc: "/prints/wimbledon-mens-legend-land.svg",
+    imageSrc: "/prints/wimbledon-mens-legend-land.png",
     imageAlt:
-      "Wimbledon Men's Championship Legend Land map print preview",
+      "Wimbledon Men's Championship Legend Land map print on a desk",
     etsyUrl:
       "https://www.etsy.com/listing/4530542997/wimbledon-mens-championship-legend-land",
   },
@@ -35,9 +35,9 @@ export const PRINT_PRODUCTS: PrintProduct[] = [
       "The ladies who wrote Centre Court history, charted as a legend map. Hang the championship lineage where you can see it every day.",
     tour: "WTA",
     tourLabel: "Ladies' Singles",
-    imageSrc: "/prints/wimbledon-womens-legend-land.svg",
+    imageSrc: "/prints/wimbledon-womens-legend-land.png",
     imageAlt:
-      "Wimbledon Women's Championship Legend Land map print preview",
+      "Wimbledon Women's Championship Legend Land map print on a desk",
     etsyUrl:
       "https://www.etsy.com/listing/4530751760/wimbledon-womens-championship-legend",
   },
