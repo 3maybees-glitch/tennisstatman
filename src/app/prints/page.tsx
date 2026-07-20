@@ -8,12 +8,14 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Championship Legend Maps",
   description:
-    "Wimbledon Championship Legend Land prints — gentlemen's and ladies' singles history mapped for your wall. Buy on Etsy.",
+    "Grand Slam Championship Legend Land prints — Wimbledon, French Open, and US Open men's and women's history mapped for your wall. Buy on Etsy.",
   path: "/prints",
   keywords: [
-    "Wimbledon map print",
-    "tennis wall art",
+    "tennis map print",
     "championship legend map",
+    "Wimbledon wall art",
+    "French Open print",
+    "US Open tennis art",
     "Etsy tennis print",
   ],
 });
@@ -29,28 +31,27 @@ export default function PrintsPage() {
               <h1 className="text-4xl font-bold">Championship Legend Maps</h1>
             </div>
             <p className="mt-4 max-w-3xl text-lg text-muted">
-              The gentlemen&apos;s and ladies&apos; championship story, mapped.
-              Hang Centre Court history on your wall — checkout happens on
-              Etsy.
+              Grand Slam history, mapped. Wimbledon, Roland-Garros, and the US
+              Open — gentlemen&apos;s and ladies&apos; championship stories for
+              your wall. Checkout happens on Etsy.
             </p>
           </div>
           <MascotExplainer pose="globe">
-            Stats on the screen, legends on the wall. These prints chart every
-            champion who wrote Wimbledon history — grab one before the next
-            fortnight.
+            Stats on the screen, legends on the wall. Grab the slam that owns
+            your heart — or collect the set before the next fortnight.
           </MascotExplainer>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {PRINT_PRODUCTS.map((product) => (
             <PrintProductCard key={product.id} product={product} />
           ))}
         </div>
         <p className="mt-10 text-center text-sm text-muted">
           You&apos;ll complete your purchase on Etsy. Tennis Stat Man is not
-          affiliated with the All England Club, ATP, or WTA.
+          affiliated with the All England Club, FFT, USTA, ATP, or WTA.
         </p>
       </section>
     </div>

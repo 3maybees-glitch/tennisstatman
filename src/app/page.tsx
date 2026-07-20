@@ -79,7 +79,7 @@ const exploreLinks = [
     href: "/prints",
     icon: MapPinned,
     title: "Championship Maps",
-    desc: "Wimbledon Legend Land prints on Etsy",
+    desc: "Grand Slam Legend Land prints on Etsy",
   },
 ];
 
