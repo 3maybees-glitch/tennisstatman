@@ -10,6 +10,7 @@ import { PlayerCard } from "@/components/PlayerCard";
 import { RankingsTable } from "@/components/RankingsTable";
 import { StatFeatureCard } from "@/components/StatFeatureCard";
 import { StatManMascot } from "@/components/StatManMascot";
+import { XTimeline } from "@/components/XTimeline";
 import { featuredMatches, upcomingStats } from "@/lib/data/mock-matches";
 import { players } from "@/lib/data/players";
 import { getStatOfTheDay } from "@/lib/data/stat-of-the-day";
@@ -217,6 +218,8 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      <XTimeline />
 
       <FaqSection faqs={HOME_FAQS} />
     </>

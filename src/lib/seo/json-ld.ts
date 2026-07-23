@@ -1,3 +1,4 @@
+import { X_PROFILE_URL } from "@/lib/social";
 import { absoluteUrl } from "./site";
 
 export type FaqItem = {
@@ -48,6 +49,7 @@ export function organizationJsonLd() {
     logo: absoluteUrl("/opengraph-image"),
     description:
       "Fan-inspired professional tennis analytics covering ATP and WTA tours.",
+    sameAs: [X_PROFILE_URL],
   };
 }
 
