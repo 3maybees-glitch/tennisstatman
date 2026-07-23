@@ -9,7 +9,8 @@
  *   "https://x.com/tennisstatman/status/1234567890123456789"
  */
 const curatedPostUrls: string[] = [
-  // Add latest post URLs below, newest first:
+  // Newest first:
+  "https://x.com/tennisstatman/status/2079868579961323736",
 ];
 
 function urlsFromEnv(): string[] {
