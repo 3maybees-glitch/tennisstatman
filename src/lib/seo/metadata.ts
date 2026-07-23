@@ -39,6 +39,8 @@ export function buildPageMetadata({
       card: "summary_large_image",
       title: ogTitle,
       description,
+      site: "@TennisStatMan",
+      creator: "@TennisStatMan",
     },
   };
 }

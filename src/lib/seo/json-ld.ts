@@ -48,6 +48,7 @@ export function organizationJsonLd() {
     logo: absoluteUrl("/opengraph-image"),
     description:
       "Fan-inspired professional tennis analytics covering ATP and WTA tours.",
+    sameAs: ["https://x.com/TennisStatMan"],
   };
 }
 

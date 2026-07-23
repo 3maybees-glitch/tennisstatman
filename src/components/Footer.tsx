@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { X } from "lucide-react";
+import { X_HANDLE, X_PROFILE_URL } from "@/lib/social";
 
 export function Footer() {
   return (
@@ -14,6 +16,15 @@ export function Footer() {
               box score to reveal momentum, mentality, and the invisible forces
               that decide matches.
             </p>
+            <a
+              href={X_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-gold hover:text-gold-light"
+            >
+              <X size={16} aria-hidden />
+              @{X_HANDLE}
+            </a>
           </div>
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-gold">

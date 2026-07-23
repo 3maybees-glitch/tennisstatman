@@ -51,6 +51,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} | Next-Gen Tennis Analytics`,
     description: SITE_DESCRIPTION,
+    site: "@TennisStatMan",
+    creator: "@TennisStatMan",
   },
   formatDetection: {
     email: false,
