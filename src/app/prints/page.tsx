@@ -8,11 +8,12 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Championship Legend Maps",
   description:
-    "Grand Slam Championship Legend Land prints — Wimbledon, French Open, and US Open men's and women's history mapped for your wall. Buy on Etsy.",
+    "Grand Slam Championship Legend Land prints — Australian Open, Wimbledon, French Open, and US Open men's and women's history mapped for your wall. Buy on Etsy.",
   path: "/prints",
   keywords: [
     "tennis map print",
     "championship legend map",
+    "Australian Open wall art",
     "Wimbledon wall art",
     "French Open print",
     "US Open tennis art",
@@ -31,9 +32,9 @@ export default function PrintsPage() {
               <h1 className="text-4xl font-bold">Championship Legend Maps</h1>
             </div>
             <p className="mt-4 max-w-3xl text-lg text-muted">
-              Grand Slam history, mapped. Wimbledon, Roland-Garros, and the US
-              Open — gentlemen&apos;s and ladies&apos; championship stories for
-              your wall. Checkout happens on Etsy.
+              Grand Slam history, mapped. Australian Open, Roland-Garros,
+              Wimbledon, and the US Open — gentlemen&apos;s and ladies&apos;
+              championship stories for your wall. Checkout happens on Etsy.
             </p>
           </div>
           <MascotExplainer pose="globe">
@@ -51,7 +52,8 @@ export default function PrintsPage() {
         </div>
         <p className="mt-10 text-center text-sm text-muted">
           You&apos;ll complete your purchase on Etsy. Tennis Stat Man is not
-          affiliated with the All England Club, FFT, USTA, ATP, or WTA.
+          affiliated with Tennis Australia, the All England Club, FFT, USTA,
+          ATP, or WTA.
         </p>
       </section>
     </div>

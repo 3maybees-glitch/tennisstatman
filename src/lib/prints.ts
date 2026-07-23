@@ -1,6 +1,7 @@
 export type PrintTour = "ATP" | "WTA";
 
 export type PrintSlam =
+  | "australian-open"
   | "wimbledon"
   | "french-open"
   | "us-open";
@@ -19,6 +20,34 @@ export type PrintProduct = {
 };
 
 export const PRINT_PRODUCTS: PrintProduct[] = [
+  {
+    id: "australian-open-mens-legend-land",
+    title: "Australian Open Men's Legend Land",
+    subtitle: "Melbourne Park · Men's Singles",
+    description:
+      "The Happy Slam as fantasy Legend Land — Rod Laver Arena, dynasty peaks, and the champions who owned summer in Melbourne.",
+    slam: "australian-open",
+    tour: "ATP",
+    tourLabel: "Men's Singles",
+    imageSrc: "/prints/australian-open-mens-legend-land.jpg",
+    imageAlt: "Australian Open Men's Legend Land map print",
+    etsyUrl:
+      "https://www.etsy.com/listing/4542519943/mens-australian-open-legend-land-fantasy",
+  },
+  {
+    id: "australian-open-womens-legend-land",
+    title: "Australian Open Women's Legend Land",
+    subtitle: "Melbourne Park · Women's Singles",
+    description:
+      "Women's Happy Slam history mapped in Legend Land style — Court, Serena, Graf, Barty, Sabalenka, and the landmarks between them.",
+    slam: "australian-open",
+    tour: "WTA",
+    tourLabel: "Women's Singles",
+    imageSrc: "/prints/australian-open-womens-legend-land.jpg",
+    imageAlt: "Australian Open Women's Legend Land map print",
+    etsyUrl:
+      "https://www.etsy.com/listing/4542536394/womens-australian-open-legend-land",
+  },
   {
     id: "wimbledon-mens-legend-land",
     title: "Wimbledon Men's Legend Land",
