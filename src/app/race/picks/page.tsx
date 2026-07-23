@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { MascotExplainer } from "@/components/MascotExplainer";
 import { PicksGame } from "@/components/PicksGame";
 
@@ -8,12 +10,19 @@ export const metadata: Metadata = {
     "Pick winners for the week's biggest ATP and WTA matches and see if you can out-predict Stat Man and his PULSE model.",
 };
 
-export default function PicksPage() {
+export default function RacePicksPage() {
   return (
     <div className="court-pattern">
       <section className="border-b border-white/5 bg-navy-light/40">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8 px-6 py-16">
           <div className="max-w-3xl">
+            <Link
+              href="/race"
+              className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-gold-light"
+            >
+              <ArrowLeft size={14} />
+              Race to the Finals
+            </Link>
             <h1 className="text-4xl font-bold">Beat Stat Man</h1>
             <p className="mt-4 max-w-3xl text-lg text-muted">
               Four matches. Four picks. Lock yours in, then see which way Stat

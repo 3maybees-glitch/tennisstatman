@@ -62,7 +62,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/picks" className="hover:text-foreground">
+                <Link href="/race/picks" className="hover:text-foreground">
                   Beat Stat Man
                 </Link>
               </li>

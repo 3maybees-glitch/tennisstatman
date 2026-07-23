@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Trophy } from "lucide-react";
 import { MascotExplainer } from "@/components/MascotExplainer";
 import { RaceChart } from "@/components/RaceChart";
-import { Trophy } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Race to the Finals",
@@ -24,6 +25,13 @@ export default function RacePage() {
               watch the points pile up from Melbourne to the Finals, or scrub
               the timeline to any checkpoint.
             </p>
+            <Link
+              href="/race/picks"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold hover:text-gold-light"
+            >
+              Beat Stat Man — weekly picks
+              <ArrowRight size={16} />
+            </Link>
           </div>
           <MascotExplainer pose="stopwatch">
             On your marks... I time the whole season with this thing. Hit play

@@ -25,6 +25,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/picks",
+        destination: "/race/picks",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -73,7 +73,7 @@ const exploreLinks = [
     desc: "Watch the season play out as an animated race",
   },
   {
-    href: "/picks",
+    href: "/race/picks",
     icon: Target,
     title: "Beat Stat Man",
     desc: "Weekly picks against our PULSE model",

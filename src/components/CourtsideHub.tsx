@@ -54,7 +54,7 @@ const features = [
     desc: "Spike alerts, your watchlist, and full historical archives.",
   },
   {
-    href: "/picks",
+    href: "/race/picks",
     icon: Trophy,
     title: "Picks Room",
     desc: "Graded pick history and the season leaderboard.",

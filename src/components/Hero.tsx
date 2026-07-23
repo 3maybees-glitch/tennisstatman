@@ -11,7 +11,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-background/90 to-background" />
       </div>
 
-      <div className="court-pattern relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-32">
+      <div className="court-pattern relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 sm:pb-20 sm:pt-10 md:pb-24 md:pt-12">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center">
           <div className="w-full max-w-3xl flex-1">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-sm text-gold-light">

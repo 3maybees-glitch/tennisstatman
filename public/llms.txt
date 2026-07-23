@@ -22,7 +22,7 @@ https://www.tennisstatman.com
 - Tournament calendar: /calendar
 - World map: /map
 - Race to the Finals: /race
-- Weekly picks: /picks
+- Weekly picks: /race/picks
 - Pricing: /pricing
 
 ## Proprietary metrics

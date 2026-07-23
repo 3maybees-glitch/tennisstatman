@@ -15,7 +15,7 @@ const links = [
   { href: "/map", label: "Map" },
   { href: "/calendar", label: "Calendar" },
   { href: "/rankings", label: "Rankings" },
-  { href: "/picks", label: "Picks" },
+  { href: "/prints", label: "Prints" },
   { href: "/pricing", label: "Courtside" },
 ];
 
@@ -57,9 +57,7 @@ export function Navbar() {
                   href={link.href}
                   className={`flex items-center gap-1 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors lg:px-3 lg:text-base ${
                     isCourtside
-                      ? active
-                        ? "bg-gold/25 text-gold-light"
-                        : "text-gold hover:bg-gold/10 hover:text-gold-light"
+                      ? "bg-gold px-3.5 text-navy hover:bg-gold-light lg:px-4"
                       : active
                         ? "bg-court/20 text-gold-light"
                         : "text-muted hover:bg-white/5 hover:text-foreground"
@@ -91,7 +89,11 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-base font-medium text-muted hover:bg-white/5 hover:text-foreground"
+                  className={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                    link.href === "/pricing" || link.href === "/courtside"
+                      ? "bg-gold text-center font-semibold text-navy hover:bg-gold-light"
+                      : "text-muted hover:bg-white/5 hover:text-foreground"
+                  }`}
                 >
                   {link.label}
                 </Link>
