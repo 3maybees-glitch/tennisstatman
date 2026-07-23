@@ -1,9 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import Script from "next/script";
-import { useEffect, useRef } from "react";
-import { X } from "lucide-react";
-import { X_HANDLE, X_PROFILE_URL, X_TIMELINE_EMBED_URL } from "@/lib/social";
+import { useEffect } from "react";
+import { ExternalLink, X } from "lucide-react";
+import type { XOEmbed } from "@/lib/x-oembed";
+import {
+  X_AVATAR_URL,
+  X_BIO,
+  X_DISPLAY_NAME,
+  X_HANDLE,
+  X_PROFILE_URL,
+} from "@/lib/social";
 
 declare global {
   interface Window {
@@ -16,16 +24,13 @@ declare global {
 }
 
 type Props = {
-  /** Pixel height of the embedded timeline. */
-  height?: number;
+  embeds: XOEmbed[];
 };
 
-export function XTimeline({ height = 560 }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
+export function XTimeline({ embeds }: Props) {
   useEffect(() => {
-    window.twttr?.widgets.load(containerRef.current);
-  }, []);
+    window.twttr?.widgets.load();
+  }, [embeds]);
 
   return (
     <section
@@ -45,8 +50,7 @@ export function XTimeline({ height = 560 }: Props) {
               Latest from @{X_HANDLE}
             </h2>
             <p className="mt-3 text-muted">
-              Daily tennis stats, PULSE movers, and Courtside takes — straight
-              from the feed.
+              Daily tennis stats, PULSE movers, and Courtside takes.
             </p>
           </div>
           <a
@@ -60,29 +64,65 @@ export function XTimeline({ height = 560 }: Props) {
           </a>
         </div>
 
-        <div
-          ref={containerRef}
-          className="overflow-hidden rounded-2xl border border-white/10 bg-navy"
-        >
-          <a
-            className="twitter-timeline"
-            data-theme="dark"
-            data-chrome="noheader nofooter noborders transparent"
-            data-height={String(height)}
-            href={X_TIMELINE_EMBED_URL}
-          >
-            Posts by @{X_HANDLE}
-          </a>
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-navy">
+          <div className="flex items-center gap-4 border-b border-white/10 p-5">
+            <Image
+              src={X_AVATAR_URL}
+              alt={`${X_DISPLAY_NAME} avatar`}
+              width={56}
+              height={56}
+              className="rounded-full ring-2 ring-gold/40"
+              unoptimized
+            />
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold text-foreground">{X_DISPLAY_NAME}</p>
+              <p className="text-sm text-gold">@{X_HANDLE}</p>
+              <p className="mt-1 line-clamp-2 text-sm text-muted">{X_BIO}</p>
+            </div>
+          </div>
+
+          {embeds.length > 0 ? (
+            <div className="space-y-4 px-3 py-4 sm:px-5">
+              {embeds.map((embed) => (
+                <div
+                  key={embed.url}
+                  className="x-embed overflow-hidden [&_.twitter-tweet]:!mx-auto"
+                  dangerouslySetInnerHTML={{ __html: embed.html }}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="px-5 py-10 text-center">
+              <p className="text-foreground/90">
+                Open @{X_HANDLE} on X to see the latest posts.
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                X blocks timeline embeds for new accounts — individual posts
+                still show here once they&apos;re added.
+              </p>
+              <a
+                href={X_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-gold-light"
+              >
+                View posts on X
+                <ExternalLink size={14} aria-hidden />
+              </a>
+            </div>
+          )}
         </div>
       </div>
 
-      <Script
-        src="https://platform.twitter.com/widgets.js"
-        strategy="lazyOnload"
-        onLoad={() => {
-          window.twttr?.widgets.load(containerRef.current);
-        }}
-      />
+      {embeds.length > 0 && (
+        <Script
+          src="https://platform.twitter.com/widgets.js"
+          strategy="lazyOnload"
+          onLoad={() => {
+            window.twttr?.widgets.load();
+          }}
+        />
+      )}
     </section>
   );
 }

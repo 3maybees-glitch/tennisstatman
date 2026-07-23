@@ -13,10 +13,12 @@ import { StatManMascot } from "@/components/StatManMascot";
 import { XTimeline } from "@/components/XTimeline";
 import { featuredMatches, upcomingStats } from "@/lib/data/mock-matches";
 import { players } from "@/lib/data/players";
+import { getFeaturedXPostUrls } from "@/lib/data/x-posts";
 import { getStatOfTheDay } from "@/lib/data/stat-of-the-day";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import { isWimbledonChampionsBannerActive } from "@/lib/promotions/wimbledon-champions";
 import { fetchAllRankings } from "@/lib/rankings";
+import { fetchFeaturedXOEmbeds } from "@/lib/x-oembed";
 import {
   CalendarDays,
   Globe2,
@@ -87,6 +89,7 @@ const exploreLinks = [
 export default async function HomePage() {
   const { atp, wta } = await fetchAllRankings();
   const daily = getStatOfTheDay();
+  const xEmbeds = await fetchFeaturedXOEmbeds(getFeaturedXPostUrls());
   const featuredPlayers = players.slice(0, 2).concat(
     players.filter((p) => p.tour === "WTA").slice(0, 2),
   );
@@ -219,7 +222,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <XTimeline />
+      <XTimeline embeds={xEmbeds} />
 
       <FaqSection faqs={HOME_FAQS} />
     </>
