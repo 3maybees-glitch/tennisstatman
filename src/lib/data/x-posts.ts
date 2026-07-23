@@ -11,6 +11,7 @@
 const curatedPostUrls: string[] = [
   // Newest first:
   "https://x.com/tennisstatman/status/2079868579961323736",
+  "https://x.com/tennisstatman/status/2079148798144610472",
 ];
 
 function urlsFromEnv(): string[] {
