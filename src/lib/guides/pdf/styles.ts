@@ -1,0 +1,142 @@
+import { StyleSheet } from "@react-pdf/renderer";
+
+export const colors = {
+  navy: "#0B1221",
+  navyLight: "#141F35",
+  gold: "#D4AF37",
+  goldLight: "#F0C75E",
+  court: "#2D6A4F",
+  courtLight: "#40916C",
+  white: "#FFFFFF",
+  muted: "#94A3B8",
+  ink: "#E2E8F0",
+  atp: "#3B82F6",
+  wta: "#EC4899",
+};
+
+export const styles = StyleSheet.create({
+  page: {
+    backgroundColor: colors.navy,
+    color: colors.ink,
+    fontFamily: "Helvetica",
+    paddingTop: 36,
+    paddingBottom: 40,
+    paddingHorizontal: 36,
+  },
+  coverPage: {
+    backgroundColor: colors.navy,
+    color: colors.ink,
+    fontFamily: "Helvetica",
+    padding: 48,
+    justifyContent: "space-between",
+  },
+  eyebrow: {
+    color: colors.gold,
+    fontSize: 11,
+    letterSpacing: 2,
+    textTransform: "uppercase",
+    marginBottom: 10,
+  },
+  h1: {
+    fontSize: 34,
+    fontFamily: "Helvetica-Bold",
+    color: colors.white,
+    marginBottom: 8,
+  },
+  h2: {
+    fontSize: 20,
+    fontFamily: "Helvetica-Bold",
+    color: colors.white,
+    marginBottom: 6,
+  },
+  body: {
+    fontSize: 10.5,
+    lineHeight: 1.45,
+    color: colors.ink,
+  },
+  muted: {
+    fontSize: 10,
+    color: colors.muted,
+    lineHeight: 1.4,
+  },
+  footer: {
+    position: "absolute",
+    left: 36,
+    right: 36,
+    bottom: 22,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    color: colors.muted,
+    fontSize: 9,
+  },
+  playerHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: 14,
+  },
+  rankBadge: {
+    backgroundColor: colors.gold,
+    color: colors.navy,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 6,
+  },
+  sectionLabel: {
+    color: colors.goldLight,
+    fontSize: 9,
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+    marginBottom: 4,
+    fontFamily: "Helvetica-Bold",
+  },
+  bioGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 8,
+  },
+  bioCell: {
+    width: "31%",
+    backgroundColor: colors.navyLight,
+    borderRadius: 8,
+    padding: 8,
+  },
+  bioLabel: {
+    fontSize: 8,
+    color: colors.muted,
+    marginBottom: 2,
+  },
+  bioValue: {
+    fontSize: 10,
+    color: colors.white,
+    fontFamily: "Helvetica-Bold",
+  },
+  twoCol: {
+    flexDirection: "row",
+    gap: 14,
+    marginTop: 12,
+  },
+  col: {
+    flex: 1,
+  },
+  panel: {
+    backgroundColor: colors.navyLight,
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 8,
+  },
+  finishItem: {
+    fontSize: 10,
+    color: colors.ink,
+    marginBottom: 3,
+  },
+  analysis: {
+    fontSize: 10,
+    lineHeight: 1.45,
+    color: colors.ink,
+    marginTop: 4,
+  },
+});

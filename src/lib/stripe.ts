@@ -8,6 +8,11 @@ export type CourtsidePlan =
   | "launch_annual"
   | "lifetime";
 
+export type DigitalProduct = "courtside" | "player_guide";
+
+export const PLAYER_GUIDE_PRODUCT = "player_guide" as const;
+export const PLAYER_GUIDE_EDITION = "summer-2026" as const;
+
 export type CourtsideMembership = {
   active: boolean;
   plan: CourtsidePlan | null;
@@ -79,6 +84,14 @@ export function getCourtsidePriceId(plan: CourtsidePlan): string {
     throw new Error(`${envKey} is not configured.`);
   }
 
+  return priceId;
+}
+
+export function getPlayerGuidePriceId(): string {
+  const priceId = process.env.STRIPE_PRICE_PLAYER_GUIDE?.trim();
+  if (!priceId) {
+    throw new Error("STRIPE_PRICE_PLAYER_GUIDE is not configured.");
+  }
   return priceId;
 }
 

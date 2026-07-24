@@ -8,9 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate-portraits": "node scripts/fetch-wikipedia-portraits.mjs"
+    "generate-portraits": "node scripts/fetch-wikipedia-portraits.mjs",
+    "generate-player-guide": "tsx scripts/generate-player-guide.tsx"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.23.0",
@@ -28,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5"
   }
 }
