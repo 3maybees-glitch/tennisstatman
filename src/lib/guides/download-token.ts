@@ -1,8 +1,8 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import {
-  GUIDE_EDITION_ID,
-  GUIDE_PDF_FILENAME,
-} from "@/lib/data/guides/summer-2026";
+  getDigitalProductByEdition,
+  type DigitalEditionId,
+} from "@/lib/guides/digital-products";
 
 const DEFAULT_TTL_SECONDS = 60 * 60 * 24; // 24 hours
 
@@ -51,11 +51,12 @@ function sign(body: string): string {
 
 export function createGuideDownloadToken(
   sessionId: string,
+  editionId: DigitalEditionId,
   ttlSeconds = DEFAULT_TTL_SECONDS,
 ): string {
   const payload: GuideDownloadPayload = {
     sessionId,
-    editionId: GUIDE_EDITION_ID,
+    editionId,
     exp: Math.floor(Date.now() / 1000) + ttlSeconds,
   };
   const body = encode(payload);
@@ -77,15 +78,23 @@ export function verifyGuideDownloadToken(
 
   const payload = decode(body);
   if (!payload) return null;
-  if (payload.editionId !== GUIDE_EDITION_ID) return null;
+  if (!getDigitalProductByEdition(payload.editionId)) return null;
   if (payload.exp < Math.floor(Date.now() / 1000)) return null;
   return payload;
 }
 
-export function getGuidePdfPath(): string {
-  return `${process.cwd()}/content/guides/${GUIDE_PDF_FILENAME}`;
+export function getGuidePdfPath(editionId: string): string {
+  const product = getDigitalProductByEdition(editionId);
+  if (!product) {
+    throw new Error(`Unknown guide edition: ${editionId}`);
+  }
+  return `${process.cwd()}/content/guides/${product.filename}`;
 }
 
-export function getGuideDownloadFilename(): string {
-  return GUIDE_PDF_FILENAME;
+export function getGuideDownloadFilename(editionId: string): string {
+  const product = getDigitalProductByEdition(editionId);
+  if (!product) {
+    throw new Error(`Unknown guide edition: ${editionId}`);
+  }
+  return product.filename;
 }

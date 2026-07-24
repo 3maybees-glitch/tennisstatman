@@ -3,12 +3,12 @@ import {
   COURTSIDE_CUSTOMER_COOKIE,
   courtsideCustomerCookieOptions,
 } from "@/lib/courtside-session";
+import { getDigitalProduct } from "@/lib/guides/digital-products";
 import { createGuideDownloadToken } from "@/lib/guides/download-token";
 import {
   getSiteUrl,
   getStripe,
   grantLifetimeAccess,
-  PLAYER_GUIDE_PRODUCT,
 } from "@/lib/stripe";
 
 export async function GET(request: Request) {
@@ -31,17 +31,17 @@ export async function GET(request: Request) {
       );
     }
 
-    const product = session.metadata?.product;
+    const digital = getDigitalProduct(session.metadata?.product);
 
-    if (product === PLAYER_GUIDE_PRODUCT) {
+    if (digital) {
       if (session.payment_status !== "paid") {
         return NextResponse.redirect(
-          `${siteUrl}/guides/summer-2026?error=payment-incomplete`,
+          `${siteUrl}${digital.cancelPath}?error=payment-incomplete`,
         );
       }
-      const token = createGuideDownloadToken(sessionId);
+      const token = createGuideDownloadToken(sessionId, digital.editionId);
       return NextResponse.redirect(
-        `${siteUrl}/guides/summer-2026/success?token=${encodeURIComponent(token)}`,
+        `${siteUrl}${digital.successPath}?token=${encodeURIComponent(token)}`,
       );
     }
 

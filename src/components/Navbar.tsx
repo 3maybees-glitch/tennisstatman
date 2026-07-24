@@ -17,6 +17,7 @@ const links = [
   { href: "/rankings", label: "Rankings" },
   { href: "/prints", label: "Prints" },
   { href: "/guides/summer-2026", label: "Guide" },
+  { href: "/guides/war-map-2026", label: "WAR MAP" },
   { href: "/pricing", label: "Courtside" },
 ];
 

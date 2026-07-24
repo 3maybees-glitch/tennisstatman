@@ -8,10 +8,12 @@ export type CourtsidePlan =
   | "launch_annual"
   | "lifetime";
 
-export type DigitalProduct = "courtside" | "player_guide";
+export type DigitalProduct = "courtside" | "player_guide" | "war_map";
 
 export const PLAYER_GUIDE_PRODUCT = "player_guide" as const;
 export const PLAYER_GUIDE_EDITION = "summer-2026" as const;
+export const WAR_MAP_PRODUCT = "war_map" as const;
+export const WAR_MAP_EDITION = "war-map-2026" as const;
 
 export type CourtsideMembership = {
   active: boolean;
@@ -93,6 +95,11 @@ export function getPlayerGuidePriceId(): string {
     throw new Error("STRIPE_PRICE_PLAYER_GUIDE is not configured.");
   }
   return priceId;
+}
+
+/** Optional configured price; when unset, checkout uses inline $1 price_data. */
+export function getWarMapPriceId(): string | null {
+  return process.env.STRIPE_PRICE_WAR_MAP?.trim() || null;
 }
 
 export function getLaunchMonthlyCouponId(): string | null {

@@ -57,6 +57,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/guides/war-map-2026" className="hover:text-foreground">
+                  2026 WAR MAP
+                </Link>
+              </li>
+              <li>
                 <Link href="/calendar" className="hover:text-foreground">
                   Master Calendar
                 </Link>

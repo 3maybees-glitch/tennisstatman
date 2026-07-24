@@ -1,11 +1,12 @@
 import { readFile, stat } from "node:fs/promises";
 import { NextResponse } from "next/server";
+import { getDigitalProductByEdition } from "@/lib/guides/digital-products";
 import {
   getGuideDownloadFilename,
   getGuidePdfPath,
   verifyGuideDownloadToken,
 } from "@/lib/guides/download-token";
-import { getStripe, PLAYER_GUIDE_PRODUCT } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 
@@ -23,6 +24,11 @@ export async function GET(request: Request) {
     );
   }
 
+  const product = getDigitalProductByEdition(payload.editionId);
+  if (!product) {
+    return NextResponse.json({ error: "Unknown product." }, { status: 400 });
+  }
+
   try {
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.retrieve(payload.sessionId);
@@ -30,7 +36,7 @@ export async function GET(request: Request) {
     if (
       session.status !== "complete" ||
       session.payment_status !== "paid" ||
-      session.metadata?.product !== PLAYER_GUIDE_PRODUCT
+      session.metadata?.product !== product.product
     ) {
       return NextResponse.json(
         { error: "Purchase could not be verified." },
@@ -38,7 +44,7 @@ export async function GET(request: Request) {
       );
     }
 
-    const pdfPath = getGuidePdfPath();
+    const pdfPath = getGuidePdfPath(payload.editionId);
     await stat(pdfPath);
     const file = await readFile(pdfPath);
     const body = new Uint8Array(file);
@@ -47,7 +53,7 @@ export async function GET(request: Request) {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${getGuideDownloadFilename()}"`,
+        "Content-Disposition": `attachment; filename="${getGuideDownloadFilename(payload.editionId)}"`,
         "Content-Length": String(body.byteLength),
         "Cache-Control": "no-store",
       },

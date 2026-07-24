@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "generate-portraits": "node scripts/fetch-wikipedia-portraits.mjs",
-    "generate-player-guide": "tsx scripts/generate-player-guide.tsx"
+    "generate-player-guide": "tsx scripts/generate-player-guide.tsx",
+    "generate-war-map": "tsx scripts/generate-war-map.tsx"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",
