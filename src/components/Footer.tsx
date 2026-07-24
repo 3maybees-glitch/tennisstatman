@@ -52,6 +52,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/guides/summer-2026" className="hover:text-foreground">
+                  Player Guide
+                </Link>
+              </li>
+              <li>
                 <Link href="/calendar" className="hover:text-foreground">
                   Master Calendar
                 </Link>

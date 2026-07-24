@@ -3,7 +3,13 @@ import {
   COURTSIDE_CUSTOMER_COOKIE,
   courtsideCustomerCookieOptions,
 } from "@/lib/courtside-session";
-import { getSiteUrl, getStripe, grantLifetimeAccess } from "@/lib/stripe";
+import { createGuideDownloadToken } from "@/lib/guides/download-token";
+import {
+  getSiteUrl,
+  getStripe,
+  grantLifetimeAccess,
+  PLAYER_GUIDE_PRODUCT,
+} from "@/lib/stripe";
 
 export async function GET(request: Request) {
   const siteUrl = getSiteUrl();
@@ -20,7 +26,23 @@ export async function GET(request: Request) {
     });
 
     if (session.status !== "complete") {
-      return NextResponse.redirect(`${siteUrl}/pricing?error=checkout-incomplete`);
+      return NextResponse.redirect(
+        `${siteUrl}/pricing?error=checkout-incomplete`,
+      );
+    }
+
+    const product = session.metadata?.product;
+
+    if (product === PLAYER_GUIDE_PRODUCT) {
+      if (session.payment_status !== "paid") {
+        return NextResponse.redirect(
+          `${siteUrl}/guides/summer-2026?error=payment-incomplete`,
+        );
+      }
+      const token = createGuideDownloadToken(sessionId);
+      return NextResponse.redirect(
+        `${siteUrl}/guides/summer-2026/success?token=${encodeURIComponent(token)}`,
+      );
     }
 
     const customerId =
@@ -35,7 +57,9 @@ export async function GET(request: Request) {
     if (session.mode === "payment") {
       await grantLifetimeAccess(customerId);
     } else if (session.mode !== "subscription") {
-      return NextResponse.redirect(`${siteUrl}/pricing?error=checkout-incomplete`);
+      return NextResponse.redirect(
+        `${siteUrl}/pricing?error=checkout-incomplete`,
+      );
     }
 
     const response = NextResponse.redirect(`${siteUrl}/courtside?subscribed=1`);

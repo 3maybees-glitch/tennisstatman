@@ -22,8 +22,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Wimbledon semifinal",
       "Madrid champion",
     ],
-    strengths: "Elite serve-plus-one tennis and fearless baseline pace.",
-    weaknesses: "Can leak errors when rushed into low-margin defense.",
     funFact: "Sabalenka is known for her tiger tattoo and equally ferocious forehand.",
   },
   {
@@ -47,8 +45,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Indian Wells champion",
       "Rome champion",
     ],
-    strengths: "Heavy forehand angles, return pressure, and clay-court point construction.",
-    weaknesses: "Flat power hitters can shorten rallies before she sets the pattern.",
     funFact: "Świątek often reads novels between matches to reset her mind.",
   },
   {
@@ -72,8 +68,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Cincinnati champion",
       "Auckland champion",
     ],
-    strengths: "World-class speed, backhand stability, and improved transition play.",
-    weaknesses: "Forehand timing can fluctuate under heavy pace.",
     funFact: "Gauff made her Wimbledon main-draw breakthrough at just 15 years old.",
   },
   {
@@ -97,8 +91,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Canadian Open champion",
       "Australian Open quarterfinal",
     ],
-    strengths: "Early ball-striking and calm tactical adjustments on return.",
-    weaknesses: "Can need extra aggression to finish against elite defenders.",
     funFact: "Pegula co-founded a skincare brand while competing at the top of the tour.",
   },
   {
@@ -122,8 +114,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Rome champion",
       "Miami finalist",
     ],
-    strengths: "One of the tour's cleanest serves and easy baseline acceleration.",
-    weaknesses: "Physical interruptions can blunt her week-to-week rhythm.",
     funFact: "Rybakina became Kazakhstan's first singles Grand Slam champion.",
   },
   {
@@ -147,8 +137,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Australian Open fourth round",
       "Madrid quarterfinal",
     ],
-    strengths: "Mature rally tolerance, disguise, and redirecting pace.",
-    weaknesses: "Serve can still be pressured by elite returners.",
     funFact: "Andreeva reached major second weeks before turning 18.",
   },
   {
@@ -172,8 +160,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Wimbledon quarterfinal",
       "Adelaide champion",
     ],
-    strengths: "Instant offense from the serve and forehand wings.",
-    weaknesses: "Streaky timing can produce quick error clusters.",
     funFact: "Keys has been a tour-level power threat since her teenage seasons.",
   },
   {
@@ -197,8 +183,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Olympic doubles gold",
       "BJK Cup champion",
     ],
-    strengths: "Footspeed, positive court positioning, and quick-strike forehands.",
-    weaknesses: "Serve size leaves little margin against elite return games.",
     funFact: "Paolini's 2024 surge made her a Grand Slam finalist on clay and grass.",
   },
   {
@@ -222,8 +206,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "Miami finalist",
       "Beijing champion",
     ],
-    strengths: "Free points on serve and decisive first-strike forehands.",
-    weaknesses: "Forward movement and net instincts are less natural than baseline offense.",
     funFact: "Osaka has won all four of her first four Grand Slam finals.",
   },
   {
@@ -247,8 +229,6 @@ export const WTA_SUMMER_2026_SEEDS: GuidePlayerSeed[] = [
       "US Open quarterfinal",
       "Sydney champion",
     ],
-    strengths: "Forehand heaviness and confident patterns from the baseline.",
-    weaknesses: "Injury management can affect continuity across long swings.",
     funFact: "Badosa was born in New York and represents Spain on tour.",
   },
   {

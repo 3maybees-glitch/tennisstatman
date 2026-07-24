@@ -16,6 +16,7 @@ const links = [
   { href: "/calendar", label: "Calendar" },
   { href: "/rankings", label: "Rankings" },
   { href: "/prints", label: "Prints" },
+  { href: "/guides/summer-2026", label: "Guide" },
   { href: "/pricing", label: "Courtside" },
 ];
 
