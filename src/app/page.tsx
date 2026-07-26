@@ -9,12 +9,15 @@ import { MatchCard } from "@/components/MatchCard";
 import { PlayerCard } from "@/components/PlayerCard";
 import { RankingsTable } from "@/components/RankingsTable";
 import { StatFeatureCard } from "@/components/StatFeatureCard";
-import { StatManMascot } from "@/components/StatManMascot";
+import { StatOfTheDayCard } from "@/components/StatOfTheDayCard";
 import { XTimeline } from "@/components/XTimeline";
 import { featuredMatches, upcomingStats } from "@/lib/data/mock-matches";
 import { players } from "@/lib/data/players";
 import { getFeaturedXPostUrls } from "@/lib/data/x-posts";
-import { getStatOfTheDay } from "@/lib/data/stat-of-the-day";
+import {
+  getMenStatOfTheDay,
+  getWomenStatOfTheDay,
+} from "@/lib/data/stat-of-the-day";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import { isWimbledonChampionsBannerActive } from "@/lib/promotions/wimbledon-champions";
 import { fetchAllRankings } from "@/lib/rankings";
@@ -88,7 +91,8 @@ const exploreLinks = [
 
 export default async function HomePage() {
   const { atp, wta } = await fetchAllRankings();
-  const daily = getStatOfTheDay();
+  const menStat = getMenStatOfTheDay();
+  const womenStat = getWomenStatOfTheDay();
   const xEmbeds = await fetchFeaturedXOEmbeds(getFeaturedXPostUrls());
   const featuredPlayers = players.slice(0, 2).concat(
     players.filter((p) => p.tour === "WTA").slice(0, 2),
@@ -102,27 +106,18 @@ export default async function HomePage() {
       {isHardcourtPreviewActive() && <HardcourtPreviewBanner />}
       {isWimbledonChampionsBannerActive() && <WimbledonChampionsBanner />}
 
-      {/* Stat of the Day */}
+      {/* Men's + Women's Stat of the Day — portrait cards for X */}
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <div className="flex flex-col items-center gap-6 overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-r from-gold/10 via-navy-light to-navy-light p-8 md:flex-row md:gap-10">
-          <StatManMascot size={120} className="shrink-0" />
-          <div className="text-center md:text-left">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gold">
-              Stat of the Day · {daily.category}
-            </p>
-            <p className="mt-2 text-4xl font-bold text-gold-light md:text-5xl">
-              {daily.headline}
-            </p>
-            <p className="mt-3 max-w-2xl leading-relaxed text-foreground/90">
-              {daily.detail}
-            </p>
-            <Link
-              href={daily.relatedHref}
-              className="mt-4 inline-block text-sm font-medium text-gold hover:text-gold-light"
-            >
-              {daily.relatedLabel} →
-            </Link>
-          </div>
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold">Stat of the Day</h2>
+          <p className="mx-auto mt-3 max-w-xl text-muted">
+            One for the men, one for the women — portrait cards ready to
+            screenshot or download for X.
+          </p>
+        </div>
+        <div className="mx-auto grid max-w-3xl gap-10 sm:grid-cols-2 sm:gap-8">
+          <StatOfTheDayCard stat={menStat} />
+          <StatOfTheDayCard stat={womenStat} />
         </div>
       </section>
 
