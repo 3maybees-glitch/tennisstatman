@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
-import { WimbledonChampionsBanner } from "@/components/WimbledonChampionsBanner";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
 import { MatchCard } from "@/components/MatchCard";
@@ -19,7 +18,6 @@ import {
   getWomenStatOfTheDay,
 } from "@/lib/data/stat-of-the-day";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
-import { isWimbledonChampionsBannerActive } from "@/lib/promotions/wimbledon-champions";
 import { fetchAllRankings } from "@/lib/rankings";
 import { fetchFeaturedXOEmbeds } from "@/lib/x-oembed";
 import {
@@ -104,7 +102,6 @@ export default async function HomePage() {
       <Hero />
 
       {isHardcourtPreviewActive() && <HardcourtPreviewBanner />}
-      {isWimbledonChampionsBannerActive() && <WimbledonChampionsBanner />}
 
       {/* Men's + Women's Stat of the Day — portrait cards for X */}
       <section className="mx-auto max-w-7xl px-6 py-14">
