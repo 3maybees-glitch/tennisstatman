@@ -55,6 +55,8 @@ function ChampionBlock({
           height: 168,
         }}
       >
+        {/* next/og ImageResponse requires <img>; next/image is unsupported here. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={portrait}
           width={168}
