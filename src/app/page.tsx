@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { DcOpenChampionsBanner } from "@/components/DcOpenChampionsBanner";
 import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -17,6 +18,7 @@ import {
   getMenStatOfTheDay,
   getWomenStatOfTheDay,
 } from "@/lib/data/stat-of-the-day";
+import { isDcOpenChampionsBannerActive } from "@/lib/promotions/dc-open-champions";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import { fetchAllRankings } from "@/lib/rankings";
 import { fetchFeaturedXOEmbeds } from "@/lib/x-oembed";
@@ -100,6 +102,8 @@ export default async function HomePage() {
     <>
       <JsonLd data={faqPageJsonLd(HOME_FAQS)} />
       <Hero />
+
+      {isDcOpenChampionsBannerActive() && <DcOpenChampionsBanner />}
 
       {isHardcourtPreviewActive() && <HardcourtPreviewBanner />}
 

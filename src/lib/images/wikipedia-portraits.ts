@@ -13,6 +13,7 @@ export const WIKIPEDIA_PORTRAITS: Record<string, WikipediaPortrait> = {
   "alexander-bublik": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Sascha_Bublik_%282023_DC_Open%29_05_%28cropped%29.jpg/960px-Sascha_Bublik_%282023_DC_Open%29_05_%28cropped%29.jpg","title":"Alexander Bublik"},
   "alexander-zverev": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Alexander_Zverev.jpg/960px-Alexander_Zverev.jpg","title":"Alexander Zverev"},
   "alexandra-eala": {"url":"https://upload.wikimedia.org/wikipedia/commons/6/6e/Ealas_and_Patrick_Gregorio_%28cropped_Alexandra_Eala%29.jpg","title":"Alexandra Eala"},
+  "rafael-jodar": {"url":"https://upload.wikimedia.org/wikipedia/commons/8/8c/Rafa_J%C3%B3dar_Espinar_2025.jpg","title":"Rafael Jódar"},
   "alexandre-muller": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Muller_RGQ22_%2837%29_%2852129571758%29.jpg/960px-Muller_RGQ22_%2837%29_%2852129571758%29.jpg","title":"Alexandre Müller"},
   "alexei-popyrin": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Popyrin_RG19_%2846%29_%2848199101562%29.jpg/960px-Popyrin_RG19_%2846%29_%2848199101562%29.jpg","title":"Alexei Popyrin"},
   "aliaksandra-sasnovich": {"url":"https://upload.wikimedia.org/wikipedia/commons/c/ca/Qualifying_TransylvaniaOpen_Miriam_Bianca_Bulgaru_vs_Aliaksandra_Sasnovich_3-6%2C_4-6_%2854320615871%29_%28cropped_Aliaksandra_Sasnovich%29.jpg","title":"Aliaksandra Sasnovich"},
