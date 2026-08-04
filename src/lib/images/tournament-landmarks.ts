@@ -60,6 +60,8 @@ const LANDMARK_BY_TOURNAMENT: Record<string, string> = {
     "https://images.unsplash.com/photo-1541849542889-b65b193cd3c5?auto=format&fit=crop&w=600&h=340&q=80",
   "itf-porto-w75":
     "https://images.unsplash.com/photo-1555881403-6737b88fefc6?auto=format&fit=crop&w=600&h=340&q=80",
+  "dc-open":
+    "https://images.unsplash.com/photo-1617581629397-a72507c3de9e?auto=format&fit=crop&w=1200&h=680&q=80",
   "canadian-open":
     "https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=600&h=340&q=80",
   "cincinnati-open":
@@ -100,6 +102,10 @@ const LANDMARK_BY_CITY: Record<string, string> = {
     "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&h=340&q=80",
   "New York":
     "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=600&h=340&q=80",
+  "Washington, D.C.":
+    "https://images.unsplash.com/photo-1617581629397-a72507c3de9e?auto=format&fit=crop&w=1200&h=680&q=80",
+  Washington:
+    "https://images.unsplash.com/photo-1617581629397-a72507c3de9e?auto=format&fit=crop&w=1200&h=680&q=80",
   Rome:
     "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&h=340&q=80",
   Barcelona:
