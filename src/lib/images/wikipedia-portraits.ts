@@ -31,6 +31,7 @@ export const WIKIPEDIA_PORTRAITS: Record<string, WikipediaPortrait> = {
   "antonia-ruzic": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Ruzic_RGQ23_%2852944045033%29.jpg/960px-Ruzic_RGQ23_%2852944045033%29.jpg","title":"Antonia Ružić"},
   "arantxa-rus": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Rus_WMQ23_%2853061698736%29.jpg/960px-Rus_WMQ23_%2853061698736%29.jpg","title":"Arantxa Rus"},
   "arthur-cazaux": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Arthur_Cazaux_%282023_US_Open%29_01.jpg/960px-Arthur_Cazaux_%282023_US_Open%29_01.jpg","title":"Arthur Cazaux"},
+  "arthur-fils": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Arthur_Fils_ATP.jpg/960px-Arthur_Fils_ATP.jpg","title":"Arthur Fils"},
   "aryna-sabalenka": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Aryna_Sabalenka_%282024_DC_Open%29_06.jpg/960px-Aryna_Sabalenka_%282024_DC_Open%29_06.jpg","title":"Aryna Sabalenka"},
   "ashlyn-krueger": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Ashlyn_Krueger_%282023_DC_Open%29_01_%28cropped%29.jpg/960px-Ashlyn_Krueger_%282023_DC_Open%29_01_%28cropped%29.jpg","title":"Ashlyn Krueger"},
   "barbora-krejcikova": {"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Barbora_Krej%C4%8D%C3%ADkov%C3%A1_%282023_US_Open%29_03_%28cropped%29.jpg/960px-Barbora_Krej%C4%8D%C3%ADkov%C3%A1_%282023_US_Open%29_03_%28cropped%29.jpg","title":"Barbora Krejčíková"},

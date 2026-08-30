@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { DcOpenChampionsBanner } from "@/components/DcOpenChampionsBanner";
 import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
+import { UsOpenPreviewBanner } from "@/components/UsOpenPreviewBanner";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
 import { MatchCard } from "@/components/MatchCard";
@@ -20,6 +21,10 @@ import {
 } from "@/lib/data/stat-of-the-day";
 import { isDcOpenChampionsBannerActive } from "@/lib/promotions/dc-open-champions";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
+import {
+  isUsOpenPreviewActive,
+  usOpenPreviewJsonLd,
+} from "@/lib/promotions/us-open-preview";
 import { fetchAllRankings } from "@/lib/rankings";
 import { fetchFeaturedXOEmbeds } from "@/lib/x-oembed";
 import {
@@ -36,10 +41,18 @@ import { faqPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Next-Gen Tennis Analytics",
+  title: "US Open 2026 Preview",
   description:
-    "ATP and WTA player cards with skill grades, PULSE form scores, legend comparisons, live rankings, a world map, and the full 2026 tournament calendar.",
+    "Stat Man's US Open preview for Flushing Meadows: first-timers, veterans, surprise runs, and the players locked in to win — with PULSE form scores and the New York numbers.",
   path: "/",
+  keywords: [
+    "US Open 2026 preview",
+    "US Open tennis",
+    "PULSE tennis form score",
+    "ATP analytics",
+    "WTA analytics",
+    "Flushing Meadows",
+  ],
 });
 
 export const revalidate = 3600;
@@ -100,12 +113,22 @@ export default async function HomePage() {
 
   return (
     <>
-      <JsonLd data={faqPageJsonLd(HOME_FAQS)} />
+      <JsonLd
+        data={
+          isUsOpenPreviewActive()
+            ? [faqPageJsonLd(HOME_FAQS), usOpenPreviewJsonLd()]
+            : faqPageJsonLd(HOME_FAQS)
+        }
+      />
       <Hero />
+
+      {isUsOpenPreviewActive() && <UsOpenPreviewBanner />}
 
       {isDcOpenChampionsBannerActive() && <DcOpenChampionsBanner />}
 
-      {isHardcourtPreviewActive() && <HardcourtPreviewBanner />}
+      {isHardcourtPreviewActive() && !isUsOpenPreviewActive() && (
+        <HardcourtPreviewBanner />
+      )}
 
       {/* Men's + Women's Stat of the Day — portrait cards for X */}
       <section className="mx-auto max-w-7xl px-6 py-14">

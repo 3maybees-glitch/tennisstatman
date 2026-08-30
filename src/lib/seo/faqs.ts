@@ -16,6 +16,11 @@ export const HOME_FAQS: FaqItem[] = [
     answer:
       "Yes. The Fan tier is free forever and includes live rankings, player cards, the tournament calendar, world map, current PULSE scores, three legend comparisons per day, and weekly picks. Courtside membership adds deeper archives and unlimited tools.",
   },
+  {
+    question: "Where is the US Open 2026 preview?",
+    answer:
+      "The homepage carries Stat Man's US Open preview through the Flushing Meadows fortnight: an overall read, PULSE form scores for eight featured players, and commentary on first-timers, veterans, surprise runs, and the players most locked in to win.",
+  },
 ];
 
 export const PULSE_FAQS: FaqItem[] = [
