@@ -18,8 +18,18 @@ function toDataUrl(buffer: ArrayBuffer, contentType: string): string {
   return `data:${contentType};base64,${btoa(binary)}`;
 }
 
+/** Prefer a Wikimedia thumb so full-size Commons files do not blow the OG budget. */
+function toWikimediaThumb(url: string, width = 256): string {
+  const match = url.match(
+    /upload\.wikimedia\.org\/wikipedia\/commons\/([0-9a-f])\/([0-9a-f]{2})\/([^/?#]+)/i,
+  );
+  if (!match || url.includes("/thumb/")) return url;
+  const [, dir, sub, file] = match;
+  return `https://upload.wikimedia.org/wikipedia/commons/thumb/${dir}/${sub}/${file}/${width}px-${file}`;
+}
+
 async function loadPortrait(playerId: string, name: string): Promise<string> {
-  const url = getPlayerPortraitUrl(playerId, 256, name);
+  const url = toWikimediaThumb(getPlayerPortraitUrl(playerId, 256, name));
   try {
     const res = await fetch(url, { next: { revalidate: 86_400 } });
     if (!res.ok) return url;
