@@ -18,28 +18,17 @@ function toDataUrl(buffer: ArrayBuffer, contentType: string): string {
   return `data:${contentType};base64,${btoa(binary)}`;
 }
 
-/** Prefer a Wikimedia thumb so full-size Commons files do not blow the OG budget. */
-function toWikimediaThumb(url: string, width = 256): string {
-  const thumbMatch = url.match(
-    /upload\.wikimedia\.org\/wikipedia\/commons\/thumb\/([0-9a-f])\/([0-9a-f]{2})\/([^/?#]+)\/\d+px-/i,
-  );
-  if (thumbMatch) {
-    const [, dir, sub, file] = thumbMatch;
-    return `https://upload.wikimedia.org/wikipedia/commons/thumb/${dir}/${sub}/${file}/${width}px-${file}`;
-  }
-
-  const match = url.match(
-    /upload\.wikimedia\.org\/wikipedia\/commons\/([0-9a-f])\/([0-9a-f]{2})\/([^/?#]+)/i,
-  );
-  if (!match) return url;
-  const [, dir, sub, file] = match;
-  return `https://upload.wikimedia.org/wikipedia/commons/thumb/${dir}/${sub}/${file}/${width}px-${file}`;
-}
-
 async function loadPortrait(playerId: string, name: string): Promise<string> {
-  const url = toWikimediaThumb(getPlayerPortraitUrl(playerId, 256, name));
+  const url = getPlayerPortraitUrl(playerId, 512, name);
   try {
-    const res = await fetch(url, { next: { revalidate: 86_400 } });
+    const res = await fetch(url, {
+      next: { revalidate: 86_400 },
+      headers: {
+        "User-Agent":
+          "TennisStatMan/1.0 (https://www.tennisstatman.com; champion portraits)",
+        Accept: "image/jpeg,image/png,image/webp,*/*",
+      },
+    });
     if (!res.ok) return url;
     const contentType = res.headers.get("content-type") ?? "image/jpeg";
     return toDataUrl(await res.arrayBuffer(), contentType);
