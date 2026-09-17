@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { DcOpenChampionsBanner } from "@/components/DcOpenChampionsBanner";
 import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
-import { UsOpenPreviewBanner } from "@/components/UsOpenPreviewBanner";
+import { UsOpenChampionsBanner } from "@/components/UsOpenChampionsBanner";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
 import { MatchCard } from "@/components/MatchCard";
@@ -22,9 +22,9 @@ import {
 import { isDcOpenChampionsBannerActive } from "@/lib/promotions/dc-open-champions";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import {
-  isUsOpenPreviewActive,
-  usOpenPreviewJsonLd,
-} from "@/lib/promotions/us-open-preview";
+  isUsOpenChampionsBannerActive,
+  usOpenChampionsJsonLd,
+} from "@/lib/promotions/us-open-champions";
 import { fetchAllRankings } from "@/lib/rankings";
 import { fetchFeaturedXOEmbeds } from "@/lib/x-oembed";
 import {
@@ -41,12 +41,14 @@ import { faqPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "US Open 2026 Preview",
+  title: "US Open 2026 Champions",
   description:
-    "Stat Man's US Open preview for Flushing Meadows: first-timers, veterans, surprise runs, and the players locked in to win — with PULSE form scores and the New York numbers.",
+    "Congratulations to Alexander Zverev and Elena Rybakina, the 2026 US Open singles champions — final scores, key stats, and Stat Man's Flushing Meadows recap.",
   path: "/",
   keywords: [
-    "US Open 2026 preview",
+    "US Open 2026 champions",
+    "Alexander Zverev US Open",
+    "Elena Rybakina US Open",
     "US Open tennis",
     "PULSE tennis form score",
     "ATP analytics",
@@ -115,18 +117,18 @@ export default async function HomePage() {
     <>
       <JsonLd
         data={
-          isUsOpenPreviewActive()
-            ? [faqPageJsonLd(HOME_FAQS), usOpenPreviewJsonLd()]
+          isUsOpenChampionsBannerActive()
+            ? [faqPageJsonLd(HOME_FAQS), usOpenChampionsJsonLd()]
             : faqPageJsonLd(HOME_FAQS)
         }
       />
       <Hero />
 
-      {isUsOpenPreviewActive() && <UsOpenPreviewBanner />}
+      {isUsOpenChampionsBannerActive() && <UsOpenChampionsBanner />}
 
       {isDcOpenChampionsBannerActive() && <DcOpenChampionsBanner />}
 
-      {isHardcourtPreviewActive() && !isUsOpenPreviewActive() && (
+      {isHardcourtPreviewActive() && !isUsOpenChampionsBannerActive() && (
         <HardcourtPreviewBanner />
       )}
 
