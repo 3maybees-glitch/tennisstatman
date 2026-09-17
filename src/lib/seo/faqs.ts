@@ -17,9 +17,9 @@ export const HOME_FAQS: FaqItem[] = [
       "Yes. The Fan tier is free forever and includes live rankings, player cards, the tournament calendar, world map, current PULSE scores, three legend comparisons per day, and weekly picks. Courtside membership adds deeper archives and unlimited tools.",
   },
   {
-    question: "Where is the US Open 2026 preview?",
+    question: "Who won the 2026 US Open?",
     answer:
-      "The homepage carries Stat Man's US Open preview through the Flushing Meadows fortnight: an overall read, PULSE form scores for eight featured players, and commentary on first-timers, veterans, surprise runs, and the players most locked in to win.",
+      "Alexander Zverev won the men's singles title, defeating Ben Shelton 6-3, 7-6(2), 5-7, 6-2 for his second Grand Slam and the first German US Open men's title since 1989. Elena Rybakina won the women's singles title, defeating defending champion Aryna Sabalenka 6-4, 5-7, 6-2 for her first US Open and her third major. The homepage graphic has the scores and supporting stats.",
   },
 ];
 
