@@ -3,8 +3,8 @@ const DAY_MS = 86_400_000;
 /** First day the banner is shown (2026 DC Open final day). */
 export const DC_OPEN_BANNER_START = "2026-08-03";
 
-/** Last day the banner is shown (14 days inclusive). */
-export const DC_OPEN_BANNER_END = "2026-08-17";
+/** Last day the banner is shown (through Aug 13 — one week from Aug 6). */
+export const DC_OPEN_BANNER_END = "2026-08-13";
 
 export type DcOpenChampion = {
   tour: "ATP" | "WTA";
