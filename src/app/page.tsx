@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { DcOpenChampionsBanner } from "@/components/DcOpenChampionsBanner";
+import { FinalsSwingBanner } from "@/components/FinalsSwingBanner";
 import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
 import { UsOpenChampionsBanner } from "@/components/UsOpenChampionsBanner";
 import { FaqSection } from "@/components/FaqSection";
@@ -20,6 +21,13 @@ import {
   getWomenStatOfTheDay,
 } from "@/lib/data/stat-of-the-day";
 import { isDcOpenChampionsBannerActive } from "@/lib/promotions/dc-open-champions";
+import {
+  FINALS_SWING_DESCRIPTION,
+  FINALS_SWING_KEYWORDS,
+  FINALS_SWING_TITLE,
+  finalsSwingJsonLd,
+  isFinalsSwingActive,
+} from "@/lib/promotions/finals-swing";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import {
   isUsOpenChampionsBannerActive,
@@ -39,23 +47,44 @@ import {
 import { HOME_FAQS } from "@/lib/seo/faqs";
 import { faqPageJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { SITE_DESCRIPTION, SITE_KEYWORDS } from "@/lib/seo/site";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "US Open 2026 Champions",
-  description:
-    "Congratulations to Alexander Zverev and Elena Rybakina, the 2026 US Open singles champions — final scores, key stats, and Stat Man's Flushing Meadows recap.",
-  path: "/",
-  keywords: [
-    "US Open 2026 champions",
-    "Alexander Zverev US Open",
-    "Elena Rybakina US Open",
-    "US Open tennis",
-    "PULSE tennis form score",
-    "ATP analytics",
-    "WTA analytics",
-    "Flushing Meadows",
-  ],
-});
+export function generateMetadata(): Metadata {
+  if (isFinalsSwingActive()) {
+    return buildPageMetadata({
+      title: FINALS_SWING_TITLE,
+      description: FINALS_SWING_DESCRIPTION,
+      path: "/",
+      keywords: FINALS_SWING_KEYWORDS,
+    });
+  }
+
+  if (isUsOpenChampionsBannerActive()) {
+    return buildPageMetadata({
+      title: "US Open 2026 Champions",
+      description:
+        "Congratulations to Alexander Zverev and Elena Rybakina, the 2026 US Open singles champions — final scores, key stats, and Stat Man's Flushing Meadows recap.",
+      path: "/",
+      keywords: [
+        "US Open 2026 champions",
+        "Alexander Zverev US Open",
+        "Elena Rybakina US Open",
+        "US Open tennis",
+        "PULSE tennis form score",
+        "ATP analytics",
+        "WTA analytics",
+        "Flushing Meadows",
+      ],
+    });
+  }
+
+  return buildPageMetadata({
+    title: "Next-Gen Tennis Analytics",
+    description: SITE_DESCRIPTION,
+    path: "/",
+    keywords: SITE_KEYWORDS,
+  });
+}
 
 export const revalidate = 3600;
 
@@ -117,12 +146,16 @@ export default async function HomePage() {
     <>
       <JsonLd
         data={
-          isUsOpenChampionsBannerActive()
-            ? [faqPageJsonLd(HOME_FAQS), usOpenChampionsJsonLd()]
-            : faqPageJsonLd(HOME_FAQS)
+          isFinalsSwingActive()
+            ? [faqPageJsonLd(HOME_FAQS), ...finalsSwingJsonLd()]
+            : isUsOpenChampionsBannerActive()
+              ? [faqPageJsonLd(HOME_FAQS), usOpenChampionsJsonLd()]
+              : faqPageJsonLd(HOME_FAQS)
         }
       />
       <Hero />
+
+      {isFinalsSwingActive() && <FinalsSwingBanner />}
 
       {isUsOpenChampionsBannerActive() && <UsOpenChampionsBanner />}
 

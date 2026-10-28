@@ -1,3 +1,7 @@
+import {
+  courtsideBillingAnswer,
+  courtsideMembershipAnswer,
+} from "@/lib/pricing";
 import type { FaqItem } from "./json-ld";
 
 export const HOME_FAQS: FaqItem[] = [
@@ -54,13 +58,11 @@ export const PRICING_FAQS: FaqItem[] = [
   },
   {
     question: "What is Courtside membership?",
-    answer:
-      "Courtside is TennisStatMan's premium tier ($6/month or $48/year) for fans who want unlimited legend comparisons, full PULSE history archives, PULSE alerts, skill category leaderboards, matchup projections, and ITF-level scouting reports.",
+    answer: courtsideMembershipAnswer(),
   },
   {
-    question: "Is Courtside billing live yet?",
-    answer:
-      "Courtside billing is not live yet. The pricing page previews what membership will include at launch.",
+    question: "Is Courtside billing live?",
+    answer: courtsideBillingAnswer(),
   },
 ];
 

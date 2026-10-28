@@ -83,7 +83,7 @@ const LANDMARK_BY_TOURNAMENT: Record<string, string> = {
   "paris-masters":
     "https://images.unsplash.com/photo-1508057192744-750c6d7235e1?auto=format&fit=crop&w=600&h=340&q=80",
   "wta-finals":
-    "https://images.unsplash.com/photo-1591604128229-632f4f4f1b47?auto=format&fit=crop&w=600&h=340&q=80",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&h=340&q=80",
   "atp-finals":
     "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=600&h=340&q=80",
 };
@@ -124,6 +124,8 @@ const LANDMARK_BY_CITY: Record<string, string> = {
     "https://images.unsplash.com/photo-1535498730771-e735b998cd64?auto=format&fit=crop&w=600&h=340&q=80",
   Turin:
     "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=600&h=340&q=80",
+  "Indian Wells":
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&h=340&q=80",
 };
 
 export function getTournamentLandmarkUrl(

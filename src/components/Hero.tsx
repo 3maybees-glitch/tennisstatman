@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, WalletCards } from "lucide-react";
+import {
+  FINALS_SWING_HERO_LINE,
+  isFinalsSwingActive,
+} from "@/lib/promotions/finals-swing";
 import { HeroMascotPanel } from "./HeroMascotPanel";
 
 export function Hero() {
+  const finalsSwing = isFinalsSwingActive();
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -16,7 +21,7 @@ export function Hero() {
           <div className="w-full max-w-3xl flex-1">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-sm text-gold-light">
               <Sparkles size={14} />
-              Tennis stats with a face
+              {finalsSwing ? "Indoor swing · 2026" : "Tennis stats with a face"}
             </div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
               See the match{" "}
@@ -28,6 +33,11 @@ export function Hero() {
               and every tournament on Earth — from Wimbledon down to the ITF
               grind. Free for every fan.
             </p>
+            {finalsSwing ? (
+              <p className="mt-4 max-w-2xl text-base font-medium text-gold-light">
+                {FINALS_SWING_HERO_LINE}
+              </p>
+            ) : null}
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/players"

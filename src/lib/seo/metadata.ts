@@ -20,7 +20,10 @@ export function buildPageMetadata({
   const ogTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 
   return {
-    title,
+    // Root `app/page.tsx` shares a segment with the root layout, so the layout
+    // title template does not apply there. An absolute title keeps every page,
+    // including the homepage, on the same "… | TennisStatMan" pattern.
+    title: { absolute: ogTitle },
     description,
     keywords,
     alternates: { canonical: url },

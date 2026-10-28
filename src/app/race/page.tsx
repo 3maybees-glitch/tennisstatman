@@ -7,7 +7,7 @@ import { RaceChart } from "@/components/RaceChart";
 export const metadata: Metadata = {
   title: "Race to the Finals",
   description:
-    "Watch the season unfold — an animated race of ATP and WTA points from January to the Finals in Turin and Riyadh.",
+    "Watch the season unfold — an animated race of ATP and WTA points from January to the Finals in Turin and Indian Wells.",
 };
 
 export default function RacePage() {

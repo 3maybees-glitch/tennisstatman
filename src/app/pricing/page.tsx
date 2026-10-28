@@ -3,7 +3,12 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { CourtsideCheckout } from "@/components/CourtsideCheckout";
 import { MascotExplainer } from "@/components/MascotExplainer";
-import { LAUNCH_ACTIVE } from "@/lib/pricing";
+import {
+  getPlan,
+  LAUNCH_ACTIVE,
+  launchOfferSentence,
+  pricingPageDescription,
+} from "@/lib/pricing";
 import { Check, Sparkles } from "lucide-react";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -13,8 +18,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Pricing — Free & Courtside",
-  description:
-    "TennisStatMan is free for every fan. Courtside membership unlocks unlimited comparisons, PULSE archives, alerts, and ITF-level scouting.",
+  description: pricingPageDescription(),
   path: "/pricing",
 });
 
@@ -72,8 +76,7 @@ export default function PricingPage() {
           </p>
           {LAUNCH_ACTIVE ? (
             <p className="mx-auto mt-3 max-w-2xl text-sm text-gold-light">
-              Launch offer: $39/year, $1.99 first month, or $149 lifetime early
-              bird. Regular pricing moves to $6.99/mo and $59/yr after launch.
+              {launchOfferSentence()}
             </p>
           ) : null}
         </div>
@@ -122,21 +125,32 @@ export default function PricingPage() {
             {LAUNCH_ACTIVE ? (
               <div className="mt-6 space-y-1">
                 <p className="text-4xl font-bold">
-                  $39
-                  <span className="text-base font-normal text-muted"> / year</span>
+                  {getPlan("launch_annual").price}
+                  <span className="text-base font-normal text-muted">
+                    {" "}
+                    / year
+                  </span>
                 </p>
-                <p className="text-sm text-muted line-through">Regular $59/yr</p>
+                <p className="text-sm text-muted line-through">
+                  Regular {getPlan("launch_annual").compareAt}
+                </p>
                 <p className="text-xs text-gold-light">
-                  Also: $1.99 first month or $149 lifetime early bird
+                  Also: {getPlan("launch_monthly").price} first month or{" "}
+                  {getPlan("lifetime").price} lifetime early bird
                 </p>
               </div>
             ) : (
               <div className="mt-6 space-y-1">
                 <p className="text-4xl font-bold">
-                  $6.99
-                  <span className="text-base font-normal text-muted"> / month</span>
+                  {getPlan("monthly").price}
+                  <span className="text-base font-normal text-muted">
+                    {" "}
+                    / month
+                  </span>
                 </p>
-                <p className="text-xs text-muted">or $59/year — best value</p>
+                <p className="text-xs text-muted">
+                  or {getPlan("annual").price}/year — best value
+                </p>
               </div>
             )}
             <ul className="mt-8 space-y-3">
