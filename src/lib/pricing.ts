@@ -82,3 +82,70 @@ export function formatPlanLabel(plan: CourtsidePlan | null): string {
       return "Courtside";
   }
 }
+
+export function getPlan(id: CourtsidePlan): PlanOption {
+  const plan = [...launchPlans, ...regularPlans].find((item) => item.id === id);
+  if (!plan) {
+    throw new Error(`Unknown Courtside plan: ${id}`);
+  }
+  return plan;
+}
+
+/** Schema.org price, taken from the display string in this file. */
+export function planAmount(plan: PlanOption): string {
+  return plan.price.replace(/[^0-9.]/g, "");
+}
+
+/** Short offer line used on the pricing page, FAQ, and meta description. */
+export function launchOfferSentence(): string {
+  const annual = getPlan("launch_annual");
+  const monthly = getPlan("launch_monthly");
+  const lifetime = getPlan("lifetime");
+  const regularMonthly = getPlan("monthly");
+  const regularAnnual = getPlan("annual");
+  return `Launch offer: ${annual.price}/year, ${monthly.price} first month, or ${lifetime.price} lifetime early bird. Regular pricing moves to ${regularMonthly.price}/mo and ${regularAnnual.price}/yr after launch.`;
+}
+
+export function courtsideMembershipAnswer(): string {
+  const features =
+    "unlimited legend comparisons, full PULSE history archives, PULSE alerts, skill category leaderboards, matchup projections, and ITF-level scouting reports";
+
+  if (LAUNCH_ACTIVE) {
+    const annual = getPlan("launch_annual");
+    const monthly = getPlan("launch_monthly");
+    const lifetime = getPlan("lifetime");
+    return `Courtside is TennisStatMan's premium tier. Launch pricing is live: ${annual.price}/year (regular ${annual.compareAt}), ${monthly.price} for the first month then ${monthly.compareAt}, or ${lifetime.price} lifetime (regular ${lifetime.compareAt}). It is for fans who want ${features}.`;
+  }
+
+  const monthly = getPlan("monthly");
+  const annual = getPlan("annual");
+  return `Courtside is TennisStatMan's premium tier (${monthly.price}/month or ${annual.price}/year) for fans who want ${features}.`;
+}
+
+export function courtsideBillingAnswer(): string {
+  if (LAUNCH_ACTIVE) {
+    return `Yes. Launch pricing is live, and Courtside checkout is billed through Stripe. ${launchOfferSentence()}`;
+  }
+
+  const monthly = getPlan("monthly");
+  const annual = getPlan("annual");
+  return `Yes. Courtside billing is live at ${monthly.price}/month or ${annual.price}/year. Checkout is billed through Stripe.`;
+}
+
+export function pricingPageDescription(): string {
+  if (LAUNCH_ACTIVE) {
+    return `TennisStatMan is free for every fan. ${launchOfferSentence()} Courtside unlocks unlimited comparisons, PULSE archives, alerts, and ITF-level scouting.`;
+  }
+
+  const monthly = getPlan("monthly");
+  const annual = getPlan("annual");
+  return `TennisStatMan is free for every fan. Courtside is ${monthly.price}/month or ${annual.price}/year and unlocks unlimited comparisons, PULSE archives, alerts, and ITF-level scouting.`;
+}
+
+export function planOfferDescription(plan: PlanOption): string {
+  const parts = [
+    plan.subtext,
+    plan.compareAt ? `Regular price ${plan.compareAt}.` : null,
+  ].filter((part): part is string => Boolean(part));
+  return parts.join(" ");
+}

@@ -13,7 +13,7 @@ export default function OfflinePage() {
     <div className="court-pattern">
       <section className="mx-auto flex max-w-lg flex-col items-center px-6 py-24 text-center">
         <StatManMascot size={96} mood="thinking" pose="magnify" />
-        <h1 className="mt-8 text-3xl font-bold">You're offline</h1>
+        <h1 className="mt-8 text-3xl font-bold">You&apos;re offline</h1>
         <p className="mt-4 text-muted">
           Rankings, PULSE, and matchups need a connection. Reconnect and try
           again — your watchlist and picks stay on this device.

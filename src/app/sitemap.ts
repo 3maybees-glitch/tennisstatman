@@ -22,14 +22,17 @@ const STATIC_ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[numb
   { path: "/pricing", changeFrequency: "monthly", priority: 0.7 },
 ];
 
+/** Regenerate daily so lastmod is the generation date, not a deploy frozen in source. */
+export const revalidate = 86_400;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const roster = await getFullRoster();
-  const now = new Date();
+  const generatedAt = new Date();
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map(
     ({ path, changeFrequency, priority }) => ({
       url: absoluteUrl(path),
-      lastModified: now,
+      lastModified: generatedAt,
       changeFrequency,
       priority,
     }),
@@ -37,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const playerEntries: MetadataRoute.Sitemap = roster.map((player) => ({
     url: absoluteUrl(`/players/${player.id}`),
-    lastModified: now,
+    lastModified: generatedAt,
     changeFrequency: "daily",
     priority: player.rank <= 20 ? 0.85 : 0.7,
   }));

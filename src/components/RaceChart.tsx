@@ -163,7 +163,7 @@ export function RaceChart() {
 
       <p className="mt-8 text-center text-sm text-muted">
         Top {QUALIFY_CUT} qualify for the{" "}
-        {tour === "ATP" ? "Nitto ATP Finals in Turin" : "WTA Finals in Riyadh"}.
+        {tour === "ATP" ? "Nitto ATP Finals in Turin" : "WTA Finals in Indian Wells"}.
         Points shown are season race points at each checkpoint.
       </p>
     </section>

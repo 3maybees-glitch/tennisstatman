@@ -1,3 +1,8 @@
+import {
+  getActivePlans,
+  planAmount,
+  planOfferDescription,
+} from "@/lib/pricing";
 import { X_PROFILE_URL } from "@/lib/social";
 import { absoluteUrl } from "./site";
 
@@ -140,15 +145,15 @@ export function productJsonLd() {
         availability: "https://schema.org/InStock",
         url: absoluteUrl("/pricing"),
       },
-      {
+      ...getActivePlans().map((plan) => ({
         "@type": "Offer",
-        name: "Courtside",
-        price: "6",
+        name: `Courtside ${plan.label}`,
+        price: planAmount(plan),
         priceCurrency: "USD",
-        description: "Monthly membership with unlimited comparisons, PULSE archives, and skill leaderboards.",
-        availability: "https://schema.org/PreOrder",
+        description: planOfferDescription(plan),
+        availability: "https://schema.org/InStock",
         url: absoluteUrl("/pricing"),
-      },
+      })),
     ],
   };
 }
