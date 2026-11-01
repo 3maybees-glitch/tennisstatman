@@ -4,10 +4,11 @@ import { StatManMascot } from "@/components/StatManMascot";
 import { TournamentImage } from "@/components/TournamentImage";
 import {
   FINALS_SWING_BLURB,
-  FINALS_SWING_STOPS,
+  getFinalsSwingStops,
 } from "@/lib/promotions/finals-swing";
 
 export function FinalsSwingBanner() {
+  const stops = getFinalsSwingStops();
   return (
     <section
       aria-label="Paris Masters, WTA Finals, and the Race to Turin"
@@ -65,7 +66,7 @@ export function FinalsSwingBanner() {
           </div>
 
           <div className="grid flex-1 gap-4 sm:grid-cols-3">
-            {FINALS_SWING_STOPS.map((stop) => (
+            {stops.map((stop) => (
               <Link
                 key={stop.id}
                 href="/calendar"

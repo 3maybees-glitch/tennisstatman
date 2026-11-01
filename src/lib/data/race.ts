@@ -2,10 +2,35 @@ export type RaceEntry = {
   playerId: string;
   name: string;
   country: string;
-  /** Cumulative race points at each checkpoint (index-aligned with RACE_CHECKPOINTS) */
+  /**
+   * Points at each checkpoint.
+   * ATP entries hold one live total (see ATP_RACE_CHECKPOINTS).
+   * WTA entries are an illustrative season sketch aligned with RACE_CHECKPOINTS.
+   */
   points: number[];
   color: string;
+  /** Set only when qualification is a known fact, not a top-8 inference. */
+  qualified?: boolean;
 };
+
+/**
+ * PIF ATP Live Race to Turin, fetched from
+ * https://www.atptour.com/en/rankings/singles-race-to-turin
+ * on 2026-11-01.
+ *
+ * These are live totals from that page, not a reconstructed season path.
+ * Vienna and Basel were still in progress: Alcaraz and de Minaur had
+ * reached the Vienna final, and Lehecka and Vacherot the Basel final.
+ * `qualified` follows the players already in for Turin (Zverev, Alcaraz,
+ * Shelton, Medvedev). Sinner is second on points and out for the season,
+ * so a mechanical top-8 cut would be wrong.
+ */
+export const ATP_RACE_AS_OF = "2026-11-01";
+
+export const ATP_RACE_SOURCE_URL =
+  "https://www.atptour.com/en/rankings/singles-race-to-turin";
+
+export const ATP_RACE_CHECKPOINTS = ["Nov 1, 2026 · Live Race"];
 
 export const RACE_CHECKPOINTS = [
   "Jan · United Cup",
@@ -23,63 +48,96 @@ export const RACE_CHECKPOINTS = [
 
 export const atpRace: RaceEntry[] = [
   {
+    playerId: "alexander-zverev",
+    name: "Alexander Zverev",
+    country: "GER",
+    color: "#3b82f6",
+    points: [9350],
+    qualified: true,
+  },
+  {
     playerId: "jannik-sinner",
     name: "Jannik Sinner",
     country: "ITA",
     color: "#f0c75e",
-    points: [180, 2180, 3180, 3380, 4580, 5780, 7080, 7680, 9280, 10080, 10680],
+    points: [7950],
   },
   {
     playerId: "carlos-alcaraz",
     name: "Carlos Alcaraz",
     country: "ESP",
     color: "#40916c",
-    points: [90, 890, 1890, 2490, 4090, 6090, 6890, 7290, 8090, 8590, 9190],
-  },
-  {
-    playerId: "alexander-zverev",
-    name: "Alexander Zverev",
-    country: "GER",
-    color: "#3b82f6",
-    points: [130, 1430, 2030, 2330, 3130, 3730, 4130, 4630, 5030, 5530, 6030],
-  },
-  {
-    playerId: "novak-djokovic",
-    name: "Novak Djokovic",
-    country: "SRB",
-    color: "#8b5cf6",
-    points: [0, 800, 1200, 1200, 1800, 2600, 3800, 3800, 4600, 4900, 5300],
-  },
-  {
-    playerId: "taylor-fritz",
-    name: "Taylor Fritz",
-    country: "USA",
-    color: "#ef4444",
-    points: [200, 700, 1400, 1500, 1900, 2200, 3000, 3700, 4500, 4900, 5200],
-  },
-  {
-    playerId: "jack-draper",
-    name: "Jack Draper",
-    country: "GBR",
-    color: "#14b8a6",
-    points: [60, 460, 1460, 1660, 2260, 2560, 3160, 3660, 4060, 4460, 4860],
-  },
-  {
-    playerId: "lorenzo-musetti",
-    name: "Lorenzo Musetti",
-    country: "ITA",
-    color: "#f97316",
-    points: [45, 345, 745, 1345, 2145, 2845, 3245, 3445, 3745, 3945, 4245],
+    points: [4930],
+    qualified: true,
   },
   {
     playerId: "ben-shelton",
     name: "Ben Shelton",
     country: "USA",
     color: "#eab308",
-    points: [90, 590, 990, 1090, 1490, 1790, 2590, 3090, 3690, 4090, 4390],
+    points: [4530],
+    qualified: true,
+  },
+  {
+    playerId: "daniil-medvedev",
+    name: "Daniil Medvedev",
+    country: "RUS",
+    color: "#14b8a6",
+    points: [3860],
+    qualified: true,
+  },
+  {
+    playerId: "flavio-cobolli",
+    name: "Flavio Cobolli",
+    country: "ITA",
+    color: "#f97316",
+    points: [3690],
+  },
+  {
+    playerId: "arthur-fils",
+    name: "Arthur Fils",
+    country: "FRA",
+    color: "#ec4899",
+    points: [3525],
+  },
+  {
+    playerId: "frances-tiafoe",
+    name: "Frances Tiafoe",
+    country: "USA",
+    color: "#06b6d4",
+    points: [3380],
+  },
+  {
+    playerId: "alex-de-minaur",
+    name: "Alex de Minaur",
+    country: "AUS",
+    color: "#a3e635",
+    points: [3210],
+  },
+  {
+    playerId: "rafael-jodar",
+    name: "Rafael Jodar",
+    country: "ESP",
+    color: "#fb7185",
+    points: [3209],
+  },
+  {
+    playerId: "novak-djokovic",
+    name: "Novak Djokovic",
+    country: "SRB",
+    color: "#8b5cf6",
+    points: [2890],
+  },
+  {
+    playerId: "taylor-fritz",
+    name: "Taylor Fritz",
+    country: "USA",
+    color: "#ef4444",
+    points: [2885],
   },
 ];
 
+/** Illustrative season sketch. These are not official WTA race points. */
 export const wtaRace: RaceEntry[] = [
   {
     playerId: "aryna-sabalenka",
