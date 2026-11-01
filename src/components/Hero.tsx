@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, WalletCards } from "lucide-react";
 import {
-  FINALS_SWING_HERO_LINE,
+  getFinalsSwingHeroLine,
   isFinalsSwingActive,
 } from "@/lib/promotions/finals-swing";
 import { HeroMascotPanel } from "./HeroMascotPanel";
 
 export function Hero() {
   const finalsSwing = isFinalsSwingActive();
+  const heroLine = getFinalsSwingHeroLine();
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -35,7 +36,7 @@ export function Hero() {
             </p>
             {finalsSwing ? (
               <p className="mt-4 max-w-2xl text-base font-medium text-gold-light">
-                {FINALS_SWING_HERO_LINE}
+                {heroLine}
               </p>
             ) : null}
             <div className="mt-10 flex flex-wrap gap-4">

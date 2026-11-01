@@ -22,10 +22,10 @@ import {
 } from "@/lib/data/stat-of-the-day";
 import { isDcOpenChampionsBannerActive } from "@/lib/promotions/dc-open-champions";
 import {
-  FINALS_SWING_DESCRIPTION,
   FINALS_SWING_KEYWORDS,
   FINALS_SWING_TITLE,
   finalsSwingJsonLd,
+  getFinalsSwingDescription,
   isFinalsSwingActive,
 } from "@/lib/promotions/finals-swing";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
@@ -53,7 +53,7 @@ export function generateMetadata(): Metadata {
   if (isFinalsSwingActive()) {
     return buildPageMetadata({
       title: FINALS_SWING_TITLE,
-      description: FINALS_SWING_DESCRIPTION,
+      description: getFinalsSwingDescription(),
       path: "/",
       keywords: FINALS_SWING_KEYWORDS,
     });
@@ -86,6 +86,8 @@ export function generateMetadata(): Metadata {
   });
 }
 
+// Hourly ISR. Finals Swing copy calls Date.now() during this render
+// (same pattern as the banner that ends Nov 22), so it is not frozen at build.
 export const revalidate = 3600;
 
 const exploreLinks = [

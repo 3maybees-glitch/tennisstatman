@@ -7,7 +7,7 @@ import { RaceChart } from "@/components/RaceChart";
 export const metadata: Metadata = {
   title: "Race to the Finals",
   description:
-    "Watch the season unfold — an animated race of ATP and WTA points from January to the Finals in Turin and Indian Wells.",
+    "ATP Live Race to Turin standings as of November 1, 2026, plus an illustrative WTA season sketch on the way to Indian Wells.",
 };
 
 export default function RacePage() {
@@ -21,9 +21,9 @@ export default function RacePage() {
               <h1 className="text-4xl font-bold">Race to the Finals</h1>
             </div>
             <p className="mt-4 max-w-3xl text-lg text-muted">
-              The season as it was meant to be seen — a race. Press play and
-              watch the points pile up from Melbourne to the Finals, or scrub
-              the timeline to any checkpoint.
+              ATP bars are the live Race to Turin as of November 1, 2026.
+              The WTA view is an illustrative season sketch — press play
+              there, or stay on the ATP totals.
             </p>
             <Link
               href="/race/picks"
@@ -34,8 +34,8 @@ export default function RacePage() {
             </Link>
           </div>
           <MascotExplainer pose="stopwatch">
-            On your marks... I time the whole season with this thing. Hit play
-            and watch eleven months of ranking points fly by in seconds.
+            The ATP board is a live snapshot, not a replay. Flip to the WTA
+            sketch if you want me to run the season clock.
           </MascotExplainer>
         </div>
       </section>
