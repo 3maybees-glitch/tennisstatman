@@ -47,11 +47,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/prints" className="hover:text-foreground">
-                  Prints
-                </Link>
-              </li>
-              <li>
                 <Link href="/guides/summer-2026" className="hover:text-foreground">
                   Player Guide
                 </Link>

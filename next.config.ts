@@ -32,6 +32,12 @@ const nextConfig: NextConfig = {
         destination: "/race/picks",
         permanent: true,
       },
+      {
+        // /prints retired 2026-11: Legend Land sports prints are no longer offered.
+        source: "/prints",
+        destination: "/",
+        permanent: false,
+      },
     ];
   },
   async headers() {

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 import { FaqSection } from "@/components/FaqSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -30,12 +29,6 @@ export default function LegendsPage() {
               for age — and settle the argument with a{" "}
               <span className="text-gold-light">Legend Similarity Score</span>.
             </p>
-            <Link
-              href="/prints"
-              className="mt-5 inline-block text-sm font-medium text-gold hover:text-gold-light"
-            >
-              Own the championship maps →
-            </Link>
           </div>
           <MascotExplainer pose="magnify" mood="thinking">
             Every era argument, under the magnifying glass. Pick a star, pick

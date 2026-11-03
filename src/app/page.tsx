@@ -38,7 +38,6 @@ import { fetchFeaturedXOEmbeds } from "@/lib/x-oembed";
 import {
   CalendarDays,
   Globe2,
-  MapPinned,
   Swords,
   Target,
   Trophy,
@@ -126,12 +125,6 @@ const exploreLinks = [
     icon: Target,
     title: "Beat Stat Man",
     desc: "Weekly picks against our PULSE model",
-  },
-  {
-    href: "/prints",
-    icon: MapPinned,
-    title: "Championship Maps",
-    desc: "Grand Slam Legend Land prints on Etsy",
   },
 ];
 
