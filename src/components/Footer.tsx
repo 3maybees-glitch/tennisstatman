@@ -130,6 +130,11 @@ export function Footer() {
                   Courtside Membership
                 </Link>
               </li>
+              <li>
+                <Link href="/account" className="hover:text-foreground">
+                  Account
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

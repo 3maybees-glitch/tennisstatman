@@ -36,8 +36,9 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong className="text-foreground">Email:</strong> If you use
-                magic-link sign-in (when enabled), we use the email you enter only
-                to look up your Stripe customer and send a one-time sign-in link.
+                magic-link sign-in (when RESEND_API_KEY and ACCOUNT_EMAIL_FROM are
+                set), we use the email you enter only to look up your Stripe
+                customer and send a one-time sign-in link.
               </li>
               <li>
                 <strong className="text-foreground">Analytics:</strong> We use
