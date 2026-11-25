@@ -114,7 +114,7 @@ export function courtsideMembershipAnswer(): string {
     const annual = getPlan("launch_annual");
     const monthly = getPlan("launch_monthly");
     const lifetime = getPlan("lifetime");
-    return `Courtside is TennisStatMan's premium tier. Launch pricing is live: ${annual.price}/year (regular ${annual.compareAt}), ${monthly.price} for the first month then ${monthly.compareAt}, or ${lifetime.price} lifetime (regular ${lifetime.compareAt}). It is for fans who want ${features}.`;
+    return `Courtside is TennisStatMan's premium tier. Launch offer: ${annual.price}/year (regular ${annual.compareAt}), ${monthly.price} for the first month then ${monthly.compareAt}, or ${lifetime.price} lifetime (regular ${lifetime.compareAt}). Checkout runs through Stripe. It is for fans who want ${features}.`;
   }
 
   const monthly = getPlan("monthly");
@@ -124,12 +124,12 @@ export function courtsideMembershipAnswer(): string {
 
 export function courtsideBillingAnswer(): string {
   if (LAUNCH_ACTIVE) {
-    return `Yes. Launch pricing is live, and Courtside checkout is billed through Stripe. ${launchOfferSentence()}`;
+    return `Yes. Courtside checkout is billed through Stripe. ${launchOfferSentence()}`;
   }
 
   const monthly = getPlan("monthly");
   const annual = getPlan("annual");
-  return `Yes. Courtside billing is live at ${monthly.price}/month or ${annual.price}/year. Checkout is billed through Stripe.`;
+  return `Yes. Courtside is ${monthly.price}/month or ${annual.price}/year, billed through Stripe checkout and the customer portal.`;
 }
 
 export function pricingPageDescription(): string {

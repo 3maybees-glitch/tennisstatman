@@ -3,17 +3,24 @@ import { Trophy } from "lucide-react";
 import { MascotExplainer } from "@/components/MascotExplainer";
 import { RankingsTable } from "@/components/RankingsTable";
 import { fetchAllRankings } from "@/lib/rankings";
+import {
+  latestRankingsUpdatedAt,
+  rankingsRefreshFootnote,
+} from "@/lib/rankings/display";
 
 export const metadata: Metadata = {
   title: "Official Rankings",
   description:
-    "Live ATP and WTA official singles rankings pulled into TennisStatMan from tour sources.",
+    "ATP and WTA official singles rankings on TennisStatMan, sourced from tour feeds and updated periodically.",
 };
 
 export const revalidate = 3600;
 
 export default async function RankingsPage() {
   const { atp, wta } = await fetchAllRankings();
+  const updatedNote = rankingsRefreshFootnote(
+    latestRankingsUpdatedAt([atp, wta]),
+  );
 
   return (
     <div className="court-pattern">
@@ -25,15 +32,13 @@ export default async function RankingsPage() {
               <h1 className="text-4xl font-bold">Official Tour Rankings</h1>
             </div>
             <p className="mt-4 max-w-3xl text-lg text-muted">
-              Top 100 singles rankings for the ATP and WTA tours, refreshed
-              daily via Tennis API when configured, with official tour sources
-              as fallback.
+              Top 100 singles rankings for the ATP and WTA tours. {updatedNote}
             </p>
           </div>
           <MascotExplainer pose="chart">
             The scoreboard of the whole sport — the official top 100 on both
-            tours. I refresh it every hour so the arrows always point the
-            right way.
+            tours. I pull from tour feeds when we refresh; the date on each
+            table tells you how fresh it is.
           </MascotExplainer>
         </div>
       </section>

@@ -46,7 +46,7 @@ export const PULSE_FAQS: FaqItem[] = [
   {
     question: "How often is PULSE updated?",
     answer:
-      "PULSE updates after every counted match. Rankings and roster data on TennisStatMan refresh hourly from official ATP and WTA sources.",
+      "PULSE updates after every counted match. Official ATP and WTA rankings on TennisStatMan refresh from tour feeds when we fetch them — often cached for several days between updates, not every hour.",
   },
 ];
 
@@ -61,7 +61,7 @@ export const PRICING_FAQS: FaqItem[] = [
     answer: courtsideMembershipAnswer(),
   },
   {
-    question: "Is Courtside billing live?",
+    question: "How does Courtside billing work?",
     answer: courtsideBillingAnswer(),
   },
 ];

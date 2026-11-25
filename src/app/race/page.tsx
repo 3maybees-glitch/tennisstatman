@@ -4,10 +4,12 @@ import { ArrowRight, Trophy } from "lucide-react";
 import { MascotExplainer } from "@/components/MascotExplainer";
 import { RaceChart } from "@/components/RaceChart";
 
+import { ATP_RACE_AS_OF } from "@/lib/data/race";
+import { SEASON_WRAP_HEADLINE } from "@/lib/promotions/off-season";
+
 export const metadata: Metadata = {
   title: "Race to the Finals",
-  description:
-    "ATP Live Race to Turin standings as of November 1, 2026, plus an illustrative WTA season sketch on the way to Indian Wells.",
+  description: `${SEASON_WRAP_HEADLINE}. ATP year-end race standings as of ${ATP_RACE_AS_OF}, plus an illustrative WTA season sketch.`,
 };
 
 export default function RacePage() {
@@ -21,9 +23,9 @@ export default function RacePage() {
               <h1 className="text-4xl font-bold">Race to the Finals</h1>
             </div>
             <p className="mt-4 max-w-3xl text-lg text-muted">
-              ATP bars are the live Race to Turin as of November 1, 2026.
-              The WTA view is an illustrative season sketch — press play
-              there, or stay on the ATP totals.
+              ATP bars show year-end race points as of {ATP_RACE_AS_OF} after
+              the Nitto ATP Finals. The WTA view is an illustrative season
+              sketch — press play there, or stay on the ATP totals.
             </p>
             <Link
               href="/race/picks"
@@ -34,7 +36,7 @@ export default function RacePage() {
             </Link>
           </div>
           <MascotExplainer pose="stopwatch">
-            The ATP board is a live snapshot, not a replay. Flip to the WTA
+            The ATP board is a year-end snapshot, not a replay. Flip to the WTA
             sketch if you want me to run the season clock.
           </MascotExplainer>
         </div>

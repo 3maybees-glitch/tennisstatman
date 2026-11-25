@@ -135,8 +135,16 @@ export function Footer() {
         </div>
         <p className="mt-10 border-t border-white/5 pt-6 text-center text-xs text-muted">
           © {new Date().getFullYear()} TennisStatMan. Not affiliated with ATP,
-          WTA, or ITF. Rankings refresh hourly from official tour feeds; player
-          scouting grades and proprietary metrics are editorial analytics.
+          WTA, or ITF. Rankings are sourced from official tour feeds and updated
+          periodically (not in real time). Player scouting grades and proprietary
+          metrics are editorial analytics.{" "}
+          <Link href="/privacy" className="hover:text-foreground">
+            Privacy
+          </Link>
+          {" · "}
+          <Link href="/terms" className="hover:text-foreground">
+            Terms
+          </Link>
         </p>
       </div>
     </footer>
