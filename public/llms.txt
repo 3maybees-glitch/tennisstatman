@@ -2,7 +2,7 @@
 
 > Fan-inspired professional tennis analytics for ATP and WTA tours.
 
-TennisStatMan is a free tennis stats site with player cards, proprietary metrics, live rankings, a world map, and a full-season tournament calendar.
+TennisStatMan is a free tennis stats site with player cards, proprietary metrics, official tour rankings, a world map, and a full-season tournament calendar.
 
 ## Canonical URL
 
@@ -12,7 +12,7 @@ https://www.tennisstatman.com
 
 - Home: /
 - Player cards: /players
-- Live rankings: /rankings
+- Official rankings: /rankings
 - ATP hub: /atp
 - WTA hub: /wta
 - PULSE form score: /stats/pulse
@@ -24,6 +24,7 @@ https://www.tennisstatman.com
 - Race to the Finals: /race
 - Weekly picks: /race/picks
 - Pricing: /pricing
+- Courtside hub: /courtside
 
 ## Proprietary metrics
 
@@ -51,14 +52,14 @@ Compares a current player's skill profile against all-time greats and returns a 
 
 ## Data sources
 
-- ATP and WTA official rankings, refreshed hourly
+- ATP and WTA official rankings from tour feeds, updated periodically (cached several days between refreshes, not hourly)
 - Curated scouting cards for top players; auto-scouted cards for the broader top 100
 - 2026 tournament calendar from Grand Slams through ITF
 
 ## Pricing
 
 - Fan tier: free forever
-- Courtside: $6/month or $48/year (billing preview — not live yet)
+- Courtside (Stripe): launch offer $1.99 first month then $6.99/mo, $39/yr launch (reg. $59), $149 lifetime (reg. $199); see /pricing
 
 ## Contact
 
