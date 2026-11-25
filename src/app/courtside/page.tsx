@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
 import { CourtsideHub } from "@/components/CourtsideHub";
 import { StatManMascot } from "@/components/StatManMascot";
 import { getFullRoster } from "@/lib/data/roster";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import { Sparkles } from "lucide-react";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Your Courtside",
   description:
     "Your Courtside home — skill leaderboards, extended deep dives, matchup projections, the Stat Lab, deep scouting, PULSE alerts, and the graded picks room.",
-};
+  path: "/courtside",
+});
 
 export const revalidate = 3600;
 

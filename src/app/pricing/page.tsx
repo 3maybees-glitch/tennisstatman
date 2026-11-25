@@ -23,7 +23,7 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 const freeFeatures = [
-  "Live ATP & WTA rankings, refreshed hourly",
+  "Official ATP & WTA rankings, updated from tour feeds",
   "Player cards with all five skill grades",
   "Current PULSE scores and the leaderboard",
   "World map — tournaments and player origins",
@@ -63,7 +63,7 @@ export default function PricingPage() {
           </div>
           {LAUNCH_ACTIVE ? (
             <span className="mt-4 inline-flex rounded-full border border-gold/40 bg-gold/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-gold">
-              Launch pricing live
+              Launch pricing
             </span>
           ) : null}
           <h1 className="mt-6 text-4xl font-bold">

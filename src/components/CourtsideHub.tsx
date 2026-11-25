@@ -141,7 +141,7 @@ export function CourtsideHub({ roster }: { roster: Player[] }) {
         </div>
       ) : subscribed ? (
         <div className="mb-6 rounded-2xl border border-court/40 bg-court/10 px-5 py-4 text-sm text-court-light">
-          Courtside is live. Your subscription is active on this browser.
+          Welcome to Courtside — your subscription is active on this browser.
         </div>
       ) : null}
 

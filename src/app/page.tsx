@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { SeasonWrapBanner } from "@/components/SeasonWrapBanner";
 import { DcOpenChampionsBanner } from "@/components/DcOpenChampionsBanner";
 import { FinalsSwingBanner } from "@/components/FinalsSwingBanner";
 import { HardcourtPreviewBanner } from "@/components/HardcourtPreviewBanner";
@@ -28,6 +29,16 @@ import {
   getFinalsSwingDescription,
   isFinalsSwingActive,
 } from "@/lib/promotions/finals-swing";
+import {
+  isOffSeasonActive,
+  OFF_SEASON_KEYWORDS,
+  offSeasonDescription,
+  offSeasonJsonLd,
+} from "@/lib/promotions/off-season";
+import {
+  latestRankingsUpdatedAt,
+  rankingsRefreshFootnote,
+} from "@/lib/rankings/display";
 import { isHardcourtPreviewActive } from "@/lib/promotions/hardcourt-preview";
 import {
   isUsOpenChampionsBannerActive,
@@ -49,6 +60,15 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import { SITE_DESCRIPTION, SITE_KEYWORDS } from "@/lib/seo/site";
 
 export function generateMetadata(): Metadata {
+  if (isOffSeasonActive()) {
+    return buildPageMetadata({
+      title: "2026 Season Wrap",
+      description: offSeasonDescription(),
+      path: "/",
+      keywords: OFF_SEASON_KEYWORDS,
+    });
+  }
+
   if (isFinalsSwingActive()) {
     return buildPageMetadata({
       title: FINALS_SWING_TITLE,
@@ -136,19 +156,26 @@ export default async function HomePage() {
   const featuredPlayers = players.slice(0, 2).concat(
     players.filter((p) => p.tour === "WTA").slice(0, 2),
   );
+  const rankingsUpdatedAt = latestRankingsUpdatedAt([atp, wta]);
+  const rankingsNote = rankingsRefreshFootnote(rankingsUpdatedAt);
+  const offSeason = isOffSeasonActive();
 
   return (
     <>
       <JsonLd
         data={
-          isFinalsSwingActive()
-            ? [faqPageJsonLd(HOME_FAQS), ...finalsSwingJsonLd()]
-            : isUsOpenChampionsBannerActive()
-              ? [faqPageJsonLd(HOME_FAQS), usOpenChampionsJsonLd()]
-              : faqPageJsonLd(HOME_FAQS)
+          offSeason
+            ? [faqPageJsonLd(HOME_FAQS), ...offSeasonJsonLd()]
+            : isFinalsSwingActive()
+              ? [faqPageJsonLd(HOME_FAQS), ...finalsSwingJsonLd()]
+              : isUsOpenChampionsBannerActive()
+                ? [faqPageJsonLd(HOME_FAQS), usOpenChampionsJsonLd()]
+                : faqPageJsonLd(HOME_FAQS)
         }
       />
       <Hero />
+
+      {offSeason && <SeasonWrapBanner />}
 
       {isFinalsSwingActive() && <FinalsSwingBanner />}
 
@@ -238,9 +265,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-bold">Rankings Snapshot</h2>
-            <p className="mt-3 text-muted">
-              Official top 5 on both tours, refreshed hourly
-            </p>
+            <p className="mt-3 text-muted">{rankingsNote}</p>
             <Link
               href="/rankings"
               className="mt-4 inline-block text-sm text-gold hover:text-gold-light"

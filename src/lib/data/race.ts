@@ -25,12 +25,13 @@ export type RaceEntry = {
  * Shelton, Medvedev). Sinner is second on points and out for the season,
  * so a mechanical top-8 cut would be wrong.
  */
-export const ATP_RACE_AS_OF = "2026-11-01";
+/** Year-end race totals after the 2026 season (Nitto ATP Finals completed Nov 22). */
+export const ATP_RACE_AS_OF = "2026-11-22";
 
 export const ATP_RACE_SOURCE_URL =
   "https://www.atptour.com/en/rankings/singles-race-to-turin";
 
-export const ATP_RACE_CHECKPOINTS = ["Nov 1, 2026 · Live Race"];
+export const ATP_RACE_CHECKPOINTS = ["2026 season · Year-end standings"];
 
 export const RACE_CHECKPOINTS = [
   "Jan · United Cup",

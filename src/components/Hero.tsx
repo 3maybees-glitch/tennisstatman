@@ -1,14 +1,19 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, WalletCards } from "lucide-react";
+import { Sparkles, WalletCards } from "lucide-react";
 import {
   getFinalsSwingHeroLine,
   isFinalsSwingActive,
 } from "@/lib/promotions/finals-swing";
+import {
+  isOffSeasonActive,
+  OFF_SEASON_HERO_LINE,
+} from "@/lib/promotions/off-season";
 import { HeroMascotPanel } from "./HeroMascotPanel";
 
 export function Hero() {
-  const finalsSwing = isFinalsSwingActive();
-  const heroLine = getFinalsSwingHeroLine();
+  const offSeason = isOffSeasonActive();
+  const finalsSwing = !offSeason && isFinalsSwingActive();
+  const heroLine = finalsSwing ? getFinalsSwingHeroLine() : OFF_SEASON_HERO_LINE;
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -22,7 +27,11 @@ export function Hero() {
           <div className="w-full max-w-3xl flex-1">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-sm text-gold-light">
               <Sparkles size={14} />
-              {finalsSwing ? "Indoor swing · 2026" : "Tennis stats with a face"}
+              {offSeason
+                ? "2026 season wrap"
+                : finalsSwing
+                  ? "Indoor swing · 2026"
+                  : "Tennis stats with a face"}
             </div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
               See the match{" "}
@@ -31,28 +40,28 @@ export function Hero() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
               Player cards you&apos;ll want to collect, a PULSE score you can
               read like a heartbeat, legend comparisons that settle arguments,
-              and every tournament on Earth — from Wimbledon down to the ITF
+              and every tournament on Earth — from Grand Slams down to the ITF
               grind. Free for every fan.
             </p>
-            {finalsSwing ? (
+            {offSeason || finalsSwing ? (
               <p className="mt-4 max-w-2xl text-base font-medium text-gold-light">
                 {heroLine}
               </p>
             ) : null}
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
+                href="/pricing"
+                className="inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3 font-semibold text-navy transition-colors hover:bg-gold-light"
+              >
+                <Sparkles size={18} />
+                Start Courtside for $1.99
+              </Link>
+              <Link
                 href="/players"
-                className="inline-flex items-center gap-2 rounded-xl bg-court px-6 py-3 font-semibold text-white transition-colors hover:bg-court-light"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold transition-colors hover:bg-white/10"
               >
                 <WalletCards size={18} />
                 Browse Player Cards
-              </Link>
-              <Link
-                href="/stats/pulse"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold transition-colors hover:bg-white/10"
-              >
-                Meet PULSE
-                <ArrowRight size={18} />
               </Link>
             </div>
           </div>

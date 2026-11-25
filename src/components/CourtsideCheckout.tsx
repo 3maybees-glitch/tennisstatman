@@ -11,6 +11,7 @@ import {
   LAUNCH_ACTIVE,
 } from "@/lib/pricing";
 import type { CourtsidePlan } from "@/lib/stripe";
+import { checkoutRedirectMessage } from "@/lib/checkout-errors";
 
 export function CourtsideCheckout() {
   const searchParams = useSearchParams();
@@ -22,6 +23,7 @@ export function CourtsideCheckout() {
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const canceled = searchParams.get("canceled") === "1";
+  const redirectError = checkoutRedirectMessage(searchParams.get("error"));
   const isLifetime = plan === "lifetime";
 
   useEffect(() => {
@@ -128,7 +130,13 @@ export function CourtsideCheckout() {
     <div className="mt-8">
       {LAUNCH_ACTIVE ? (
         <div className="mb-4 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-center text-sm text-gold-light">
-          Launch pricing is live. Annual is the best deal.
+          Launch pricing — $39/year is the best value.
+        </div>
+      ) : null}
+
+      {redirectError ? (
+        <div className="mb-4 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-center text-sm text-red-200">
+          {redirectError}
         </div>
       ) : null}
 
@@ -196,7 +204,7 @@ export function CourtsideCheckout() {
         )}
       </button>
 
-      {canceled ? (
+      {canceled && !redirectError ? (
         <p className="mt-2 text-center text-xs text-muted">
           Checkout canceled. Pick a plan when you&apos;re ready.
         </p>

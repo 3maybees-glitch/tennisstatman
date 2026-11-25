@@ -19,6 +19,11 @@ const STATIC_ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[numb
   { path: "/race/picks", changeFrequency: "weekly", priority: 0.75 },
   { path: "/guides/summer-2026", changeFrequency: "monthly", priority: 0.8 },
   { path: "/pricing", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/courtside", changeFrequency: "weekly", priority: 0.65 },
+  { path: "/matchups", changeFrequency: "weekly", priority: 0.65 },
+  { path: "/scouting", changeFrequency: "weekly", priority: 0.65 },
+  { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 /** Regenerate daily so lastmod is the generation date, not a deploy frozen in source. */
