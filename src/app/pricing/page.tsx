@@ -180,7 +180,11 @@ export default function PricingPage() {
 
         <p className="mt-10 text-center text-sm text-muted">
           Courtside is billed through Stripe. Use the same browser after checkout
-          so your membership cookie can unlock member features.
+          so your membership cookie can unlock member features, or use{" "}
+          <Link href="/account" className="text-gold hover:text-gold-light">
+            Account
+          </Link>{" "}
+          to restore access on a new device.
         </p>
       </section>
 

@@ -40,9 +40,21 @@ export async function GET(request: Request) {
         );
       }
       const token = createGuideDownloadToken(sessionId);
-      return NextResponse.redirect(
+      const guideCustomerId =
+        typeof session.customer === "string"
+          ? session.customer
+          : session.customer?.id;
+      const response = NextResponse.redirect(
         `${siteUrl}/guides/summer-2026/success?token=${encodeURIComponent(token)}`,
       );
+      if (guideCustomerId) {
+        response.cookies.set(
+          COURTSIDE_CUSTOMER_COOKIE,
+          guideCustomerId,
+          courtsideCustomerCookieOptions(),
+        );
+      }
+      return response;
     }
 
     const customerId =

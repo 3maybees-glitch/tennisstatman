@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
+import {
+  handleCheckoutSessionCompleted,
+  handleSubscriptionChange,
+} from "@/lib/account/webhook-handlers";
 import { getStripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
@@ -30,15 +34,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 400 });
   }
 
-  switch (event.type) {
-    case "checkout.session.completed":
-    case "customer.subscription.created":
-    case "customer.subscription.updated":
-    case "customer.subscription.deleted":
-    case "invoice.payment_failed":
-      break;
-    default:
-      break;
+  try {
+    switch (event.type) {
+      case "checkout.session.completed":
+        await handleCheckoutSessionCompleted(event.data.object);
+        break;
+      case "customer.subscription.created":
+      case "customer.subscription.updated":
+      case "customer.subscription.deleted":
+        await handleSubscriptionChange(event.data.object);
+        break;
+      case "invoice.payment_failed":
+        break;
+      default:
+        break;
+    }
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Webhook handler failed.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 
   return NextResponse.json({ received: true });
